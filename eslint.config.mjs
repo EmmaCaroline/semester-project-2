@@ -7,7 +7,11 @@ import prettierConfig from "eslint-config-prettier";
 export default [
   {
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        module: "readonly",
+        exports: "readonly",
+      },
     },
   },
   pluginJs.configs.recommended,
@@ -16,7 +20,7 @@ export default [
       prettier: prettierPlugin,
     },
     rules: {
-      ...prettierConfig.rules, // Applies the Prettier configuration to disable conflicting ESLint rules
+      ...prettierConfig.rules, // Applies Prettier configuration to disable conflicting ESLint rules
       "prettier/prettier": "error", // Makes Prettier issues show as ESLint errors
     },
   },
