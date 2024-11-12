@@ -1,0 +1,4 @@
+// Ensures that all collaborators using VSCode will default to LF line endings for this workspace
+{
+  "files.eol": "\n"
+}
