@@ -1,19 +1,36 @@
 // main js file
 
-//Dropdown menu in header:
+// Dropdown menu in header:
 const dropdownBtn = document.querySelector("#dropdown-menu-btn");
 const dropdownMenu = document.querySelector("#dropdown-menu");
 
-dropdownBtn.addEventListener("click", () => {
-  dropdownMenu.classList.toggle("hidden");
-});
-
-//Dropdown profile menu in header:
+// Dropdown profile menu in header:
 const dropdownProfileBtn = document.querySelector("#dropdown-profile-btn");
 const dropdownProfile = document.querySelector("#dropdown-profile");
 
-dropdownProfileBtn.addEventListener("click", () => {
+// Function to close all dropdowns
+function closeAllDropdowns() {
+  dropdownMenu.classList.add("hidden");
+  dropdownProfile.classList.add("hidden");
+}
+
+// Toggle dropdown menu visibility
+dropdownBtn.addEventListener("click", (event) => {
+  event.stopPropagation(); // Prevent event from bubbling to document
+  dropdownMenu.classList.toggle("hidden");
+  dropdownProfile.classList.add("hidden"); // Close profile dropdown if open
+});
+
+// Toggle dropdown profile menu visibility
+dropdownProfileBtn.addEventListener("click", (event) => {
+  event.stopPropagation(); // Prevent event from bubbling to document
   dropdownProfile.classList.toggle("hidden");
+  dropdownMenu.classList.add("hidden"); // Close menu dropdown if open
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener("click", () => {
+  closeAllDropdowns();
 });
 
 // Apply initial theme
