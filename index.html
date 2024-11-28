@@ -36,14 +36,23 @@
               class="w-40 h-16"
             />
           </a>
-          <div class="hidden lg:flex items-center">
-            <p>add searchbar here</p>
+          <div class="hidden lg:flex items-center relative">
+            <input
+              type="text"
+              aria-label="Search"
+              id="search-input"
+              placeholder="..search listings"
+              class="pl-10 py-2 w-80 border bg-customBeige placeholder-customGray text-base border-black rounded focus:bg-white"
+            />
+            <i
+              class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2"
+            ></i>
           </div>
           <div class="flex justify-center items-center pr-6 md:pr-20">
-            <button class="" id="dropdown-profile-btn">
+            <button id="dropdown-profile-btn" aria-label="Profile options">
               <i class="fa-solid fa-user text-xl pr-4 md:pr-8"></i>
             </button>
-            <button class="" id="dropdown-menu-btn">
+            <button id="dropdown-menu-btn" aria-label="User menu">
               <i class="fa-solid fa-bars text-2xl pl-4 md:pl-8"></i>
             </button>
           </div>
@@ -52,40 +61,33 @@
           class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-0 bg-customBeige shadow-md"
           id="dropdown-menu"
         >
-          <ul class="">
-            <li class="">
+          <ul>
+            <li>
               <a
-                href=""
-                class="block text-sm font-body py-4 px-2 hover:bg-customGray hover:text-white transition-colors duration-300"
+                href="/"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >All Listings</a
               >
             </li>
             <li>
               <a
-                href=""
-                class="block text-sm font-body py-4 px-2 hover:bg-customGray hover:text-white transition-colors duration-300"
+                href="/collections/books.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >Books</a
               >
             </li>
             <li>
               <a
-                href=""
-                class="block text-sm font-body py-4 px-2 hover:bg-customGray hover:text-white transition-colors duration-300"
+                href="/collections/jewelry.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >Jewelry</a
               >
             </li>
             <li>
               <a
-                href=""
-                class="block text-sm font-body py-4 px-2 hover:bg-customGray hover:text-white transition-colors duration-300"
+                href="/collections/art.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >Art</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="block text-sm font-body py-4 px-2 hover:bg-customGray hover:text-white transition-colors duration-300"
-                >Add dark mode toggle</a
               >
             </li>
           </ul>
@@ -98,8 +100,8 @@
           <ul>
             <li>
               <a
-                href=""
-                class="block text-sm font-body py-4 px-2 hover:bg-customGray hover:text-white transition-colors duration-300"
+                href="/auth/login.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >Log in</a
               >
             </li>
@@ -107,13 +109,13 @@
               <button id="theme-toggle" class="w-full">
                 <p
                   id="isLightmode"
-                  class="text-black block text-left text-sm font-body py-4 px-2 hover:bg-customGray hover:text-white transition-colors duration-300"
+                  class="text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >
                   Dark mode
                 </p>
                 <p
                   id="isDarkmode"
-                  class="text-white block text-left text-sm font-body py-4 px-2 hover:bg-white hover:text-black transition-colors duration-300"
+                  class="text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
                 >
                   Light mode
                 </p>
