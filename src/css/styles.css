@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}
+
+@layer components {
+  /* Base button styles */
+  .btn {
+    @apply font-medium text-sm py-1 px-2 rounded;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply bg-customPink text-black;
+  }
+
+  .btn-secondary {
+    @apply bg-customGray text-white;
+  }
+}
