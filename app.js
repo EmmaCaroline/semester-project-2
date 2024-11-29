@@ -1,4 +1,4 @@
-// main js file
+// Main js file, import here
 
 // Dropdown menu in header:
 const dropdownBtn = document.querySelector("#dropdown-menu-btn");
@@ -28,7 +28,7 @@ dropdownProfileBtn.addEventListener("click", (event) => {
   dropdownMenu.classList.add("hidden"); // Close menu dropdown if open
 });
 
-// Close dropdowns when clicking outside
+// Close dropdowns when clicking outside of the elements
 document.addEventListener("click", () => {
   closeAllDropdowns();
 });
@@ -62,3 +62,22 @@ function toggleTheme() {
 
 const themeToggle = document.querySelector("#theme-toggle");
 themeToggle.addEventListener("click", toggleTheme);
+
+// Clears the textarea and gives an alert for newsletter input on index.html, to improve the realism of the site
+document
+  .getElementById("newsletter-button")
+  .addEventListener("click", function () {
+    const emailInput = document.getElementById("subscribe-email");
+    const email = emailInput.value.trim(); // Remove leading and trailing whitespaces
+
+    // Basic email validation pattern (requires "@" symbol)
+    const emailPattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+
+    // Check if the email is not empty and matches the pattern
+    if (email && emailPattern.test(email)) {
+      emailInput.value = ""; // Clear the input field
+      alert("Thank you for subscribing!");
+    } else {
+      alert("Please enter a valid email address.");
+    }
+  });
