@@ -22,8 +22,8 @@
     />
   </head>
   <body class="box-border m-0">
-    <header class="bg-customBeige shadow-lg fixed w-full">
-      <nav class="container mx-auto">
+    <header class="bg-customBeige shadow-lg fixed w-full h-20 top-0">
+      <nav class="container mx-auto h-full">
         <div class="flex justify-between items-center" id="navbar">
           <a
             href="/"
@@ -125,40 +125,96 @@
         </div>
       </nav>
     </header>
+    <main class="mt-20">
+      <div
+        id="unregistered-welcome-message"
+        class="px-8 py-8 flex flex-col md:items-center lg:px-20 lg:py-12"
+      >
+        <h1 class="font-heading text-3xl md:text-4xl md:pb-4">
+          Welcome to TreasureBid
+        </h1>
+        <p class="font-body text-sm py-4 max-w-xs md:text-base">
+          Want to become a TreasureBidder? Sign up to start placing bids or to
+          create listings
+        </p>
+        <button class="btn btn-primary self-start md:self-center">
+          Register
+        </button>
+        <p class="font-body text-sm py-4 md:text-base">
+          Already a TreasureBidder?
+        </p>
+        <button class="btn btn-primary self-start md:self-center">
+          Log in
+        </button>
+        <hr class="border-t-2 border-customBlue mt-8 lg:mt-12 w-full" />
+      </div>
 
-    <main>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
+      <!-- DIAMOND IMAGE CONTAINER -->
+      <div id="featured-section">
+        <h2 class="font-heading text-xl text-center mb-6">Featured auctions</h2>
+        <div
+          id="diamond-image-container"
+          class="flex flex-col md:flex-row md:justify-center md:items-center pb-8 lg:pb-12"
+        >
+          <!-- First Image -->
+          <div class="flex flex-col items-center md:mr-24">
+            <div
+              class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45"
+            >
+              <img
+                src="images/jewelry-item1-image1.jpg"
+                alt="Diamond Image"
+                class="w-full h-full object-cover -rotate-45"
+              />
+            </div>
+            <p
+              class="mt-2 text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px]"
+            >
+              Title TEST
+            </p>
+          </div>
+
+          <!-- Second and Third Images (Side by Side on Desktop) -->
+          <div class="flex justify-center mt-8 md:mt-0 md:space-x-24">
+            <!-- Second Image -->
+            <div class="flex flex-col items-center">
+              <div
+                class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 mr-6 md:mr-0"
+              >
+                <img
+                  src="images/books-item1-image1.jpg"
+                  alt="Diamond Image"
+                  class="w-full h-full object-cover -rotate-45"
+                />
+              </div>
+              <p
+                class="mt-2 text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] mr-6 md:mr-0"
+              >
+                Title TEST
+              </p>
+            </div>
+
+            <!-- Third Image -->
+            <div class="flex flex-col items-center">
+              <div
+                class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 ml-6 md:ml-0"
+              >
+                <img
+                  src="images/art-item1-image1.jpg"
+                  alt="Diamond Image"
+                  class="w-full h-full object-cover -rotate-45"
+                />
+              </div>
+              <p
+                class="mt-2 text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] ml-6 md:ml-0"
+              >
+                Title TEST
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="border-t-2 border-customBlue mb-8 mx-8 lg:mx-20 lg:mb-12" />
     </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
@@ -175,7 +231,7 @@
           aria-label="Twitter"
         ></i>
       </div>
-      <div class="flex flex-col mx-8 lg:mx-20">
+      <div class="flex flex-col px-8 lg:px-20">
         <img
           src="/images/treasurebid-logo.png"
           alt="TreasureBid Logo"
@@ -202,8 +258,8 @@
             </button>
           </div>
         </div>
-        <hr class="border-t-2 border-customBlue -mx-8 lg:-mx-20" />
-        <div class="footer-pages-first flex flex-col">
+        <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
+        <div class="footer-pages-first flex flex-col lg:pt-6">
           <a href="" class="font-body font-medium text-sm py-4 md:text-base"
             >About Us</a
           >
@@ -211,6 +267,7 @@
             >Contact</a
           >
         </div>
+        <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
       </div>
 
       <div class="footer-pages-second flex justify-center items-center py-4">

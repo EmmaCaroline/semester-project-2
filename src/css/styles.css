@@ -13,7 +13,7 @@
 @layer components {
   /* Base button styles */
   .btn {
-    @apply font-body text-sm py-1.5 px-8 rounded md:text-base;
+    @apply font-body text-sm py-1.5 px-8 rounded-lg md:text-base;
   }
 
   /* Button variants */
