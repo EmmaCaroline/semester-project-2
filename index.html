@@ -22,8 +22,8 @@
     />
   </head>
   <body class="box-border m-0">
-    <header class="bg-customBeige shadow-lg fixed w-full">
-      <nav class="container mx-auto">
+    <header class="bg-customBeige shadow-lg fixed w-full h-20 top-0">
+      <nav class="container mx-auto h-full">
         <div class="flex justify-between items-center" id="navbar">
           <a
             href="/"
@@ -125,40 +125,28 @@
         </div>
       </nav>
     </header>
-
-    <main>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
-      <p>Lorem ipsum Lorem ipsum Lorem ipsum</p>
+    <main class="mt-20">
+      <div
+        id="unregistered-welcome-message"
+        class="px-8 py-8 flex flex-col md:items-center"
+      >
+        <h1 class="font-heading text-3xl md:text-4xl md:pb-4">
+          Welcome to TreasureBid
+        </h1>
+        <p class="font-body text-sm py-4 max-w-xs md:text-base">
+          Want to become a TreasureBidder? Sign up to start placing bids or to
+          create listings
+        </p>
+        <button class="btn btn-primary self-start md:self-center">
+          Register
+        </button>
+        <p class="font-body text-sm py-4 md:text-base">
+          Already a TreasureBidder?
+        </p>
+        <button class="btn btn-primary self-start md:self-center">
+          Log in
+        </button>
+      </div>
     </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
