@@ -22,7 +22,7 @@
     />
   </head>
   <body class="box-border m-0">
-    <header class="bg-customBeige shadow-lg fixed w-full h-20 top-0">
+    <header class="bg-customBeige shadow-lg fixed w-full h-20 top-0 z-50">
       <nav class="container mx-auto h-full">
         <div class="flex justify-between items-center" id="navbar">
           <a
@@ -128,7 +128,7 @@
     <main class="mt-20">
       <div
         id="unregistered-welcome-message"
-        class="px-8 py-8 flex flex-col md:items-center lg:px-20 lg:py-12"
+        class="px-8 pt-8 flex flex-col md:items-center lg:px-20 lg:pt-12 md:hidden"
       >
         <h1 class="font-heading text-3xl md:text-4xl md:pb-4">
           Welcome to TreasureBid
@@ -150,11 +150,13 @@
       </div>
 
       <!-- DIAMOND IMAGE CONTAINER -->
-      <div id="featured-section">
-        <h2 class="font-heading text-xl text-center mb-6">Featured auctions</h2>
+      <div id="featured-section" class="py-8 lg:py-12 pb">
+        <h2 class="font-heading text-xl text-center mb-6 md:text-2xl">
+          Featured auctions
+        </h2>
         <div
           id="diamond-image-container"
-          class="flex flex-col md:flex-row md:justify-center md:items-center pb-8 lg:pb-12"
+          class="flex flex-col md:flex-row md:justify-center md:items-center"
         >
           <!-- First Image -->
           <div class="flex flex-col items-center md:mr-24">
@@ -215,6 +217,51 @@
         </div>
       </div>
       <hr class="border-t-2 border-customBlue mb-8 mx-8 lg:mx-20 lg:mb-12" />
+      <!-- IMAGE CAROUSEL -->
+      <div>
+        <h2 class="font-heading text-xl text-center mb-6 md:text-2xl">
+          Newly added
+        </h2>
+        <div id="imageCarousel" class="w-full relative">
+          <!-- Carousel Images -->
+          <div
+            id="carouselImages"
+            class="flex w-full h-96 overflow-hidden lg:h-[520px]"
+          >
+            <img
+              src="images/jewelry-item2-image1.jpg"
+              class="w-full h-full object-cover"
+              alt="Jewelry Image"
+            />
+
+            <!-- Overlay -->
+            <div
+              class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25"
+            ></div>
+            <p
+              class="font-heading text-white text-xl absolute bottom-12 left-1/2 transform -translate-x-1/2 max-w-xs truncate md:max-w-md lg:bottom-1/2 lg:-translate-y-1/2 md:text-2xl"
+            >
+              Title
+            </p>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <button
+            id="prevButton"
+            class="absolute top-1/2 left-6 transform -translate-y-1/2"
+            onclick="prevImage()"
+          >
+            <i class="fa-solid fa-chevron-left text-white text-2xl"></i>
+          </button>
+          <button
+            id="nextButton"
+            class="absolute top-1/2 right-6 transform -translate-y-1/2"
+            onclick="nextImage()"
+          >
+            <i class="fa-solid fa-chevron-right text-white text-2xl"></i>
+          </button>
+        </div>
+      </div>
     </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
