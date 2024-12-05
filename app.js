@@ -3,15 +3,15 @@
 import { setupNewsletterSubscription } from "./src/js";
 import { addTypewriterEffect } from "./src/js";
 
-// Dropdown menu in header:
+// Dropdown menu in header
 const dropdownBtn = document.querySelector("#dropdown-menu-btn");
 const dropdownMenu = document.querySelector("#dropdown-menu");
 
-// Dropdown profile menu in header:
+// Dropdown profile menu in header
 const dropdownProfileBtn = document.querySelector("#dropdown-profile-btn");
 const dropdownProfile = document.querySelector("#dropdown-profile");
 
-// Function to close all dropdowns
+// Close dropdowns
 function closeAllDropdowns() {
   dropdownMenu.classList.add("hidden");
   dropdownProfile.classList.add("hidden");
@@ -31,7 +31,7 @@ dropdownProfileBtn.addEventListener("click", (event) => {
   dropdownMenu.classList.add("hidden"); // Close menu dropdown if open
 });
 
-// Close dropdowns when clicking outside of the elements
+// Close dropdowns when clicking anywhere outside of the elements
 document.addEventListener("click", () => {
   closeAllDropdowns();
 });
@@ -51,8 +51,6 @@ function applyInitialTheme() {
   document.querySelector("#isDarkmode").classList.toggle("hidden", !isDarkMode);
 }
 
-applyInitialTheme();
-
 // Dark mode theme toggle function and event listener
 function toggleTheme() {
   const isDarkMode = document.documentElement.classList.toggle("dark");
@@ -67,6 +65,8 @@ const themeToggle = document.querySelector("#theme-toggle");
 themeToggle.addEventListener("click", toggleTheme);
 
 // Function calls
+applyInitialTheme();
+
 setupNewsletterSubscription("newsletter-button", "subscribe-email");
 
 document.addEventListener("DOMContentLoaded", () => {
