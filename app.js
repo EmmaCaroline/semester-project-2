@@ -1,6 +1,7 @@
-// Main js file
+// Main JS file
 
 import { setupNewsletterSubscription } from "./src/js";
+import { addTypewriterEffect } from "./src/js";
 
 // Dropdown menu in header:
 const dropdownBtn = document.querySelector("#dropdown-menu-btn");
@@ -67,3 +68,7 @@ themeToggle.addEventListener("click", toggleTheme);
 
 // Function calls
 setupNewsletterSubscription("newsletter-button", "subscribe-email");
+
+document.addEventListener("DOMContentLoaded", () => {
+  addTypewriterEffect("typewriter", "Welcome to TreasureBid", 100);
+});

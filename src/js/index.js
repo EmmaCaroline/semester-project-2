@@ -21,3 +21,29 @@ export function setupNewsletterSubscription(buttonId, inputId) {
     }
   });
 }
+
+/**
+ * Adds a typewriter effect to the specified element.
+ * @param {string} elementId - The ID of the element where the typewriter effect will be applied.
+ * @param {string} text - The text to display with the typewriter effect.
+ * @param {number} speed - The speed of the typing effect in milliseconds (default: 100ms).
+ */
+export function addTypewriterEffect(elementId, text, speed = 100) {
+  const typewriterElement = document.getElementById(elementId);
+  if (!typewriterElement) {
+    console.error(`Element with ID '${elementId}' not found.`);
+    return;
+  }
+
+  let index = 0;
+
+  function typeWriter() {
+    if (index < text.length) {
+      typewriterElement.textContent += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+
+  typeWriter();
+}

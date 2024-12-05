@@ -42,18 +42,26 @@
               aria-label="Search"
               id="search-input"
               placeholder="..search listings"
-              class="pl-10 py-2 w-80 border bg-customBeige placeholder-customGray text-base border-black rounded focus:bg-white"
+              class="pl-10 py-2 w-80 border bg-customBeige placeholder-customGray text-base border-black rounded focus:bg-white focus:ring focus:ring-customBlue transition-all duration-300"
             />
             <i
               class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2"
             ></i>
           </div>
           <div class="flex justify-center items-center pr-6 md:pr-20">
-            <button id="dropdown-profile-btn" aria-label="Profile options">
-              <i class="fa-solid fa-user text-xl pr-4 md:pr-8"></i>
+            <button
+              id="dropdown-profile-btn"
+              aria-label="Profile options"
+              class="group"
+            >
+              <i
+                class="fa-solid fa-user text-xl pr-4 md:pr-8 transition-all duration-300 group-hover:scale-110 group-hover:text-gray-600"
+              ></i>
             </button>
-            <button id="dropdown-menu-btn" aria-label="User menu">
-              <i class="fa-solid fa-bars text-2xl pl-4 md:pl-8"></i>
+            <button id="dropdown-menu-btn" aria-label="User menu" class="group">
+              <i
+                class="fa-solid fa-bars text-2xl pl-4 md:pl-8 transition-all duration-300 group-hover:scale-110 group-hover:text-gray-600"
+              ></i>
             </button>
           </div>
         </div>
@@ -130,20 +138,26 @@
         id="unregistered-welcome-message"
         class="px-8 pt-8 flex flex-col md:items-center lg:px-20 lg:pt-12"
       >
-        <h1 class="font-heading text-3xl md:text-4xl md:pb-4">
-          Welcome to TreasureBid
-        </h1>
+        <h1
+          id="typewriter"
+          class="font-heading text-3xl md:text-4xl md:pb-4 text-left lg:text-center"
+        ></h1>
+
         <p class="font-body text-sm py-4 max-w-xs md:text-base">
           Want to become a TreasureBidder? Sign up to start placing bids or to
           create listings
         </p>
-        <button class="btn btn-primary self-start md:self-center">
+        <button
+          class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
+        >
           Register
         </button>
         <p class="font-body text-sm py-4 md:text-base">
           Already a TreasureBidder?
         </p>
-        <button class="btn btn-primary self-start md:self-center">
+        <button
+          class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
+        >
           Log in
         </button>
         <hr class="border-t-2 border-customBlue mt-8 lg:mt-12 w-full" />
