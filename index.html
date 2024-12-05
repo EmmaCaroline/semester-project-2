@@ -189,50 +189,99 @@
               Title TEST
             </p>
           </div>
-
-          <!-- Second and Third Images (Side by Side on Desktop) -->
-          <div class="flex justify-center mt-8 md:mt-0 md:space-x-24">
-            <!-- Second Image -->
-            <div class="flex flex-col items-center">
+      <section id="unregistered-welcome-message">
+        <div class="px-8 pt-8 flex flex-col md:items-center lg:px-20 lg:pt-12">
+          <h1 class="font-heading text-3xl md:text-4xl md:pb-4">
+            Welcome to TreasureBid
+          </h1>
+          <p class="font-body text-sm py-4 max-w-xs md:text-base">
+            Want to become a TreasureBidder? Sign up to start placing bids or to
+            create listings
+          </p>
+          <button class="btn btn-primary self-start md:self-center">
+            Register
+          </button>
+          <p class="font-body text-sm py-4 md:text-base">
+            Already a TreasureBidder?
+          </p>
+          <button class="btn btn-primary self-start md:self-center">
+            Log in
+          </button>
+          <hr class="border-t-2 border-customBlue mt-8 lg:mt-12 w-full" />
+        </div>
+      </section>
+      <section id="featured-auctions">
+        <!-- DIAMOND IMAGE CONTAINER -->
+        <div class="py-8 lg:py-12 pb">
+          <h2 class="font-heading text-xl text-center mb-6 md:text-2xl">
+            Featured auctions
+          </h2>
+          <div
+            id="diamond-image-container"
+            class="flex flex-col md:flex-row md:justify-center md:items-center"
+          >
+            <!-- First Image -->
+            <div class="flex flex-col items-center md:mr-24">
               <div
-                class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 mr-6 md:mr-0"
+                class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45"
               >
                 <img
-                  src="images/books-item1-image1.jpg"
+                  src="images/jewelry-item1-image1.jpg"
                   alt="Diamond Image"
                   class="w-full h-full object-cover -rotate-45"
                 />
               </div>
               <p
-                class="mt-2 text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] mr-6 md:mr-0"
+                class="mt-2 font-body text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px]"
               >
                 Title TEST
               </p>
             </div>
 
-            <!-- Third Image -->
-            <div class="flex flex-col items-center">
-              <div
-                class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 ml-6 md:ml-0"
-              >
-                <img
-                  src="images/art-item1-image1.jpg"
-                  alt="Diamond Image"
-                  class="w-full h-full object-cover -rotate-45"
-                />
+            <!-- Second and Third Images (Side by Side on Desktop) -->
+            <div class="flex justify-center mt-8 md:mt-0 md:space-x-24">
+              <!-- Second Image -->
+              <div class="flex flex-col items-center">
+                <div
+                  class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 mr-6 md:mr-0"
+                >
+                  <img
+                    src="images/books-item1-image1.jpg"
+                    alt="Diamond Image"
+                    class="w-full h-full object-cover -rotate-45"
+                  />
+                </div>
+                <p
+                  class="mt-2 font-body text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] mr-6 md:mr-0"
+                >
+                  Title TEST
+                </p>
               </div>
-              <p
-                class="mt-2 text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] ml-6 md:ml-0"
-              >
-                Title TEST
-              </p>
+
+              <!-- Third Image -->
+              <div class="flex flex-col items-center">
+                <div
+                  class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 ml-6 md:ml-0"
+                >
+                  <img
+                    src="images/art-item1-image1.jpg"
+                    alt="Diamond Image"
+                    class="w-full h-full object-cover -rotate-45"
+                  />
+                </div>
+                <p
+                  class="mt-2 font-body text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] ml-6 md:ml-0"
+                >
+                  Title TEST
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <hr class="border-t-2 border-customBlue mb-8 mx-8 lg:mx-20 lg:mb-12" />
-      <!-- IMAGE CAROUSEL -->
-      <div>
+      <section id="newly-added-carousel">
+        <!-- IMAGE CAROUSEL -->
         <h2 class="font-heading text-xl text-center mb-6 md:text-2xl">
           Newly added
         </h2>
@@ -253,7 +302,7 @@
               class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25"
             ></div>
             <p
-              class="font-heading text-white text-xl absolute bottom-12 left-1/2 transform -translate-x-1/2 max-w-xs truncate md:max-w-md md:top-48 lg:top-60 md:text-2xl"
+              class="font-heading text-white text-xl absolute bottom-12 left-1/2 transform -translate-x-1/2 max-w-xs truncate md:max-w-md md:top-48 lg:top-60 md:text-xl lg:text-3xl"
             >
               Title
             </p>
@@ -275,7 +324,98 @@
             <i class="fa-solid fa-chevron-right text-white text-2xl"></i>
           </button>
         </div>
-      </div>
+      </section>
+      <section id="collections" class="mx-8 lg:mx-20">
+        <h2
+          class="font-heading text-xl text-center mt-8 pb-2 lg:mt-12 md:text-2xl"
+        >
+          Collections
+        </h2>
+        <div
+          class="flex flex-col items-center lg:flex-row lg:justify-center lg:gap-16"
+        >
+          <!-- Books -->
+          <div class="collections-image-container py-4">
+            <a href="/collections/books.html">
+              <div
+                class="flex w-64 h-64 overflow-hidden rounded-full relative group"
+              >
+                <img
+                  src="images/books-category1.jpg"
+                  alt="Stack of old books"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 flex items-center justify-center rounded-full"
+                >
+                  <p
+                    class="text-white text-lg lg:text-xl font-semibold opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    View collection
+                  </p>
+                </div>
+              </div>
+            </a>
+            <p class="text-center font-special text-2xl md:text-3xl pt-2">
+              Books
+            </p>
+          </div>
+
+          <!-- Jewelry -->
+          <div class="collections-image-container py-4">
+            <a href="/collections/jewelry.html">
+              <div
+                class="flex w-64 h-64 overflow-hidden rounded-full relative group"
+              >
+                <img
+                  src="images/jewelry_category1.jpg"
+                  alt="Hanging necklaces"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 flex items-center justify-center rounded-full"
+                >
+                  <p
+                    class="text-white text-lg lg:text-xl font-semibold opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    View collection
+                  </p>
+                </div>
+              </div>
+            </a>
+            <p class="text-center font-special text-2xl md:text-3xl pt-2">
+              Jewelry
+            </p>
+          </div>
+
+          <!-- Art -->
+          <div class="collections-image-container py-4">
+            <a href="/collections/art.html">
+              <div
+                class="flex w-64 h-64 overflow-hidden rounded-full relative group"
+              >
+                <img
+                  src="images/art-category1.jpg"
+                  alt="Modern artwork, bronze coloured"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 flex items-center justify-center rounded-full"
+                >
+                  <p
+                    class="text-white text-lg lg:text-xl font-semibold opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    View collection
+                  </p>
+                </div>
+              </div>
+            </a>
+            <p class="text-center font-special text-2xl md:text-3xl pt-2">
+              Art
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
