@@ -134,84 +134,36 @@
       </nav>
     </header>
     <main class="mt-20">
-      <div
-        id="unregistered-welcome-message"
-        class="px-8 pt-8 flex flex-col md:items-center lg:px-20 lg:pt-12"
-      >
-        <h1
-          id="typewriter"
-          class="font-heading text-3xl md:text-4xl md:pb-4 text-left lg:text-center"
-        ></h1>
-
-        <p class="font-body text-sm py-4 max-w-xs md:text-base">
-          Want to become a TreasureBidder? Sign up to start placing bids or to
-          create listings
-        </p>
-        <button
-          class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
-        >
-          Register
-        </button>
-        <p class="font-body text-sm py-4 md:text-base">
-          Already a TreasureBidder?
-        </p>
-        <button
-          class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
-        >
-          Log in
-        </button>
-        <hr class="border-t-2 border-customBlue mt-8 lg:mt-12 w-full" />
-      </div>
-
-      <!-- DIAMOND IMAGE CONTAINER -->
-      <div id="featured-section" class="py-8 lg:py-12 pb">
-        <h2 class="font-heading text-xl text-center mb-6 md:text-2xl">
-          Featured auctions
-        </h2>
-        <div
-          id="diamond-image-container"
-          class="flex flex-col md:flex-row md:justify-center md:items-center"
-        >
-          <!-- First Image -->
-          <div class="flex flex-col items-center md:mr-24">
-            <div
-              class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45"
-            >
-              <img
-                src="images/jewelry-item1-image1.jpg"
-                alt="Diamond Image"
-                class="w-full h-full object-cover -rotate-45"
-              />
-            </div>
-            <p
-              class="mt-2 text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px]"
-            >
-              Title TEST
-            </p>
-          </div>
       <section id="unregistered-welcome-message">
         <div class="px-8 pt-8 flex flex-col md:items-center lg:px-20 lg:pt-12">
-          <h1 class="font-heading text-3xl md:text-4xl md:pb-4">
-            Welcome to TreasureBid
-          </h1>
+          <h1
+            id="typewriter"
+            class="font-heading text-3xl md:text-4xl md:pb-4 text-left lg:text-center"
+          ></h1>
+
           <p class="font-body text-sm py-4 max-w-xs md:text-base">
             Want to become a TreasureBidder? Sign up to start placing bids or to
             create listings
           </p>
-          <button class="btn btn-primary self-start md:self-center">
+          <button
+            class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
+          >
             Register
           </button>
           <p class="font-body text-sm py-4 md:text-base">
             Already a TreasureBidder?
           </p>
-          <button class="btn btn-primary self-start md:self-center">
+          <button
+            class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
+          >
             Log in
           </button>
           <hr class="border-t-2 border-customBlue mt-8 lg:mt-12 w-full" />
         </div>
       </section>
-      <section id="featured-auctions">
-        <!-- DIAMOND IMAGE CONTAINER -->
+
+      <!-- DIAMOND IMAGE CONTAINER -->
+      <section id="featured-section">
         <div class="py-8 lg:py-12 pb">
           <h2 class="font-heading text-xl text-center mb-6 md:text-2xl">
             Featured auctions
@@ -232,49 +184,49 @@
                 />
               </div>
               <p
-                class="mt-2 font-body text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px]"
+                class="mt-2 text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px]"
+              >
+                Title TEST
+              </p>
+            </div>
+          </div>
+
+          <!-- Second and Third Images (Side by Side on Desktop) -->
+          <div class="flex justify-center mt-8 md:mt-0 md:space-x-24">
+            <!-- Second Image -->
+            <div class="flex flex-col items-center">
+              <div
+                class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 mr-6 md:mr-0"
+              >
+                <img
+                  src="images/books-item1-image1.jpg"
+                  alt="Diamond Image"
+                  class="w-full h-full object-cover -rotate-45"
+                />
+              </div>
+              <p
+                class="mt-2 font-body text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] mr-6 md:mr-0"
               >
                 Title TEST
               </p>
             </div>
 
-            <!-- Second and Third Images (Side by Side on Desktop) -->
-            <div class="flex justify-center mt-8 md:mt-0 md:space-x-24">
-              <!-- Second Image -->
-              <div class="flex flex-col items-center">
-                <div
-                  class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 mr-6 md:mr-0"
-                >
-                  <img
-                    src="images/books-item1-image1.jpg"
-                    alt="Diamond Image"
-                    class="w-full h-full object-cover -rotate-45"
-                  />
-                </div>
-                <p
-                  class="mt-2 font-body text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] mr-6 md:mr-0"
-                >
-                  Title TEST
-                </p>
+            <!-- Third Image -->
+            <div class="flex flex-col items-center">
+              <div
+                class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 ml-6 md:ml-0"
+              >
+                <img
+                  src="images/art-item1-image1.jpg"
+                  alt="Diamond Image"
+                  class="w-full h-full object-cover -rotate-45"
+                />
               </div>
-
-              <!-- Third Image -->
-              <div class="flex flex-col items-center">
-                <div
-                  class="relative w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] overflow-hidden rotate-45 ml-6 md:ml-0"
-                >
-                  <img
-                    src="images/art-item1-image1.jpg"
-                    alt="Diamond Image"
-                    class="w-full h-full object-cover -rotate-45"
-                  />
-                </div>
-                <p
-                  class="mt-2 font-body text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] ml-6 md:ml-0"
-                >
-                  Title TEST
-                </p>
-              </div>
+              <p
+                class="mt-2 font-body text-center text-sm md:text-base truncate w-[120px] sm:w-[150px] md:w-[200px] ml-6 md:ml-0"
+              >
+                Title TEST
+              </p>
             </div>
           </div>
         </div>
