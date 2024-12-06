@@ -43,12 +43,12 @@
               class="group"
             >
               <i
-                class="fa-solid fa-user text-xl pr-4 md:pr-8 transition-all duration-300 group-hover:scale-110 group-hover:text-gray-600"
+                class="fa-solid fa-user text-xl pr-4 md:pr-8 lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600"
               ></i>
             </button>
             <button id="dropdown-menu-btn" aria-label="User menu" class="group">
               <i
-                class="fa-solid fa-bars text-2xl pl-4 md:pl-8 transition-all duration-300 group-hover:scale-110 group-hover:text-gray-600"
+                class="fa-solid fa-bars text-2xl pl-4 md:pl-8 lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600"
               ></i>
             </button>
           </div>
@@ -119,9 +119,105 @@
             </li>
           </ul>
         </div>
+        <div
+          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md"
+          id="dropdown-logged-in"
+        >
+          <!-- NEW-->
+          <ul>
+            <li>
+              <a
+                href="/profile.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+              >
+                Profile
+              </a>
+            </li>
+            <li>
+              <a
+                href="/listings/create.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+              >
+                Create Listing
+              </a>
+            </li>
+            <li>
+              <button
+                id="logout-button"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 w-full text-left"
+              >
+                Log out
+              </button>
+            </li>
+            <li>
+              <button id="theme-toggle" class="w-full">
+                <p
+                  id="isLightmode"
+                  class="text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                >
+                  Dark mode
+                </p>
+                <p
+                  id="isDarkmode"
+                  class="text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
+                >
+                  Light mode
+                </p>
+              </button>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
-    <main></main>
+    <main class="mt-20 py-12">
+      <h1 class="font-heading text-xl text-center mb-6 md:text-2xl">Login</h1>
+      <div class="flex justify-center bg-white dark:bg-gray-950">
+        <form
+          name="login"
+          class="login-form w-80 mx-8 p-6 bg-white rounded-lg shadow-lg border border-customBlue font-body md:w-96 dark:bg-gray-900"
+        >
+          <div class="mb-4">
+            <label
+              for="email"
+              class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
+              >Email</label
+            >
+            <input
+              id="email"
+              type="email"
+              name="email"
+              required
+              class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="password"
+              class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
+              >Password</label
+            >
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
+            />
+          </div>
+          <a
+            href="/auth/register/"
+            class="block text-sm text-blue-500 hover:underline mb-4"
+            >Register</a
+          >
+          <button
+            type="submit"
+            class="w-auto btn btn-primary dark:bg-gray-800 dark:text-gray-200"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
         <i
