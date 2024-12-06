@@ -1,3 +1,4 @@
+import { setLogoutListener } from "./src/js/ui/global/logout";
 import router from "./src/js/router/index";
 
 // Initialize router for the current page
@@ -112,3 +113,5 @@ initializeDropdownState();
 // Initialize theme toggle listeners and apply theme
 applyInitialTheme();
 setupThemeToggleListeners();
+
+setLogoutListener();
