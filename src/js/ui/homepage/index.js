@@ -1,3 +1,6 @@
+const token = localStorage.getItem("token");
+const welcomeMessage = document.querySelector("#unregistered-welcome-message");
+
 /**
  * Adds a click event listener to the newsletter button for handling subscriptions.
  * Clears the email input field and shows an alert based on the input's validity.
@@ -47,3 +50,12 @@ export function addTypewriterEffect(elementId, text, speed = 100) {
 
   typeWriter();
 }
+
+export function ifLoggedIn() {
+  if (token) {
+    // User is logged in: hide the welcome message
+    welcomeMessage.classList.add("hidden");
+  }
+}
+
+ifLoggedIn();
