@@ -1,7 +1,8 @@
 // Main JS file
 
-import { setupNewsletterSubscription } from "./src/js";
-import { addTypewriterEffect } from "./src/js";
+import router from "./src/js/router/index";
+
+await router(window.location.pathname);
 
 // Dropdown menu in header
 const dropdownBtn = document.querySelector("#dropdown-menu-btn");
@@ -64,11 +65,5 @@ function toggleTheme() {
 const themeToggle = document.querySelector("#theme-toggle");
 themeToggle.addEventListener("click", toggleTheme);
 
-// Function calls
+// Function calls that I can't have in another file (remove comment later)
 applyInitialTheme();
-
-setupNewsletterSubscription("newsletter-button", "subscribe-email");
-
-document.addEventListener("DOMContentLoaded", () => {
-  addTypewriterEffect("typewriter", "Welcome to TreasureBid", 100);
-});
