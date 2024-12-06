@@ -12,7 +12,7 @@ import { login } from "../../api/auth/login";
  * @throws {Error} If the login process encounters an error.
  */
 
-export async function onLogin(event) {
+/*export async function onLogin(event) {
   event.preventDefault();
 
   const form = document.forms.login;
@@ -32,5 +32,31 @@ export async function onLogin(event) {
     }
     console.error("Login failed", error);
     throw error;
+  }
+}*/
+
+export async function onLogin(event) {
+  event.preventDefault();
+
+  const form = document.forms.login;
+  const formData = new FormData(form);
+  const user = Object.fromEntries(formData.entries());
+
+  try {
+    const response = await login(user);
+    console.log("Login successful:", response);
+
+    // Store token in localStorage
+    localStorage.setItem("token", response.data.token);
+
+    // Dispatch custom event for global updates
+    const loginEvent = new Event("userLoggedIn");
+    document.dispatchEvent(loginEvent);
+
+    // Redirect to homepage or wherever needed
+    window.location.href = "/";
+  } catch (error) {
+    console.error("Login failed:", error);
+    alert(`Login failed: ${error.message}`);
   }
 }

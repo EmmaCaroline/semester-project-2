@@ -119,6 +119,54 @@
             </li>
           </ul>
         </div>
+        <div
+          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md"
+          id="dropdown-logged-in"
+        >
+          <!-- NEW-->
+          <ul>
+            <li>
+              <a
+                href="/profile.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+              >
+                Profile
+              </a>
+            </li>
+            <li>
+              <a
+                href="/listings/create.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+              >
+                Create Listing
+              </a>
+            </li>
+            <li>
+              <button
+                id="logout-button"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 w-full text-left"
+              >
+                Log out
+              </button>
+            </li>
+            <li>
+              <button id="theme-toggle" class="w-full">
+                <p
+                  id="isLightmode"
+                  class="text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                >
+                  Dark mode
+                </p>
+                <p
+                  id="isDarkmode"
+                  class="text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
+                >
+                  Light mode
+                </p>
+              </button>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
     <main class="mt-20 py-12">
