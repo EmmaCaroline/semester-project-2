@@ -35,6 +35,11 @@ import { login } from "../../api/auth/login";
   }
 }*/
 
+/**
+ * Handles the user login process on form submission.
+ *
+ * @param {Event} event - The form submission event.
+ */
 export async function onLogin(event) {
   event.preventDefault();
 
@@ -43,17 +48,15 @@ export async function onLogin(event) {
   const user = Object.fromEntries(formData.entries());
 
   try {
+    // Call the login API function
     const response = await login(user);
     console.log("Login successful:", response);
 
-    // Store token in localStorage
-    localStorage.setItem("token", response.data.token);
-
-    // Dispatch custom event for global updates
+    // Dispatch a custom event for global updates
     const loginEvent = new Event("userLoggedIn");
     document.dispatchEvent(loginEvent);
 
-    // Redirect to homepage or wherever needed
+    // Redirect the user
     window.location.href = "/";
   } catch (error) {
     console.error("Login failed:", error);
