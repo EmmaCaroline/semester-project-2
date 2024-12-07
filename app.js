@@ -1,5 +1,5 @@
-import { setLogoutListener } from "./src/js/ui/global/logout";
 import router from "./src/js/router/index";
+import { setLogoutListener } from "./src/js/ui/global/logout";
 
 // Initialize router for the current page
 await router(window.location.pathname);
