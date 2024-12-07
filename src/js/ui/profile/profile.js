@@ -52,5 +52,5 @@ export const readProfileData = async () => {
   // Append icon after the text
   totalCredits.appendChild(coinIcon);
 
-  bio.textContent = "Total credits: " + profile.bio || "No bio available";
+  bio.textContent = profile.bio || "No bio available";
 };
