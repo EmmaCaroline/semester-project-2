@@ -115,7 +115,9 @@ export const readProfileData = async () => {
   // Check if the logged-in user is viewing their own profile
   if (user.name === username) {
     editProfileIcon.classList.remove("hidden"); // Show icon
+    totalCredits.classList.remove("hidden");
   } else {
     editProfileIcon.classList.add("hidden"); // Hide icon
+    totalCredits.classList.add("hidden");
   }
 };
