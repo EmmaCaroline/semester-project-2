@@ -1,5 +1,5 @@
 import { API_AUTH_LOGIN } from "../../constants";
-import * as storage from "./key";
+import * as storage from "../auth/key";
 import { headers } from "../../headers";
 
 /**
