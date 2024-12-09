@@ -167,7 +167,101 @@
         </div>
       </nav>
     </header>
-    <main></main>
+    <main class="mt-20 py-12">
+      <h1 class="font-heading text-xl text-center mb-6 md:text-2xl">
+        Create listing
+      </h1>
+      <section id="create-form-container">
+        <div class="flex justify-center bg-white dark:bg-gray-950">
+          <form
+            name="create"
+            class="create-form w-80 mx-8 p-6 bg-white rounded-lg shadow-lg border border-customBlue font-body md:w-96 dark:bg-gray-900"
+          >
+            <div class="mb-4">
+              <label
+                for="title"
+                class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
+                >Title</label
+              >
+              <input
+                id="title"
+                type="text"
+                name="title"
+                required
+                class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="description"
+                class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
+                >Description</label
+              >
+              <textarea
+                name="description"
+                placeholder="Describe the item you're selling"
+                class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
+              ></textarea>
+            </div>
+            <div class="mb-4">
+              <label
+                for="tags"
+                class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
+                >Tags</label
+              >
+              <input
+                type="text"
+                name="tags"
+                id="tags"
+                placeholder="Enter tags, separated by commas"
+                class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
+              />
+            </div>
+            <div class="mb-4">
+              <div id="mediaFields"></div>
+              <!--<label
+                for="banner-url"
+                class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
+                >Image URL</label
+              >
+              <input
+                type="url"
+                name="banner-url"
+                placeholder="Insert image URL"
+                class="w-full mb-2 p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
+              />-->
+              <button
+                type="button"
+                class="w-auto btn btn-secondary dark:bg-gray-800 dark:text-gray-200"
+                id="addImageButton"
+              >
+                Add image
+              </button>
+            </div>
+            <div class="mb-4">
+              <label
+                for="endsAt"
+                class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
+                >Auction ends at</label
+              >
+              <input
+                type="datetime-local"
+                name="endsAt"
+                id="endsAt"
+                required
+                class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-auto btn btn-primary dark:bg-gray-800 dark:text-gray-200"
+            >
+              Create listing
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
         <i
