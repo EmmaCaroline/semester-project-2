@@ -55,6 +55,8 @@ export function ifLoggedIn() {
   if (token) {
     // User is logged in: hide the welcome message
     welcomeMessage.classList.add("hidden");
+  } else {
+    welcomeMessage.classList.remove("hidden");
   }
 }
 
