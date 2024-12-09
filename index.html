@@ -305,10 +305,16 @@
               class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25"
             ></div>
             <p
-              class="font-heading text-white text-xl absolute bottom-12 left-1/2 transform -translate-x-1/2 max-w-xs truncate md:max-w-md md:top-48 lg:top-60 md:text-xl lg:text-3xl"
+              class="font-heading text-white text-xl absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 max-w-52 truncate sm:max-w-sm md:max-w-md lg:max-w-3xl md:text-xl lg:text-3xl"
             >
               Title
             </p>
+            <button
+              id="view-newly-button"
+              class="btn btn-secondary bg-black absolute bottom-4 left-1/2 transform -translate-x-1/2 border border-gray-600 hover:bg-customGray hover:text-gray-300"
+            >
+              View
+            </button>
           </div>
 
           <!-- Navigation Buttons -->
@@ -326,6 +332,17 @@
           >
             <i class="fa-solid fa-chevron-right text-white text-2xl"></i>
           </button>
+        </div>
+        <div id="dots-container" class="flex justify-center items-center py-2">
+          <div
+            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
+          ></div>
+          <div
+            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
+          ></div>
+          <div
+            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
+          ></div>
         </div>
       </section>
       <section id="collections" class="mx-8 lg:mx-20">
