@@ -34,13 +34,13 @@ export const readProfileData = async () => {
   }
 
   // Update their properties and content
-  bannerImage.src = profile.banner?.url || "default-banner.jpg";
-  bannerImage.alt = profile.banner?.alt || "Banner Image";
+  bannerImage.src = profile.banner?.url;
+  bannerImage.alt = profile.banner?.alt;
 
   userName.textContent = username;
 
-  avatarImage.src = profile.avatar?.url || "default-avatar.jpg";
-  avatarImage.alt = profile.avatar?.alt || "Avatar Image";
+  avatarImage.src = profile.avatar?.url;
+  avatarImage.alt = profile.avatar?.alt;
 
   totalCredits.textContent = "Total credits: " + profile.credits;
 
@@ -56,7 +56,7 @@ export const readProfileData = async () => {
   // Append icon after the text
   totalCredits.appendChild(coinIcon);
 
-  bio.textContent = profile.bio || "No bio available";
+  bio.textContent = profile.bio;
 
   // Check if the logged-in user is viewing their own profile
   if (user.name === username) {

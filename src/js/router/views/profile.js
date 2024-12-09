@@ -13,11 +13,10 @@ const cancelButton = document.getElementById("cancel-update");
 cancelButton.addEventListener("click", function (event) {
   event.preventDefault(); // Prevent default button behavior
   form.classList.add("hidden"); // Hide the form
-  form.classList.remove("flex", "flex-col"); // Remove flex styles
 });
 
 // Ensure form is hidden initially
-form.classList.add("hidden");
+//form.classList.add("hidden");
 
 // Toggle form visibility
 document
@@ -27,14 +26,20 @@ document
 
     if (isFormVisible) {
       form.classList.remove("hidden");
-      form.classList.add("block"); // Use block instead of flex for the form
+      form.classList.add("block");
       prefillProfileForm();
+
+      // Scroll to the form, but a little higher. Couldn't use scrollIntoView() due to some elements being too close to the viewport's edge
+      const formPosition = form.offsetTop; // Get the position of the form
+      window.scrollTo({
+        top: formPosition - 90,
+        behavior: "smooth",
+      });
     } else {
       form.classList.add("hidden");
       form.classList.remove("block");
     }
   });
 
-// Auth and profile setup
 authGuard();
 readProfileData();

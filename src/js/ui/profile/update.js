@@ -33,31 +33,36 @@ export async function onUpdateProfile(event) {
   const bannerURL = formData.get("banner-url");
   const bioText = formData.get("bio");
 
-  if (avatarURL) {
+  // Fetch current profile data
+  const profile = await readProfile(username);
+
+  // Compare new data with existing data before adding to updated object
+  if (avatarURL && avatarURL !== profile.avatar?.url) {
     updated.avatar = {
       url: avatarURL,
       alt: formData.get("avatar-alt"),
     };
   }
 
-  if (bannerURL) {
+  if (bannerURL && bannerURL !== profile.banner?.url) {
     updated.banner = {
       url: bannerURL,
       alt: formData.get("banner-alt"),
     };
   }
 
-  if (bioText) {
+  if (bioText && bioText !== profile.bio) {
     updated.bio = bioText;
   }
 
-  // Check if the 'updated' object has any keys / something was updated
+  // Check if the 'updated' object has any keys
   if (Object.keys(updated).length > 0) {
     await updateProfile(username, updated);
     alert("Profile is now updated");
     window.location.reload();
   } else {
     alert("No changes were made to the profile.");
+    window.location.reload();
   }
 }
 
