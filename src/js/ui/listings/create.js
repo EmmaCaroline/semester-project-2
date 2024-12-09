@@ -3,42 +3,42 @@ import { createListing } from "../../api/listings/create";
 /**
  * Handles the post creation form submission and processes the creation of a new post.
  *
- * This function prevents the default form submission, retrieves the form data,
- * processes the tags and media URL, and validates the post title. If the creation
- * is successful, it displays a success message and resets the form. If it fails,
- * it logs the error and alerts the user.
- *
  * @param {Event} event - The event object from the form submission.
- * @returns {Promise<void>} A promise that resolves when the post creation process is complete.
- * @throws {Error} If the post creation process encounters an error.
  */
-
-// Function to handle creating a listing
 export async function onCreateListing(event) {
   event.preventDefault();
   const form = event.target;
   const formData = new FormData(form);
   const listing = Object.fromEntries(formData.entries());
 
-  // Convert tags to an array
+  // Convert tags to array
   listing.tags = listing.tags
     ? listing.tags.split(",").map((tag) => tag.trim())
     : [];
 
-  // Collect media URLs dynamically from the input fields
+  // Collect all media inputs dynamically
   const mediaInputs = document.querySelectorAll(".media-input");
   const media = [];
   mediaInputs.forEach((input) => {
-    if (input.value.trim()) {
-      media.push({
-        url: input.value.trim(),
-        alt: input.dataset.alt || "No description provided",
-      });
+    const url = input.value.trim();
+    const altText = input.dataset.alt || "No description provided";
+    if (url) {
+      media.push({ url, alt: altText });
     }
   });
 
-  listing.media = media.length > 0 ? media : null;
+  listing.media = media.length ? media : null;
 
+  // Process endsAt date to ISO 8601 format
+  const endsAtInput = document.querySelector("#endsAt").value; // Read the value from input
+  if (endsAtInput) {
+    listing.endsAt = new Date(endsAtInput).toISOString(); // Convert to ISO 8601
+  } else {
+    alert("Please select an end date for the auction.");
+    return;
+  }
+
+  // Check if the title is empty
   if (!listing.title) {
     alert("Title is required for creating a post");
     return;
@@ -46,9 +46,10 @@ export async function onCreateListing(event) {
 
   try {
     await createListing(listing);
-    alert("Post created!");
+    alert("Post created successfully!");
     form.reset();
-    document.getElementById("mediaFields").innerHTML = ""; // Clear media inputs
+    document.getElementById("mediaFields").innerHTML = ""; // Clear media inputs on success
+    addImageField(); // Ensure at least one media field is available after reset
     window.location.href = "/profile/";
   } catch (error) {
     console.error("Error creating post: ", error);
@@ -56,6 +57,9 @@ export async function onCreateListing(event) {
   }
 }
 
+/**
+ * Dynamically adds a new image input field for media entry with a remove button.
+ */
 export function addImageField() {
   const mediaFieldsContainer = document.getElementById("mediaFields");
 
@@ -64,56 +68,33 @@ export function addImageField() {
     return;
   }
 
-  // Create a new field container for the image input
   const container = document.createElement("div");
-  container.className = "mb-4 relative"; // Make the container relative for absolute positioning
+  container.className = "mb-4 relative";
 
-  // Create the label
   const label = document.createElement("label");
-  label.className =
-    "block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base";
-  label.innerText = "Images";
+  label.setAttribute("for", "media-url");
+  label.className = "block text-sm font-medium text-gray-700 mb-2";
+  label.innerText = "Image URL";
 
-  // Create the input field
   const input = document.createElement("input");
-  input.type = "text";
+  input.type = "url";
   input.placeholder = "Enter image URL";
-  input.name = "media-url[]";
-  input.className =
-    "block w-full p-2 border border-gray-300 rounded mb-2 media-input";
+  input.name = "media-url";
+  input.className = "block w-full p-2 border rounded mb-2 media-input";
 
-  // Create the preview image element
   const preview = document.createElement("img");
-  preview.className = "w-24 h-24 object-cover rounded mt-2 hidden";
+  preview.className = "w-24 h-24 object-cover mt-2 hidden";
 
-  // Create the 'X' remove button
   const removeButton = document.createElement("button");
   removeButton.type = "button";
   removeButton.className =
-    "absolute top-[29px] right-0 bg-customGray text-white px-2 py-2 rounded cursor-pointer md:top-[33px]";
+    "absolute top-[29px] right-0 bg-customGray text-white px-2 py-2 rounded cursor-pointer";
 
   removeButton.innerText = "X";
-
-  // Remove logic
   removeButton.addEventListener("click", () => {
-    if (preview.classList.contains("hidden")) {
-      // If the preview is already hidden, this is not dynamically added, just reset preview URL
-      input.value = "";
-      preview.src = "";
-      preview.classList.add("hidden");
-    } else {
-      // Dynamically remove the entire field only if it's not the first one
-      if (mediaFieldsContainer.children.length > 1) {
-        container.remove();
-      } else {
-        // Only clear the preview for the first field
-        preview.src = "";
-        preview.classList.add("hidden");
-      }
-    }
+    container.remove();
   });
 
-  // Handle image URL input and only show the preview on valid URL after typing
   input.addEventListener("input", () => {
     const url = input.value.trim();
     if (url) {
@@ -121,17 +102,14 @@ export function addImageField() {
       preview.classList.remove("hidden");
     } else {
       preview.classList.add("hidden");
-      preview.src = ""; // Clear image preview
+      preview.src = "";
     }
   });
 
-  // Attach everything to the DOM
   container.appendChild(label);
   container.appendChild(input);
   container.appendChild(preview);
   container.appendChild(removeButton);
 
   mediaFieldsContainer.appendChild(container);
-
-  console.log("New input field with image preview is added.");
 }

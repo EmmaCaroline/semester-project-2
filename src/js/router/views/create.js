@@ -4,13 +4,9 @@ import { addImageField } from "../../ui/listings/create";
 
 authGuard();
 
-// Form handling
 const form = document.forms.create;
-
-// Attach submit listener
 form.addEventListener("submit", onCreateListing);
 
-// Ensure DOM is ready and the add image button is available
 function attachImageButtonListener() {
   const addImageButton = document.getElementById("addImageButton");
 
@@ -21,8 +17,8 @@ function attachImageButtonListener() {
   }
 }
 
-// Call this after dynamically importing the view logic
+// Call listener to dynamically add images on click
 attachImageButtonListener();
 
-// Ensure the first media field input is added when the page loads
+// Ensure at least one media field is visible by default when DOM loads
 addImageField();
