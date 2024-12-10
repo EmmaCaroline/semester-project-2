@@ -288,8 +288,8 @@
         <h2 class="font-heading text-xl text-center mb-6 md:text-2xl">
           Newly added
         </h2>
-        <div id="imageCarousel" class="w-full relative">
-          <!-- Carousel Images -->
+        <div id="image-carousel" class="w-full relative">
+          <!--Carousel Images 
           <div
             id="carouselImages"
             class="flex w-full h-96 overflow-hidden lg:h-[500px]"
@@ -300,7 +300,7 @@
               alt="Jewelry Image"
             />
 
-            <!-- Overlay -->
+             Overlay 
             <div
               class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25"
             ></div>
@@ -317,7 +317,7 @@
             </button>
           </div>
 
-          <!-- Navigation Buttons -->
+           Navigation Buttons 
           <button
             id="prevButton"
             class="absolute top-1/2 left-6 transform -translate-y-1/2"
@@ -343,7 +343,7 @@
           <div
             class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
           ></div>
-        </div>
+        </div>-->
       </section>
       <section id="collections" class="mx-8 lg:mx-20">
         <h2
@@ -437,43 +437,18 @@
         </div>
       </section>
       <section id="all-listings">
-        <div
-          id="posts-container"
-          class="container mx-auto px-6 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-20"
+        <h2
+          class="font-heading text-xl mx-8 mt-8 pb-4 lg:mt-12 lg:mx-20 md:text-2xl"
         >
-          <div class="post-data hidden">
-            <div
-              class="relative bg-white shadow-lg rounded-lg overflow-hidden group flex flex-col min-h-[390px] dark:bg-black"
-            >
-              <div class="seller-avatar-bids-container">
-                <div class="flex items-center py-2 px-2">
-                  <img
-                    class="default-avatar w-10 h-10 rounded-full"
-                    src="/images/default-avatar.jpg"
-                    alt="Default Avatar"
-                  />
-                  <span
-                    class="author-name font-body text-sm font-medium ml-2 dark:text-gray-100"
-                  ></span>
-                </div>
-                <div class="bid-count"></div>
-              </div>
-              <div class="ends-at"></div>
-              <div
-                class="image-container w-full h-60 overflow-hidden cursor-pointer"
-              >
-                <img
-                  src=""
-                  alt=""
-                  class="post-image w-full h-full object-cover"
-                />
-              </div>
-              <h2
-                class="post-title font-heading text-lg truncate mb-4 cursor-pointer dark:text-gray-100"
-              ></h2>
-              <button class="btn btn-primary"></button>
-            </div>
-          </div>
+          All listings
+        </h2>
+        <div
+          class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
+        ></div>
+        <div class="pagination-controls">
+          <button id="prevPage" disabled>Previous</button>
+          <span id="currentPage">Page 1</span>
+          <button id="nextPage">Next</button>
         </div>
       </section>
     </main>

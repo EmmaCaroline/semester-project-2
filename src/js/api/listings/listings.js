@@ -1,9 +1,10 @@
 import { API_AUCTION_LISTINGS } from "../../constants";
-import { API_AUCTION_PROFILES } from "../../constants";
-import { headers } from "../headers";
+//import { API_AUCTION_PROFILES } from "../../constants";
+import { headers } from "../../headers";
 
-export async function readPosts(
+/*export async function fetchListings(
   limit = 24,
+  page = 1,
   title,
   tags,
   media,
@@ -55,9 +56,51 @@ export async function readPosts(
     console.error("Fetching posts failed: ", error);
     throw error;
   }
+}*/
+
+export async function fetchListings(
+  limit = 24,
+  page = 1,
+  _seller = true,
+  _count = true,
+  sort = "created",
+  sortOrder = "desc",
+  //active = "true",
+  active = null, // Allow null for no filtering
+) {
+  const endpoint = new URL(API_AUCTION_LISTINGS);
+  endpoint.searchParams.append("limit", limit);
+  endpoint.searchParams.append("page", page);
+  endpoint.searchParams.append("_seller", _seller);
+  endpoint.searchParams.append("_count", _count);
+  //endpoint.searchParams.append("_active", active);
+  endpoint.searchParams.append("sort", sort);
+  endpoint.searchParams.append("sortOrder", sortOrder);
+
+  if (active !== null) {
+    endpoint.searchParams.append("_active", active);
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      headers: headers(),
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error("Failed to fetch posts: " + errorText);
+    }
+
+    const listingsData = await response.json();
+    return listingsData;
+  } catch (error) {
+    console.error("Fetching listings failed: ", error);
+    throw error;
+  }
 }
 
-export async function readPost(
+/*export async function fetchListing(
   id,
   title,
   description,
@@ -100,7 +143,7 @@ export async function readPost(
   }
 }
 
-export async function readListingsByUser(
+export async function fetchListingsByUser(
   username,
   title,
   tags,
@@ -140,4 +183,4 @@ export async function readListingsByUser(
     console.error("Fetching listings failed: ", error);
     throw error;
   }
-}
+}*/
