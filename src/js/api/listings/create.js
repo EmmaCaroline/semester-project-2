@@ -13,12 +13,18 @@ import { headers } from "../../headers";
  * @throws {Error} If the post creation fails.
  */
 
-export async function createListing({ title, body, tags, media, endsAt }) {
+export async function createListing({
+  title,
+  description,
+  tags,
+  media,
+  endsAt,
+}) {
   try {
     const response = await fetch(API_AUCTION_LISTINGS, {
       headers: headers(),
       method: "POST",
-      body: JSON.stringify({ title, body, tags, media, endsAt }),
+      body: JSON.stringify({ title, description, tags, media, endsAt }),
     });
 
     if (!response.ok) {
