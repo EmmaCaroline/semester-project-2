@@ -15,7 +15,7 @@ export function setupNewsletterSubscription(buttonId, inputId) {
     const emailInput = document.getElementById(inputId);
     const email = emailInput.value.trim(); // Remove leading and trailing whitespaces
 
-    // Basic email validation pattern (requires "@" symbol)
+    // Email validation pattern (requires "@" symbol) for 'newsletter subscription'
     const emailPattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
     // Check if the email is not empty and matches the pattern
@@ -63,6 +63,10 @@ export function ifLoggedIn() {
   }
 }
 
+// CarouselFunctions.js
+
+let currentSlideIndex = 0; // Track the current slide index
+
 async function readPostsForCarousel() {
   try {
     const { data: listing } = await fetchListings();
@@ -74,143 +78,190 @@ async function readPostsForCarousel() {
   }
 }
 
-let slideIndex = 1;
-
 export async function createCarouselSlides() {
-  const posts = await readPostsForCarousel();
+  const listings = await readPostsForCarousel();
   const carouselContainer = document.querySelector("#image-carousel");
+  const dotsContainer = document.querySelector("#dots-container");
 
-  carouselContainer.innerHTML = ""; // Clear any existing slides
+  carouselContainer.innerHTML = ""; // Clear existing slides
+  dotsContainer.innerHTML = ""; // Clear existing dots
 
-  posts.forEach((post) => {
-    const bannerImageDiv = document.createElement("div");
-    bannerImageDiv.classList.add("banner-images", "fade");
+  listings.forEach((listing, index) => {
+    const imageCarousel = document.createElement("div");
+    imageCarousel.classList.add(
+      "flex",
+      "w-full",
+      "h-96",
+      "overflow-hidden",
+      "lg:h-[500px]",
+      "carousel-slide",
+    );
 
-    const bannerImageContainerDiv = document.createElement("div");
-    bannerImageContainerDiv.classList.add("banner-image-container");
-
-    const bannerImageOverlayDiv = document.createElement("div");
-    bannerImageOverlayDiv.classList.add("banner-image-overlay");
-
-    const img = document.createElement("img");
-    if (post.media?.[0]) {
-      img.src = post.media[0].url;
-      img.alt = post.media[0].alt;
+    const bannerImage = document.createElement("img");
+    bannerImage.classList.add("w-full", "object-cover");
+    if (listing.media?.[0]) {
+      bannerImage.src = listing.media[0].url;
+      bannerImage.alt = listing.media[0].alt;
     } else {
-      img.src = defaultImage;
-      console.log("defaultImage: ", defaultImage);
-      img.alt = "No image available";
+      bannerImage.src = defaultImage;
+      bannerImage.alt = "No image available";
     }
 
-    bannerImageContainerDiv.appendChild(bannerImageOverlayDiv);
-    bannerImageContainerDiv.appendChild(img);
+    const bannerOverlay = document.createElement("div");
+    bannerOverlay.classList.add(
+      "absolute",
+      "top-0",
+      "left-0",
+      "w-full",
+      "h-full",
+      "bg-black",
+      "bg-opacity-25",
+    );
 
-    const bannerTextDiv = document.createElement("div");
-    bannerTextDiv.classList.add("banner-text");
-    const h2 = document.createElement("h2");
-    h2.textContent = post.title;
-    bannerTextDiv.appendChild(h2);
+    const bannerTitle = document.createElement("p");
+    bannerTitle.textContent = listing.title;
+    bannerTitle.classList.add(
+      "font-heading",
+      "text-white",
+      "text-xl",
+      "absolute",
+      "top-1/2",
+      "transform",
+      "-translate-y-1/2",
+      "left-1/2",
+      "-translate-x-1/2",
+      "max-w-52",
+      "truncate",
+      "sm:max-w-sm",
+      "md:max-w-md",
+      "lg:max-w-3xl",
+      "md:text-xl",
+      "lg:text-3xl",
+    );
 
-    const buttonDiv = document.createElement("div");
-    buttonDiv.classList.add("button");
-    const anchor = document.createElement("a");
-    anchor.href = `post/index.html?id=${post.id}`;
-    anchor.textContent = "Read More";
-    buttonDiv.appendChild(anchor);
+    const viewButton = document.createElement("a");
+    viewButton.href = `/listing/listing.html?id=${listing.id}`;
+    viewButton.textContent = "View items";
+    viewButton.classList.add(
+      "font-body",
+      "text-sm",
+      "py-1.5",
+      "px-8",
+      "rounded-lg",
+      "md:text-base",
+      "text-white",
+      "bg-black",
+      "absolute",
+      "bottom-4",
+      "left-1/2",
+      "transform",
+      "-translate-x-1/2",
+      "border",
+      "border-gray-600",
+      "hover:bg-customGray",
+      "hover:text-gray-300",
+    );
 
-    bannerImageDiv.appendChild(bannerImageContainerDiv);
-    bannerImageDiv.appendChild(bannerTextDiv);
-    bannerImageDiv.appendChild(buttonDiv);
+    imageCarousel.append(bannerImage, bannerOverlay, bannerTitle, viewButton);
+    carouselContainer.appendChild(imageCarousel);
 
-    carouselContainer.appendChild(bannerImageDiv);
-  });
+    const dot = document.createElement("div");
+    dot.classList.add(
+      "single-dot",
+      "w-2",
+      "h-2",
+      "md:w-3",
+      "md:h-3",
+      "mx-1",
+      "bg-gray-400",
+      "rounded-full",
+      "inline-block",
+      "transition-bg",
+      "duration-600",
+      "ease-in-out",
+      "hover:bg-gray-700",
+      "cursor-pointer",
+    );
 
-  // Add buttons and dots
-  addCarouselNavigation(carouselContainer);
-  addCarouselDots(posts, carouselContainer);
+    // Click event to navigate to the corresponding slide
+    dot.addEventListener("click", () => {
+      currentSlideIndex = index;
+      showSlide(currentSlideIndex);
+    });
 
-  // Initialize the first slide
-  showSlides(slideIndex);
-}
-
-function addCarouselNavigation(carouselContainer) {
-  const prevButton = document.createElement("a");
-  prevButton.classList.add("banner-prev");
-  prevButton.innerHTML = "&#10094;";
-  prevButton.onclick = function () {
-    console.log("Prev button clicked");
-    plusSlides(-1);
-  };
-
-  const nextButton = document.createElement("a");
-  nextButton.classList.add("banner-next");
-  nextButton.innerHTML = "&#10095;";
-  nextButton.onclick = function () {
-    console.log("Next button clicked");
-    plusSlides(1);
-  };
-
-  carouselContainer.appendChild(prevButton);
-  carouselContainer.appendChild(nextButton);
-}
-
-function addCarouselDots(posts, carouselContainer) {
-  const dotsContainer = document.createElement("div");
-  dotsContainer.classList.add("dots-container");
-
-  posts.forEach((_, index) => {
-    const dot = document.createElement("span");
-    dot.classList.add("dot");
-    dot.onclick = function () {
-      console.log(`Dot clicked: ${index + 1}`);
-      currentSlide(index + 1);
-    };
     dotsContainer.appendChild(dot);
   });
 
-  carouselContainer.appendChild(dotsContainer);
+  const prevBtn = document.createElement("button");
+  prevBtn.id = "prev-btn";
+  prevBtn.classList.add(
+    "absolute",
+    "top-1/2",
+    "left-6",
+    "transform",
+    "-translate-y-1/2",
+  );
+  prevBtn.innerHTML =
+    '<i class="fa-solid fa-chevron-left text-white text-2xl"></i>';
+  prevBtn.onclick = prevImage;
+
+  const nextBtn = document.createElement("button");
+  nextBtn.id = "next-btn";
+  nextBtn.classList.add(
+    "absolute",
+    "top-1/2",
+    "right-6",
+    "transform",
+    "-translate-y-1/2",
+  );
+  nextBtn.innerHTML =
+    '<i class="fa-solid fa-chevron-right text-white text-2xl"></i>';
+  nextBtn.onclick = nextImage;
+
+  carouselContainer.appendChild(prevBtn);
+  carouselContainer.appendChild(nextBtn);
+
+  showSlide(currentSlideIndex); // Show the first slide initially
 }
 
-export function showSlides(numberOfSlides) {
-  const slides = document.getElementsByClassName("banner-images");
-  const dots = document.getElementsByClassName("dot");
+// Update the showSlide function to highlight the active dot
+function showSlide(index) {
+  const slides = document.querySelectorAll(".carousel-slide");
+  const dots = document.querySelectorAll(".single-dot");
 
-  console.log(`showSlides called with slideIndex: ${numberOfSlides}`);
-  if (numberOfSlides > slides.length) {
-    slideIndex = 1;
-  }
-  if (numberOfSlides < 1) {
-    slideIndex = slides.length;
-  }
+  slides.forEach((slide, i) => {
+    slide.style.display = i === index ? "block" : "none";
+  });
 
-  // Log slides and dots to check if they are being correctly accessed
-  console.log(`Slides length: ${slides.length}, Dots length: ${dots.length}`);
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-
-  console.log(`Displaying slide index: ${slideIndex}`);
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].className += " active";
+  dots.forEach((dot, i) => {
+    dot.classList.toggle("bg-gray-700", i === index); // Highlight active dot
+    dot.classList.toggle("bg-gray-400", i !== index); // Dim inactive dots
+  });
 }
 
-export function plusSlides(numberOfSlides) {
-  console.log("PlusSlides triggered");
-  slideIndex += numberOfSlides; // Update slideIndex
-  showSlides(slideIndex); // Show the updated slide
+function nextImage() {
+  const slides = document.querySelectorAll(".carousel-slide");
+  if (currentSlideIndex < slides.length - 1) {
+    currentSlideIndex++;
+  } else {
+    currentSlideIndex = 0;
+  }
+  showSlide(currentSlideIndex);
 }
 
-export function currentSlide(numberOfSlides) {
-  console.log("CurrentSlide triggered");
-  slideIndex = numberOfSlides; // Set slideIndex to the given slide number
-  showSlides(slideIndex); // Show the updated slide
+function prevImage() {
+  const slides = document.querySelectorAll(".carousel-slide");
+  if (currentSlideIndex > 0) {
+    currentSlideIndex--;
+  } else {
+    currentSlideIndex = slides.length - 1;
+  }
+  showSlide(currentSlideIndex);
 }
 
-// function calls
+window.nextImage = nextImage;
+window.prevImage = prevImage;
 
+// Function calls
 ifLoggedIn();
+createCarouselSlides();

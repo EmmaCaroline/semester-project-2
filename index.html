@@ -10,6 +10,7 @@
     <title>TreasureBid</title>
     <link rel="stylesheet" href="/src/css/styles.css" />
     <script type="module" src="/app.js"></script>
+    <script type="module" src="/src/js/ui/homepage/index.js"></script>
     <script
       src="https://kit.fontawesome.com/7f993fe397.js"
       crossorigin="anonymous"
@@ -289,61 +290,26 @@
           Newly added
         </h2>
         <div id="image-carousel" class="w-full relative">
-          <!--Carousel Images 
-          <div
-            id="carouselImages"
-            class="flex w-full h-96 overflow-hidden lg:h-[500px]"
-          >
-            <img
-              src="images/jewelry-item2-image1.jpg"
-              class="w-full h-full object-cover"
-              alt="Jewelry Image"
-            />
-
-             Overlay 
-            <div
-              class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25"
-            ></div>
-            <p
-              class="font-heading text-white text-xl absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 max-w-52 truncate sm:max-w-sm md:max-w-md lg:max-w-3xl md:text-xl lg:text-3xl"
-            >
-              Title
-            </p>
-            <button
-              id="view-newly-button"
-              class="btn btn-secondary bg-black absolute bottom-4 left-1/2 transform -translate-x-1/2 border border-gray-600 hover:bg-customGray hover:text-gray-300"
-            >
-              View
-            </button>
-          </div>
-
-           Navigation Buttons 
+          <!--Navigation Buttons-->
           <button
-            id="prevButton"
-            class="absolute top-1/2 left-6 transform -translate-y-1/2"
+            id="prev-btn"
+            class="bg-red-500 absolute top-1/2 left-6 transform -translate-y-1/2"
             onclick="prevImage()"
           >
             <i class="fa-solid fa-chevron-left text-white text-2xl"></i>
           </button>
           <button
-            id="nextButton"
-            class="absolute top-1/2 right-6 transform -translate-y-1/2"
+            id="next-btn"
+            class="bg-red-500 absolute top-1/2 right-6 transform -translate-y-1/2"
             onclick="nextImage()"
           >
             <i class="fa-solid fa-chevron-right text-white text-2xl"></i>
           </button>
         </div>
-        <div id="dots-container" class="flex justify-center items-center py-2">
-          <div
-            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
-          ></div>
-          <div
-            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
-          ></div>
-          <div
-            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
-          ></div>
-        </div>-->
+        <div
+          id="dots-container"
+          class="flex justify-center items-center py-2"
+        ></div>
       </section>
       <section id="collections" class="mx-8 lg:mx-20">
         <h2
