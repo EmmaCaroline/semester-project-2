@@ -1,62 +1,10 @@
 import { API_AUCTION_LISTINGS } from "../../constants";
 //import { API_AUCTION_PROFILES } from "../../constants";
 import { headers } from "../../headers";
-
-/*export async function fetchListings(
-  limit = 24,
-  page = 1,
-  title,
-  tags,
-  media,
-  endsAt,
-  _seller,
-  _count,
-) {
-  try {
-    let allListings = [];
-    let page = 1;
-    let hasMoreListings = true;
-
-    while (hasMoreListings) {
-      // Construct the endpoint with query parameters
-      const endpoint = new URL(API_AUCTION_LISTINGS);
-      endpoint.searchParams.append("limit", limit);
-      endpoint.searchParams.append("page", page);
-      if (title) endpoint.searchParams.append("title", title);
-      if (tags) endpoint.searchParams.append("tags", tags);
-      if (media) endpoint.searchParams.append("media", media);
-      if (endsAt) endpoint.searchParams.append("endsAt", endsAt);
-      if (_seller) endpoint.searchParams.append("_seller", _seller);
-      if (_count) endpoint.searchParams.append("_count", _count);
-
-      const response = await fetch(endpoint, {
-        headers: headers(),
-        method: "GET",
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error("Failed to fetch posts: " + errorText);
-      }
-
-      const listingsData = await response.json();
-
-      if (listingsData.length === 0) {
-        // No more posts, stop the loop
-        hasMoreListings = false;
-      } else {
-        // Append fetched posts to the result array
-        allListings = allListings.concat(listingsData);
-        page++; // Increment the page number for the next request
-      }
-    }
-
-    return allListings;
-  } catch (error) {
-    console.error("Fetching posts failed: ", error);
-    throw error;
-  }
-}*/
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 export async function fetchListings(
   limit = 24,
@@ -78,7 +26,7 @@ export async function fetchListings(
   if (active !== null) {
     endpoint.searchParams.append("_active", active);
   }
-
+  showLoadingSpinner();
   try {
     const response = await fetch(endpoint, {
       headers: headers(),
@@ -95,6 +43,8 @@ export async function fetchListings(
   } catch (error) {
     console.error("Fetching listings failed: ", error);
     throw error;
+  } finally {
+    hideLoadingSpinner();
   }
 }
 

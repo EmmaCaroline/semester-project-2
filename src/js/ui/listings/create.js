@@ -1,4 +1,8 @@
 import { createListing } from "../../api/listings/create";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * Handles the post creation form submission and processes the creation of a new post.
@@ -43,7 +47,7 @@ export async function onCreateListing(event) {
     alert("Title is required for creating a post");
     return;
   }
-
+  showLoadingSpinner();
   try {
     await createListing(listing);
     alert("Post created successfully!");
@@ -54,6 +58,8 @@ export async function onCreateListing(event) {
   } catch (error) {
     console.error("Error creating post: ", error);
     alert("Failed to create post. Please try again.");
+  } finally {
+    hideLoadingSpinner();
   }
 }
 

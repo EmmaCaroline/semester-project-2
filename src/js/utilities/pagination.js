@@ -1,9 +1,11 @@
 import { fetchListings } from "../api/listings/listings";
 import { createAndReadListings } from "../ui/listings/listings";
+import { showLoadingSpinner, hideLoadingSpinner } from "./loadingSpinner";
 
 let currentPage = 1;
 const limit = 24;
 let totalListings = 0; // Track total listings to calculate total pages
+const maxPages = 16; // Maximum number of pages
 
 // Function to update pagination buttons
 function updatePaginationButtons() {
@@ -11,7 +13,8 @@ function updatePaginationButtons() {
   const nextPageButton = document.getElementById("nextPage");
   const currentPageElement = document.getElementById("currentPage");
 
-  const totalPages = Math.ceil(totalListings / limit);
+  // Calculate total pages with a maximum limit of 20
+  const totalPages = Math.min(Math.ceil(totalListings / limit), maxPages);
 
   currentPageElement.textContent = `Page ${currentPage} / ${totalPages}`;
   prevPageButton.disabled = currentPage === 1;
@@ -19,6 +22,7 @@ function updatePaginationButtons() {
 }
 
 export async function fetchAndRenderListings() {
+  showLoadingSpinner();
   try {
     const listingContainer = document.querySelector(".listings-container");
 
@@ -55,6 +59,8 @@ export async function fetchAndRenderListings() {
     }, 300); // Match timeout with CSS transition duration
   } catch (error) {
     console.error("Error fetching and rendering listings:", error);
+  } finally {
+    hideLoadingSpinner();
   }
 }
 
@@ -72,11 +78,14 @@ export function initializePagination() {
   });
 
   document.getElementById("nextPage").addEventListener("click", () => {
-    currentPage++;
-    fetchAndRenderListings();
+    const totalPages = Math.min(Math.ceil(totalListings / limit), maxPages);
+    if (currentPage < totalPages) {
+      currentPage++;
+      fetchAndRenderListings();
 
-    // Scroll to the listings container after fetching the listings
-    const listingContainer = document.querySelector(".listings-container");
-    listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Scroll to the listings container after fetching the listings
+      const listingContainer = document.querySelector(".listings-container");
+      listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
 }

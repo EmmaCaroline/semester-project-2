@@ -1,4 +1,8 @@
 import { login } from "../../api/auth/login";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * Handles the user login process on form submission.
@@ -11,7 +15,7 @@ export async function onLogin(event) {
   const form = document.forms.login;
   const formData = new FormData(form);
   const user = Object.fromEntries(formData.entries());
-
+  showLoadingSpinner();
   try {
     // Call the login API function
     const response = await login(user);
@@ -26,5 +30,7 @@ export async function onLogin(event) {
   } catch (error) {
     console.error("Login failed:", error);
     alert(`Login failed: ${error.message}`);
+  } finally {
+    hideLoadingSpinner();
   }
 }

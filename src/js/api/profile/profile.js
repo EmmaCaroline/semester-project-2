@@ -1,5 +1,9 @@
 import { API_AUCTION_PROFILES } from "../../constants";
 import { headers } from "../../headers";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * API call function to fetch the profile data of a user by their username.
@@ -11,6 +15,7 @@ import { headers } from "../../headers";
 
 export async function readProfile(username) {
   const endpoint = `${API_AUCTION_PROFILES}/${username}`;
+  showLoadingSpinner();
   try {
     const response = await fetch(endpoint, {
       headers: headers(),
@@ -32,5 +37,7 @@ export async function readProfile(username) {
     }
     console.error("Fetching profile failed: ", error);
     throw error;
+  } finally {
+    hideLoadingSpinner();
   }
 }

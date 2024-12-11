@@ -1,4 +1,8 @@
 import { register } from "../../api/auth/register";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * Handles the registration form submission and processes user registration.
@@ -19,7 +23,7 @@ export async function onRegister(event) {
   const form = document.forms.register;
   const formData = new FormData(form);
   const user = Object.fromEntries(formData.entries());
-
+  showLoadingSpinner();
   try {
     const response = await register(user);
     console.log("Registration ok", response);
@@ -27,5 +31,7 @@ export async function onRegister(event) {
     window.location.href = "/auth/login/";
   } catch (error) {
     console.error("Registration failed:", error);
+  } finally {
+    hideLoadingSpinner();
   }
 }

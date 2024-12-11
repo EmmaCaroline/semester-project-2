@@ -1,5 +1,9 @@
 import { load } from "../../api/auth/key";
 import { readProfile } from "../../api/profile/profile";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * Loads and displays the logged-in user's profile data.
@@ -12,11 +16,13 @@ import { readProfile } from "../../api/profile/profile";
  * @throws {Error} If the user is not logged in or the profile data cannot be fetched.
  */
 export const readProfileData = async () => {
+  showLoadingSpinner();
   const user = load("user");
   if (!user || !user.name) {
     console.error("User is not logged in or user object is invalid");
     return;
   }
+  hideLoadingSpinner();
 
   const username = user.name;
   const profile = await readProfile(username);

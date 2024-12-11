@@ -14,4 +14,4 @@ addTypewriterEffect("typewriter", "Welcome to TreasureBid", 100);
 onReadAllListings();
 
 initializePagination();
-fetchAndRenderListings(); // Initial fetch
+fetchAndRenderListings();

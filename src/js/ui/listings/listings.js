@@ -1,6 +1,10 @@
 import { fetchListings } from "../../api/listings/listings";
 import { save } from "../../api/auth/key";
 import defaultImage from "../../../../images/No_Image_Available.jpg";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 function formatDate(isoDate) {
   const date = new Date(isoDate);
@@ -195,6 +199,7 @@ export async function createAndReadListings(listing) {
 }
 
 export async function onReadAllListings() {
+  showLoadingSpinner();
   try {
     // Fetch listings from the API
     const response = await fetchListings();
@@ -217,5 +222,7 @@ export async function onReadAllListings() {
     });
   } catch (error) {
     console.error("Error reading all listings:", error);
+  } finally {
+    hideLoadingSpinner();
   }
 }

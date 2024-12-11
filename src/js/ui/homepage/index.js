@@ -1,5 +1,9 @@
 import { fetchListings } from "../../api/listings/listings";
 import defaultImage from "../../../../images/No_Image_Available.jpg";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 const token = localStorage.getItem("token");
 const welcomeMessage = document.querySelector("#unregistered-welcome-message");
@@ -68,6 +72,7 @@ export function ifLoggedIn() {
 let currentSlideIndex = 0; // Track the current slide index
 
 async function readPostsForCarousel() {
+  showLoadingSpinner();
   try {
     const { data: listing } = await fetchListings();
     listing.sort((a, b) => new Date(b.created) - new Date(a.created));
@@ -75,6 +80,8 @@ async function readPostsForCarousel() {
   } catch (error) {
     console.error("Failed to fetch listing:", error);
     return [];
+  } finally {
+    hideLoadingSpinner();
   }
 }
 
@@ -89,12 +96,6 @@ export async function createCarouselSlides() {
   listings.forEach((listing, index) => {
     const imageCarousel = document.createElement("div");
     imageCarousel.classList.add(
-      /*"flex",
-      "w-full",
-      "h-72",
-      "overflow-hidden",
-      "lg:h-[500px]",
-      "carousel-slide",*/
       "flex",
       "w-full",
       "h-72",
@@ -116,13 +117,6 @@ export async function createCarouselSlides() {
 
     const bannerOverlay = document.createElement("div");
     bannerOverlay.classList.add(
-      /*"absolute",
-      "top-0",
-      "left-0",
-      "w-full",
-      "h-full",
-      "bg-black",
-      "bg-opacity-25",*/
       "absolute",
       "top-0",
       "left-0",
@@ -276,7 +270,7 @@ function prevImage() {
   showSlide(currentSlideIndex);
 }
 
-// Drag-to-change logic for mobile devices
+// Drag-to-change logic for mobile
 function addDragToChangeSlides(carouselContainer) {
   let startX = 0;
   let endX = 0;
@@ -308,6 +302,6 @@ function addDragToChangeSlides(carouselContainer) {
 window.nextImage = nextImage;
 window.prevImage = prevImage;
 
-// unction calls
+// Function calls
 ifLoggedIn();
 createCarouselSlides();
