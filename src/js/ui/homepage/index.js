@@ -89,16 +89,23 @@ export async function createCarouselSlides() {
   listings.forEach((listing, index) => {
     const imageCarousel = document.createElement("div");
     imageCarousel.classList.add(
-      "flex",
+      /*"flex",
       "w-full",
-      "h-96",
+      "h-72",
       "overflow-hidden",
       "lg:h-[500px]",
+      "carousel-slide",*/
+      "flex",
+      "w-full",
+      "h-72",
+      "md:h-[400px]",
+      "lg:h-[500px]",
+      "overflow-hidden",
       "carousel-slide",
     );
 
     const bannerImage = document.createElement("img");
-    bannerImage.classList.add("w-full", "object-cover");
+    bannerImage.classList.add("w-full", "object-cover", "h-full");
     if (listing.media?.[0]) {
       bannerImage.src = listing.media[0].url;
       bannerImage.alt = listing.media[0].alt;
@@ -109,6 +116,13 @@ export async function createCarouselSlides() {
 
     const bannerOverlay = document.createElement("div");
     bannerOverlay.classList.add(
+      /*"absolute",
+      "top-0",
+      "left-0",
+      "w-full",
+      "h-full",
+      "bg-black",
+      "bg-opacity-25",*/
       "absolute",
       "top-0",
       "left-0",
@@ -221,6 +235,9 @@ export async function createCarouselSlides() {
   carouselContainer.appendChild(prevBtn);
   carouselContainer.appendChild(nextBtn);
 
+  // Add drag-to-change functionality for mobile
+  addDragToChangeSlides(carouselContainer);
+
   showSlide(currentSlideIndex); // Show the first slide initially
 }
 
@@ -259,9 +276,38 @@ function prevImage() {
   showSlide(currentSlideIndex);
 }
 
+// Drag-to-change logic for mobile devices
+function addDragToChangeSlides(carouselContainer) {
+  let startX = 0;
+  let endX = 0;
+  let isDragging = false;
+
+  carouselContainer.addEventListener("touchstart", (e) => {
+    isDragging = true;
+    startX = e.touches[0].pageX;
+  });
+
+  carouselContainer.addEventListener("touchmove", (e) => {
+    if (!isDragging) return;
+    endX = e.touches[0].pageX;
+  });
+
+  carouselContainer.addEventListener("touchend", () => {
+    if (!isDragging) return;
+    isDragging = false;
+    if (startX - endX > 50) {
+      // Swiped left
+      nextImage();
+    } else if (endX - startX > 50) {
+      // Swiped right
+      prevImage();
+    }
+  });
+}
+
 window.nextImage = nextImage;
 window.prevImage = prevImage;
 
-// Function calls
+// unction calls
 ifLoggedIn();
 createCarouselSlides();

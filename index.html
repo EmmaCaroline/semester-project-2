@@ -293,14 +293,14 @@
           <!--Navigation Buttons-->
           <button
             id="prev-btn"
-            class="bg-red-500 absolute top-1/2 left-6 transform -translate-y-1/2"
+            class="absolute top-1/2 left-6 transform -translate-y-1/2"
             onclick="prevImage()"
           >
             <i class="fa-solid fa-chevron-left text-white text-2xl"></i>
           </button>
           <button
             id="next-btn"
-            class="bg-red-500 absolute top-1/2 right-6 transform -translate-y-1/2"
+            class="absolute top-1/2 right-6 transform -translate-y-1/2"
             onclick="nextImage()"
           >
             <i class="fa-solid fa-chevron-right text-white text-2xl"></i>
@@ -411,10 +411,23 @@
         <div
           class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
         ></div>
-        <div class="pagination-controls">
-          <button id="prevPage" disabled>Previous</button>
-          <span id="currentPage">Page 1</span>
-          <button id="nextPage">Next</button>
+        <div
+          class="pagination-controls flex justify-center items-center mt-4 gap-4"
+        >
+          <button
+            id="prevPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+            disabled
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span id="currentPage" class="font-body text-sm md:text-base"></span>
+          <button
+            id="nextPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
         </div>
       </section>
     </main>

@@ -16,7 +16,7 @@ function formatDate(isoDate) {
 }
 
 export async function createAndReadListings(listing) {
-  console.log("Processing listing:", listing);
+  //console.log("Processing listing:", listing);
 
   const listingElement = document.createElement("a");
   if (!listingElement) {
@@ -52,7 +52,7 @@ export async function createAndReadListings(listing) {
   const sellerName = document.createElement("p");
   sellerName.classList.add("text-sm", "font-body", "md:text-base");
   sellerName.textContent = listing.seller.name;
-  console.log("Seller name:", sellerName.textContent);
+  //console.log("Seller name:", sellerName.textContent);
 
   const sellerAvatar = document.createElement("img");
   sellerAvatar.classList.add("w-8", "h-8", "rounded-full", "mr-2");
@@ -63,14 +63,14 @@ export async function createAndReadListings(listing) {
     sellerAvatar.src = "../../../../images/default-avatar.jpg";
     sellerAvatar.alt = "Default avatar image";
   }
-  console.log("Seller avatar:", sellerAvatar.src);
+  //console.log("Seller avatar:", sellerAvatar.src);
 
   seller.append(sellerAvatar, sellerName);
 
   const bidCount = document.createElement("p");
   bidCount.classList.add("text-sm", "font-body", "md:text-base");
   bidCount.textContent = "Bids: " + listing._count.bids;
-  console.log("Bid count:", bidCount.textContent);
+  //console.log("Bid count:", bidCount.textContent);
   sellerAndBidCount.append(seller, bidCount);
 
   const endingDate = document.createElement("p");
@@ -151,7 +151,7 @@ export async function createAndReadListings(listing) {
 
   const listingTitle = document.createElement("h2");
   listingTitle.textContent = listing.title || "Untitled";
-  console.log("Listing title:", listingTitle.textContent);
+  //console.log("Listing title:", listingTitle.textContent);
   listingTitle.classList.add(
     "font-heading",
     "text-xl",
@@ -179,7 +179,7 @@ export async function createAndReadListings(listing) {
   listingsButton.textContent = "View items";
   buttonContainer.appendChild(listingsButton);
 
-  console.log("Assembling listing container...");
+  //console.log("Assembling listing container...");
   listingElement.append(
     sellerAndBidCount,
     endingDate,
@@ -202,7 +202,7 @@ export async function onReadAllListings() {
 
     // Access the listings data inside the 'data' property
     const listingsArray = Array.isArray(response.data) ? response.data : [];
-    console.log("Processed Listings Array:", listingsArray);
+    //console.log("Processed Listings Array:", listingsArray);
 
     // Check if the array is empty
     if (listingsArray.length === 0) {
@@ -212,7 +212,7 @@ export async function onReadAllListings() {
 
     // Loop through the listings and create the HTML for each one
     listingsArray.forEach((listing) => {
-      console.log("Processing Listing:", listing);
+      //console.log("Processing Listing:", listing);
       createAndReadListings(listing);
     });
   } catch (error) {
