@@ -91,3 +91,21 @@ export async function getListingCount() {
     // You can also display an error message to the user
   }
 }
+
+export async function getWinsCount() {
+  try {
+    const user = load("user");
+    const username = user.name;
+    const profile = await readProfile(username);
+
+    const winsCount = document.createElement("p");
+    winsCount.classList.add("text-sm", "font-body", "md:text-base");
+    winsCount.textContent = "Total: " + profile._count.wins;
+
+    const winsCountContainer = document.querySelector("#wins-count");
+    winsCountContainer.appendChild(winsCount);
+  } catch (error) {
+    console.error("Error fetching listing count:", error);
+    // You can also display an error message to the user
+  }
+}
