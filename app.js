@@ -1,8 +1,17 @@
 import router from "./src/js/router/index";
 import { setLogoutListener } from "./src/js/ui/global/logout";
+import { redirectToAndScroll } from "./src/js/utilities/scrollToListings";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "./src/js/utilities/loadingSpinner";
+
+showLoadingSpinner();
 
 // Initialize router for the current page
 await router(window.location.pathname);
+
+hideLoadingSpinner();
 
 const token = localStorage.getItem("token");
 
@@ -115,3 +124,17 @@ applyInitialTheme();
 setupThemeToggleListeners();
 
 setLogoutListener();
+
+redirectToAndScroll();
+
+// Scroll into view after the page loads if the hash matches
+window.addEventListener("load", () => {
+  if (window.location.hash === "#scroll-to-listings") {
+    const listingsContainer = document.getElementById("scroll-to-listings");
+    if (listingsContainer) {
+      listingsContainer.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.log("Listings container not found on this page.");
+    }
+  }
+});

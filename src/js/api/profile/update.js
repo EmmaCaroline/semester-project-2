@@ -1,5 +1,9 @@
 import { API_AUCTION_PROFILES } from "../../constants";
 import { headers } from "../../headers";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * API call function to update the profile of a user with the specified username and new data.
@@ -12,7 +16,7 @@ import { headers } from "../../headers";
 
 export async function updateProfile(username, updatedData) {
   const endpoint = `${API_AUCTION_PROFILES}/${username}`;
-
+  showLoadingSpinner();
   try {
     const response = await fetch(endpoint, {
       headers: headers(),
@@ -30,5 +34,7 @@ export async function updateProfile(username, updatedData) {
   } catch (error) {
     console.error("Updating profile failed: ", error);
     throw error;
+  } finally {
+    hideLoadingSpinner();
   }
 }

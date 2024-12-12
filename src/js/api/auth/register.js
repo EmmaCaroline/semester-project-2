@@ -1,5 +1,9 @@
 import { API_AUTH_REGISTER } from "../../constants";
 import { headers } from "../../headers";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * API call function to register a new user with the provided name, email, and password.
@@ -13,6 +17,7 @@ import { headers } from "../../headers";
  */
 
 export async function register({ name, email, password }) {
+  showLoadingSpinner();
   const body = JSON.stringify({ name, email, password });
 
   try {
@@ -37,5 +42,7 @@ export async function register({ name, email, password }) {
     }
     console.error("Registration failed", error);
     throw error;
+  } finally {
+    hideLoadingSpinner();
   }
 }

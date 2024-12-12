@@ -1,6 +1,10 @@
 import { API_AUTH_LOGIN } from "../../constants";
 import * as storage from "../auth/key";
 import { headers } from "../../headers";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * API call function to log in a user with the provided email and password.
@@ -13,6 +17,7 @@ import { headers } from "../../headers";
  */
 
 export async function login({ email, password }) {
+  showLoadingSpinner();
   const body = JSON.stringify({ email, password });
 
   try {
@@ -35,5 +40,7 @@ export async function login({ email, password }) {
   } catch (error) {
     console.error("Login failed", error);
     throw error;
+  } finally {
+    hideLoadingSpinner();
   }
 }

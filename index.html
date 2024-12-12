@@ -10,6 +10,7 @@
     <title>TreasureBid</title>
     <link rel="stylesheet" href="/src/css/styles.css" />
     <script type="module" src="/app.js"></script>
+    <script type="module" src="/src/js/ui/homepage/index.js"></script>
     <script
       src="https://kit.fontawesome.com/7f993fe397.js"
       crossorigin="anonymous"
@@ -36,18 +37,22 @@
               class="w-40 h-16"
             />
           </a>
+
           <div class="hidden lg:flex items-center relative">
             <input
               type="text"
               aria-label="Search"
               id="search-input"
-              placeholder="..search listings"
+              placeholder="Search listings"
               class="pl-10 py-2 w-80 border bg-customBeige placeholder-customGray text-base border-black rounded focus:bg-white focus:ring focus:ring-customBlue transition-all duration-300"
             />
-            <i
-              class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2"
-            ></i>
+            <a href="#scroll-to-listings">
+              <i
+                class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2"
+              ></i>
+            </a>
           </div>
+
           <div class="flex justify-center items-center pr-6 md:pr-20">
             <button
               id="dropdown-profile-btn"
@@ -73,6 +78,7 @@
             <li>
               <a
                 href="/"
+                id="all-listings-link"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >All Listings</a
               >
@@ -181,7 +187,18 @@
       </nav>
     </header>
     <main class="mt-20">
-      <section id="unregistered-welcome-message">
+      <div
+        id="loading-spinner"
+        class="hidden fixed inset-0 justify-center items-center bg-gray-800 bg-opacity-50 z-50"
+      >
+        <div
+          class="spinner-border animate-spin inline-block w-16 h-16 border-4 border-t-transparent border-gray-200 rounded-full"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <section id="unregistered-welcome-message" class="hidden">
         <div class="px-8 pt-8 flex flex-col md:items-center lg:px-20 lg:pt-12">
           <h1
             id="typewriter"
@@ -189,7 +206,7 @@
           ></h1>
 
           <p class="font-body text-sm py-4 max-w-xs md:text-base">
-            Want to become a TreasureBidder? Sign up to start placing bids or to
+            Want to become a TreasureBidder? Sign up to start placing bids or
             create listings
           </p>
           <a href="/auth/register.html">
@@ -288,62 +305,27 @@
         <h2 class="font-heading text-xl text-center mb-6 md:text-2xl">
           Newly added
         </h2>
-        <div id="imageCarousel" class="w-full relative">
-          <!-- Carousel Images -->
-          <div
-            id="carouselImages"
-            class="flex w-full h-96 overflow-hidden lg:h-[500px]"
-          >
-            <img
-              src="images/jewelry-item2-image1.jpg"
-              class="w-full h-full object-cover"
-              alt="Jewelry Image"
-            />
-
-            <!-- Overlay -->
-            <div
-              class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25"
-            ></div>
-            <p
-              class="font-heading text-white text-xl absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 max-w-52 truncate sm:max-w-sm md:max-w-md lg:max-w-3xl md:text-xl lg:text-3xl"
-            >
-              Title
-            </p>
-            <button
-              id="view-newly-button"
-              class="btn btn-secondary bg-black absolute bottom-4 left-1/2 transform -translate-x-1/2 border border-gray-600 hover:bg-customGray hover:text-gray-300"
-            >
-              View
-            </button>
-          </div>
-
-          <!-- Navigation Buttons -->
+        <div id="image-carousel" class="w-full relative">
+          <!--Navigation Buttons-->
           <button
-            id="prevButton"
+            id="prev-btn"
             class="absolute top-1/2 left-6 transform -translate-y-1/2"
             onclick="prevImage()"
           >
             <i class="fa-solid fa-chevron-left text-white text-2xl"></i>
           </button>
           <button
-            id="nextButton"
+            id="next-btn"
             class="absolute top-1/2 right-6 transform -translate-y-1/2"
             onclick="nextImage()"
           >
             <i class="fa-solid fa-chevron-right text-white text-2xl"></i>
           </button>
         </div>
-        <div id="dots-container" class="flex justify-center items-center py-2">
-          <div
-            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
-          ></div>
-          <div
-            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
-          ></div>
-          <div
-            class="single-dot w-2 h-2 md:w-3 md:h-3 mx-1 bg-gray-400 rounded-full inline-block transition-bg duration-600 ease-in-out hover:bg-gray-700"
-          ></div>
-        </div>
+        <div
+          id="dots-container"
+          class="flex justify-center items-center py-2"
+        ></div>
       </section>
       <section id="collections" class="mx-8 lg:mx-20">
         <h2
@@ -436,6 +418,57 @@
           </div>
         </div>
       </section>
+      <hr
+        class="border-t-2 border-customBlue mb-8 mt-8 mx-8 lg:mx-20 lg:mb-12"
+      />
+      <section id="all-listings">
+        <h2
+          class="font-heading text-xl mx-8 mt-8 pb-6 lg:mt-12 lg:mx-20 md:text-2xl"
+        >
+          All listings
+        </h2>
+        <div class="sort-by mx-8 lg:mx-20 mb-4">
+          <label for="sort-select" class="mr-2 font-body text-sm md:text-base"
+            >Sort by:</label
+          >
+          <select
+            id="sort-select"
+            class="border border-customBlue rounded cursor-pointer pr-2"
+          >
+            <option value="newest" class="font-body text-sm md:text-base">
+              Most Recent
+            </option>
+            <option value="oldest" class="font-body text-sm md:text-base">
+              Least Recent
+            </option>
+            <option value="ending-soon" class="font-body text-sm md:text-base">
+              Ending Soon
+            </option>
+          </select>
+        </div>
+        <div
+          id="scroll-to-listings"
+          class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
+        ></div>
+        <div
+          class="pagination-controls flex justify-center items-center mt-6 gap-4"
+        >
+          <button
+            id="prevPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+            disabled
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span id="currentPage" class="font-body text-sm md:text-base"></span>
+          <button
+            id="nextPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
     </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
@@ -480,24 +513,43 @@
           </div>
         </div>
         <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
-        <div class="footer-pages-first flex flex-col lg:pt-6">
-          <a href="" class="font-body font-medium text-sm py-4 md:text-base"
-            >About Us</a
-          >
-          <a href="" class="font-body font-medium text-sm py-4 md:text-base"
-            >Contact</a
-          >
+        <div class="footer-pages-first lg:pt-6">
+          <ul>
+            <li>
+              <a
+                href=""
+                class="inline-block font-body font-medium text-sm py-4 md:text-base"
+              >
+                About Us
+              </a>
+            </li>
+            <li>
+              <a
+                href=""
+                class="inline-block font-body font-medium text-sm py-4 md:text-base"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
         </div>
         <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
       </div>
-
       <div class="footer-pages-second flex justify-center items-center py-4">
-        <a href="" class="px-4 md:px-32 font-body text-sm md:text-base"
-          >Terms and Conditions</a
-        >
-        <a href="" class="px-4 md:px-32 font-body text-sm md:text-base"
-          >Privacy Policy</a
-        >
+        <ul>
+          <li>
+            <a
+              href=""
+              class="inline-block font-body text-sm md:text-base mx-4 lg:mx-20"
+              >Terms and Conditions</a
+            >
+            <a
+              href=""
+              class="inline-block font-body text-sm md:text-base mx-4 lg:mx-20"
+              >Privacy Policy</a
+            >
+          </li>
+        </ul>
       </div>
     </footer>
   </body>

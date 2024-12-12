@@ -1,5 +1,9 @@
 import { API_AUCTION_LISTINGS } from "../../constants";
 import { headers } from "../../headers";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * API call function to create a new post with the provided title, body, tags, and media.
@@ -13,12 +17,19 @@ import { headers } from "../../headers";
  * @throws {Error} If the post creation fails.
  */
 
-export async function createListing({ title, body, tags, media, endsAt }) {
+export async function createListing({
+  title,
+  description,
+  tags,
+  media,
+  endsAt,
+}) {
+  showLoadingSpinner();
   try {
     const response = await fetch(API_AUCTION_LISTINGS, {
       headers: headers(),
       method: "POST",
-      body: JSON.stringify({ title, body, tags, media, endsAt }),
+      body: JSON.stringify({ title, description, tags, media, endsAt }),
     });
 
     if (!response.ok) {
@@ -36,5 +47,7 @@ export async function createListing({ title, body, tags, media, endsAt }) {
     }
     console.error("Creating post failed", error);
     throw error;
+  } finally {
+    hideLoadingSpinner();
   }
 }

@@ -61,6 +61,7 @@
             <li>
               <a
                 href="/"
+                id="all-listings-link"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >All Listings</a
               >
@@ -134,7 +135,7 @@
             </li>
             <li>
               <a
-                href="/listings/create.html"
+                href="/listing/create.html"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
               >
                 Create Listing
@@ -294,15 +295,32 @@
           ></p>
         </div>
       </section>
-      <h2
-        class="font-heading text-xl mx-8 lg:mx-20 mt-8 pb-2 lg:mt-12 md:text-2xl"
-      >
-        Your Listings
-      </h2>
-      <p class="font-body text-sm mx-8 lg:mx-20 md:text-base mt-2">
-        Total listings here, add dynamically
-      </p>
-      <section></section>
+      <section>
+        <h2
+          class="font-heading text-xl mx-8 lg:mx-20 mt-8 mb-2 pb-2 lg:mt-12 md:text-2xl"
+        >
+          Your Listings
+        </h2>
+        <a
+          href="#target-section"
+          class="mx-8 lg:mx-20 font-body text-sm lg:text-base text-customGray"
+          >Go to Your Wins <span><i class="fa-solid fa-arrow-down"></i></span
+        ></a>
+        <div id="listings-count" class="mx-8 lg:mx-20 mb-2 mt-6"></div>
+
+        <div
+          class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
+        ></div>
+      </section>
+      <section>
+        <h2
+          id="target-section"
+          class="font-heading text-xl mx-8 lg:mx-20 mt-8 pb-2 lg:mt-12 md:text-2xl"
+        >
+          Your Wins
+        </h2>
+        <div id="wins-count" class="mx-8 lg:mx-20 mb-2"></div>
+      </section>
     </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
@@ -319,7 +337,7 @@
           aria-label="Twitter"
         ></i>
       </div>
-      <div class="flex flex-col mx-8 lg:mx-20">
+      <div class="flex flex-col px-8 lg:px-20">
         <img
           src="/images/treasurebid-logo.png"
           alt="TreasureBid Logo"
@@ -346,24 +364,44 @@
             </button>
           </div>
         </div>
-        <hr class="border-t-2 border-customBlue -mx-8 lg:-mx-20" />
-        <div class="footer-pages-first flex flex-col">
-          <a href="" class="font-body font-medium text-sm py-4 md:text-base"
-            >About Us</a
-          >
-          <a href="" class="font-body font-medium text-sm py-4 md:text-base"
-            >Contact</a
-          >
+        <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
+        <div class="footer-pages-first lg:pt-6">
+          <ul>
+            <li>
+              <a
+                href=""
+                class="inline-block font-body font-medium text-sm py-4 md:text-base"
+              >
+                About Us
+              </a>
+            </li>
+            <li>
+              <a
+                href=""
+                class="inline-block font-body font-medium text-sm py-4 md:text-base"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
         </div>
+        <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
       </div>
-
       <div class="footer-pages-second flex justify-center items-center py-4">
-        <a href="" class="px-4 md:px-32 font-body text-sm md:text-base"
-          >Terms and Conditions</a
-        >
-        <a href="" class="px-4 md:px-32 font-body text-sm md:text-base"
-          >Privacy Policy</a
-        >
+        <ul>
+          <li>
+            <a
+              href=""
+              class="inline-block font-body text-sm md:text-base mx-4 lg:mx-20"
+              >Terms and Conditions</a
+            >
+            <a
+              href=""
+              class="inline-block font-body text-sm md:text-base mx-4 lg:mx-20"
+              >Privacy Policy</a
+            >
+          </li>
+        </ul>
       </div>
     </footer>
   </body>

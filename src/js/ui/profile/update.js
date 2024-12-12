@@ -1,6 +1,10 @@
 import { load } from "../../api/auth/key";
 import { readProfile } from "../../api/profile/profile";
 import { updateProfile } from "../../api/profile/update";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * Handles the profile update form submission.
@@ -16,12 +20,13 @@ import { updateProfile } from "../../api/profile/update";
 
 export async function onUpdateProfile(event) {
   event.preventDefault();
-
+  showLoadingSpinner();
   const user = load("user");
   if (!user || !user.name) {
     console.error("User is not logged in or user object is invalid");
     return;
   }
+  hideLoadingSpinner();
 
   const username = user.name;
 
@@ -57,6 +62,7 @@ export async function onUpdateProfile(event) {
 
   // Check if the 'updated' object has any keys
   if (Object.keys(updated).length > 0) {
+    showLoadingSpinner();
     await updateProfile(username, updated);
     alert("Profile is now updated");
     window.location.reload();
@@ -64,6 +70,7 @@ export async function onUpdateProfile(event) {
     alert("No changes were made to the profile.");
     window.location.reload();
   }
+  hideLoadingSpinner();
 }
 
 /**
@@ -79,6 +86,7 @@ export async function onUpdateProfile(event) {
  */
 
 export async function prefillProfileForm() {
+  showLoadingSpinner();
   const user = load("user");
   if (!user || !user.name) {
     console.error("User is not logged in or user object is invalid");
@@ -93,4 +101,5 @@ export async function prefillProfileForm() {
   if (bioInput && profile.bio) {
     bioInput.value = profile.bio; // Prefill the bio field with current bio
   }
+  hideLoadingSpinner();
 }

@@ -1,5 +1,9 @@
 import { load } from "../../api/auth/key";
 import { readProfile } from "../../api/profile/profile";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 /**
  * Loads and displays the logged-in user's profile data.
@@ -12,11 +16,13 @@ import { readProfile } from "../../api/profile/profile";
  * @throws {Error} If the user is not logged in or the profile data cannot be fetched.
  */
 export const readProfileData = async () => {
+  showLoadingSpinner();
   const user = load("user");
   if (!user || !user.name) {
     console.error("User is not logged in or user object is invalid");
     return;
   }
+  hideLoadingSpinner();
 
   const username = user.name;
   const profile = await readProfile(username);
@@ -67,3 +73,39 @@ export const readProfileData = async () => {
     totalCredits.classList.add("hidden");
   }
 };
+
+export async function getListingCount() {
+  try {
+    const user = load("user");
+    const username = user.name;
+    const profile = await readProfile(username);
+
+    const listingCount = document.createElement("p");
+    listingCount.classList.add("text-sm", "font-body", "md:text-base");
+    listingCount.textContent = "Total: " + profile._count.listings;
+
+    const listingsCountContainer = document.querySelector("#listings-count");
+    listingsCountContainer.appendChild(listingCount);
+  } catch (error) {
+    console.error("Error fetching listing count:", error);
+    // You can also display an error message to the user
+  }
+}
+
+export async function getWinsCount() {
+  try {
+    const user = load("user");
+    const username = user.name;
+    const profile = await readProfile(username);
+
+    const winsCount = document.createElement("p");
+    winsCount.classList.add("text-sm", "font-body", "md:text-base");
+    winsCount.textContent = "Total: " + profile._count.wins;
+
+    const winsCountContainer = document.querySelector("#wins-count");
+    winsCountContainer.appendChild(winsCount);
+  } catch (error) {
+    console.error("Error fetching listing count:", error);
+    // You can also display an error message to the user
+  }
+}
