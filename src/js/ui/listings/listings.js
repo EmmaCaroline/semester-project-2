@@ -70,14 +70,7 @@ export async function createAndReadListings(listing) {
   seller.append(sellerAvatar, sellerName);
 
   const bidCount = document.createElement("p");
-  bidCount.classList.add(
-    "text-sm",
-    "font-body",
-    "md:text-base",
-    "mx-8",
-    "lg:mx-20",
-    "mt-2",
-  );
+  bidCount.classList.add("text-sm", "font-body", "md:text-base");
   bidCount.textContent = "Bids: " + listing._count.bids;
   sellerAndBidCount.append(seller, bidCount);
 
