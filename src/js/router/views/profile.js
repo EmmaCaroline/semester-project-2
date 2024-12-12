@@ -2,6 +2,8 @@ import { authGuard } from "../../utilities/authGuard";
 import { readProfileData } from "../../ui/profile/profile";
 import { onUpdateProfile } from "../../ui/profile/update";
 import { prefillProfileForm } from "../../ui/profile/update";
+import { onReadListingsByProfile } from "../../ui/listings/listings";
+import { getListingCount } from "../../ui/profile/profile";
 
 const form = document.forms.updateProfile;
 
@@ -43,3 +45,5 @@ document
 
 authGuard();
 readProfileData();
+onReadListingsByProfile();
+getListingCount();

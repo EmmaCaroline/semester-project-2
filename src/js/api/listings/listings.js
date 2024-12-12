@@ -1,5 +1,5 @@
 import { API_AUCTION_LISTINGS } from "../../constants";
-//import { API_AUCTION_PROFILES } from "../../constants";
+import { API_AUCTION_PROFILES } from "../../constants";
 import { headers } from "../../headers";
 import {
   showLoadingSpinner,
@@ -130,3 +130,36 @@ export async function fetchListingsByUser(
     throw error;
   }
 }*/
+
+export async function fetchListingsByProfile(
+  username,
+  _seller = true,
+  active = false,
+) {
+  const endpoint = new URL(`${API_AUCTION_PROFILES}/${username}/listings`);
+  endpoint.searchParams.append("_seller", _seller);
+
+  if (active !== false) {
+    endpoint.searchParams.append("_active", active);
+  }
+  showLoadingSpinner();
+  try {
+    const response = await fetch(endpoint, {
+      headers: headers(),
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error("Failed to fetch posts: " + errorText);
+    }
+
+    const listingsData = await response.json();
+    return listingsData;
+  } catch (error) {
+    console.error("Fetching listings failed: ", error);
+    throw error;
+  } finally {
+    hideLoadingSpinner();
+  }
+}

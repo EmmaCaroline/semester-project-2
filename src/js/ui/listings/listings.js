@@ -1,6 +1,8 @@
 import { fetchListings } from "../../api/listings/listings";
 import { save } from "../../api/auth/key";
 import defaultImage from "../../../../images/No_Image_Available.jpg";
+import { load } from "../../api/auth/key";
+import { fetchListingsByProfile } from "../../api/listings/listings";
 import {
   showLoadingSpinner,
   hideLoadingSpinner,
@@ -20,8 +22,6 @@ function formatDate(isoDate) {
 }
 
 export async function createAndReadListings(listing) {
-  //console.log("Processing listing:", listing);
-
   const listingElement = document.createElement("a");
   if (!listingElement) {
     console.error("Failed to create listing container for:", listing);
@@ -70,9 +70,15 @@ export async function createAndReadListings(listing) {
   seller.append(sellerAvatar, sellerName);
 
   const bidCount = document.createElement("p");
-  bidCount.classList.add("text-sm", "font-body", "md:text-base");
+  bidCount.classList.add(
+    "text-sm",
+    "font-body",
+    "md:text-base",
+    "mx-8",
+    "lg:mx-20",
+    "mt-2",
+  );
   bidCount.textContent = "Bids: " + listing._count.bids;
-  //console.log("Bid count:", bidCount.textContent);
   sellerAndBidCount.append(seller, bidCount);
 
   const endingDate = document.createElement("p");
@@ -181,7 +187,6 @@ export async function createAndReadListings(listing) {
   listingsButton.textContent = "View items";
   buttonContainer.appendChild(listingsButton);
 
-  //console.log("Assembling listing container...");
   listingElement.append(
     sellerAndBidCount,
     endingDate,
@@ -253,17 +258,47 @@ export async function onReadAllListings() {
       return;
     }
 
-    window.listingsArray = listingsArray;
+    if (window.location.pathname === "/") {
+      window.listingsArray = listingsArray;
 
-    const searchInput = document.getElementById("search-input");
-    const sortSelect = document.getElementById("sort-select");
+      const searchInput = document.getElementById("search-input");
+      const sortSelect = document.getElementById("sort-select");
 
-    searchInput.addEventListener("keyup", () =>
-      handleSearch(searchInput, listingsArray),
-    );
-    sortSelect.addEventListener("change", () =>
-      handleSort(sortSelect, listingsArray),
-    );
+      searchInput.addEventListener("keyup", () =>
+        handleSearch(searchInput, listingsArray),
+      );
+      sortSelect.addEventListener("change", () =>
+        handleSort(sortSelect, listingsArray),
+      );
+    }
+
+    // Loop through the listings and create a listing for each one
+    listingsArray.forEach((listing) => {
+      createAndReadListings(listing);
+    });
+  } catch (error) {
+    console.error("Error reading all listings:", error);
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
+export async function onReadListingsByProfile() {
+  const user = load("user");
+  const userName = user.name;
+  showLoadingSpinner();
+  try {
+    // Fetch listings from the API
+    const response = await fetchListingsByProfile(userName);
+
+    // Access the listings data inside the 'data' property
+    const listingsArray = Array.isArray(response.data) ? response.data : [];
+
+    // Check if the array is empty
+    if (listingsArray.length === 0) {
+      console.warn("No listings found in the response.");
+      return;
+    }
 
     // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {

@@ -73,3 +73,21 @@ export const readProfileData = async () => {
     totalCredits.classList.add("hidden");
   }
 };
+
+export async function getListingCount() {
+  try {
+    const user = load("user");
+    const username = user.name;
+    const profile = await readProfile(username);
+
+    const listingCount = document.createElement("p");
+    listingCount.classList.add("text-sm", "font-body", "md:text-base");
+    listingCount.textContent = "Total: " + profile._count.listings;
+
+    const listingsCountContainer = document.querySelector("#listings-count");
+    listingsCountContainer.appendChild(listingCount);
+  } catch (error) {
+    console.error("Error fetching listing count:", error);
+    // You can also display an error message to the user
+  }
+}
