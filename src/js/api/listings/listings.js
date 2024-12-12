@@ -10,20 +10,18 @@ export async function fetchListings(
   limit = 24,
   page = 1,
   _seller = true,
-  _count = true,
   sort = "created",
   sortOrder = "desc",
-  active = null, // Allow null for no filtering
+  active = false,
 ) {
   const endpoint = new URL(API_AUCTION_LISTINGS);
   endpoint.searchParams.append("limit", limit);
   endpoint.searchParams.append("page", page);
   endpoint.searchParams.append("_seller", _seller);
-  endpoint.searchParams.append("_count", _count);
   endpoint.searchParams.append("sort", sort);
   endpoint.searchParams.append("sortOrder", sortOrder);
 
-  if (active !== null) {
+  if (active !== false) {
     endpoint.searchParams.append("_active", active);
   }
   showLoadingSpinner();

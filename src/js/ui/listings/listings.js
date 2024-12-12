@@ -198,16 +198,56 @@ export async function createAndReadListings(listing) {
   return listingContainer;
 }
 
+function handleSearch(searchInput, listingsArray) {
+  const searchQuery = searchInput.value.toLowerCase();
+  const filteredListings = listingsArray.filter((listing) =>
+    listing.title.toLowerCase().includes(searchQuery),
+  );
+
+  // Clear existing listings
+  const listingContainer = document.querySelector(".listings-container");
+  listingContainer.innerHTML = "";
+
+  // Re-render filtered listings
+  filteredListings.forEach((listing) => createAndReadListings(listing));
+}
+
+function handleSort(sortSelect) {
+  const selectedSort = sortSelect.value;
+  let sortParam = "created"; // Default sort parameter: sort by creation date
+  let sortOrder = "desc"; // Default sort order: descending
+  let active = false; // Default to include all listings
+
+  if (selectedSort === "newest") {
+    sortParam = "created";
+    sortOrder = "desc"; // Sort by newest (descending order)
+  } else if (selectedSort === "oldest") {
+    sortParam = "created";
+    sortOrder = "asc"; // Sort by oldest (ascending order)
+  } else if (selectedSort === "ending-soon") {
+    sortParam = "endsAt";
+    sortOrder = "asc"; // Sort by ending soon (ascending order)
+    active = true; // Filter for active listings only
+  }
+
+  fetchListings(undefined, undefined, undefined, sortParam, sortOrder, active)
+    .then((response) => response.data)
+    .then((listings) => {
+      const listingContainer = document.querySelector(".listings-container");
+      listingContainer.innerHTML = "";
+      listings.forEach((listing) => createAndReadListings(listing));
+    })
+    .catch((error) => console.error("Error fetching listings:", error));
+}
+
 export async function onReadAllListings() {
   showLoadingSpinner();
   try {
     // Fetch listings from the API
     const response = await fetchListings();
-    console.log("Raw API Response:", response);
 
     // Access the listings data inside the 'data' property
     const listingsArray = Array.isArray(response.data) ? response.data : [];
-    //console.log("Processed Listings Array:", listingsArray);
 
     // Check if the array is empty
     if (listingsArray.length === 0) {
@@ -215,9 +255,20 @@ export async function onReadAllListings() {
       return;
     }
 
-    // Loop through the listings and create the HTML for each one
+    window.listingsArray = listingsArray;
+
+    const searchInput = document.getElementById("search-input");
+    const sortSelect = document.getElementById("sort-select");
+
+    searchInput.addEventListener("keyup", () =>
+      handleSearch(searchInput, listingsArray),
+    );
+    sortSelect.addEventListener("change", () =>
+      handleSort(sortSelect, listingsArray),
+    );
+
+    // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
-      //console.log("Processing Listing:", listing);
       createAndReadListings(listing);
     });
   } catch (error) {
