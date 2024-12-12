@@ -176,6 +176,7 @@ export async function createAndReadListings(listing) {
     "md:text-base",
     "bg-customGray",
     "text-white",
+    "hover:bg-gray-400",
   );
   listingsButton.textContent = "View items";
   buttonContainer.appendChild(listingsButton);
