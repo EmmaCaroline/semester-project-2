@@ -37,6 +37,7 @@
               class="w-40 h-16"
             />
           </a>
+
           <div class="hidden lg:flex items-center relative">
             <input
               type="text"
@@ -45,10 +46,13 @@
               placeholder="Search listings"
               class="pl-10 py-2 w-80 border bg-customBeige placeholder-customGray text-base border-black rounded focus:bg-white focus:ring focus:ring-customBlue transition-all duration-300"
             />
-            <i
-              class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2"
-            ></i>
+            <a href="#scroll-to-listings">
+              <i
+                class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2"
+              ></i>
+            </a>
           </div>
+
           <div class="flex justify-center items-center pr-6 md:pr-20">
             <button
               id="dropdown-profile-btn"
@@ -442,6 +446,7 @@
           </select>
         </div>
         <div
+          id="scroll-to-listings"
           class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
         ></div>
         <div
