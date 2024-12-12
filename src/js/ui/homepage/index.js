@@ -123,7 +123,7 @@ export async function createCarouselSlides() {
       "w-full",
       "h-full",
       "bg-black",
-      "bg-opacity-25",
+      "bg-opacity-40",
     );
 
     const bannerTitle = document.createElement("p");
@@ -206,6 +206,7 @@ export async function createCarouselSlides() {
     "absolute",
     "top-1/2",
     "left-6",
+    "md:left-10",
     "transform",
     "-translate-y-1/2",
   );
@@ -219,6 +220,7 @@ export async function createCarouselSlides() {
     "absolute",
     "top-1/2",
     "right-6",
+    "md:right-10",
     "transform",
     "-translate-y-1/2",
   );

@@ -1,8 +1,13 @@
-import { fetchListings } from "../../api/listings/listings";
+import {
+  fetchListings,
+  fetchListingsArt,
+  fetchListingsBooks,
+  fetchListingsJewelry,
+  fetchListingsByProfile,
+} from "../../api/listings/listings";
 import { save } from "../../api/auth/key";
 import defaultImage from "../../../../images/No_Image_Available.jpg";
 import { load } from "../../api/auth/key";
-import { fetchListingsByProfile } from "../../api/listings/listings";
 import {
   showLoadingSpinner,
   hideLoadingSpinner,
@@ -264,6 +269,84 @@ export async function onReadAllListings() {
       sortSelect.addEventListener("change", () =>
         handleSort(sortSelect, listingsArray),
       );
+    }
+
+    // Loop through the listings and create a listing for each one
+    listingsArray.forEach((listing) => {
+      createAndReadListings(listing);
+    });
+  } catch (error) {
+    console.error("Error reading all listings:", error);
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
+export async function onReadAllListingsArt() {
+  showLoadingSpinner();
+  try {
+    // Fetch listings from the API
+    const response = await fetchListingsArt();
+
+    // Access the listings data inside the 'data' property
+    const listingsArray = Array.isArray(response.data) ? response.data : [];
+
+    // Check if the array is empty
+    if (listingsArray.length === 0) {
+      console.warn("No listings found in the response.");
+      return;
+    }
+
+    // Loop through the listings and create a listing for each one
+    listingsArray.forEach((listing) => {
+      createAndReadListings(listing);
+    });
+  } catch (error) {
+    console.error("Error reading all listings:", error);
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
+export async function onReadAllListingsBooks() {
+  showLoadingSpinner();
+  try {
+    // Fetch listings from the API
+    const response = await fetchListingsBooks();
+
+    // Access the listings data inside the 'data' property
+    const listingsArray = Array.isArray(response.data) ? response.data : [];
+
+    // Check if the array is empty
+    if (listingsArray.length === 0) {
+      console.warn("No listings found in the response.");
+      return;
+    }
+
+    // Loop through the listings and create a listing for each one
+    listingsArray.forEach((listing) => {
+      createAndReadListings(listing);
+    });
+  } catch (error) {
+    console.error("Error reading all listings:", error);
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
+export async function onReadAllListingsJewelry() {
+  showLoadingSpinner();
+  try {
+    // Fetch listings from the API
+    const response = await fetchListingsJewelry();
+
+    // Access the listings data inside the 'data' property
+    const listingsArray = Array.isArray(response.data) ? response.data : [];
+
+    // Check if the array is empty
+    if (listingsArray.length === 0) {
+      console.warn("No listings found in the response.");
+      return;
     }
 
     // Loop through the listings and create a listing for each one

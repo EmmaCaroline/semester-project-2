@@ -46,6 +46,120 @@ export async function fetchListings(
   }
 }
 
+export async function fetchListingsArt(
+  limit = 24,
+  page = 1,
+  seller = true,
+  active = false,
+  tag = "art",
+) {
+  const endpoint = new URL(API_AUCTION_LISTINGS);
+  endpoint.searchParams.append("limit", limit);
+  endpoint.searchParams.append("page", page);
+  endpoint.searchParams.append("_seller", seller);
+  endpoint.searchParams.append("_tag", tag);
+
+  if (active !== false) {
+    endpoint.searchParams.append("_active", active);
+  }
+  showLoadingSpinner();
+  try {
+    const response = await fetch(endpoint, {
+      headers: headers(),
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error("Failed to fetch posts: " + errorText);
+    }
+
+    const listingsData = await response.json();
+    return listingsData;
+  } catch (error) {
+    console.error("Fetching listings failed: ", error);
+    throw error;
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
+export async function fetchListingsBooks(
+  limit = 24,
+  page = 1,
+  seller = true,
+  active = false,
+  tag = "books",
+) {
+  const endpoint = new URL(API_AUCTION_LISTINGS);
+  endpoint.searchParams.append("limit", limit);
+  endpoint.searchParams.append("page", page);
+  endpoint.searchParams.append("_seller", seller);
+  endpoint.searchParams.append("_tag", tag);
+
+  if (active !== false) {
+    endpoint.searchParams.append("_active", active);
+  }
+  showLoadingSpinner();
+  try {
+    const response = await fetch(endpoint, {
+      headers: headers(),
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error("Failed to fetch posts: " + errorText);
+    }
+
+    const listingsData = await response.json();
+    return listingsData;
+  } catch (error) {
+    console.error("Fetching listings failed: ", error);
+    throw error;
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
+export async function fetchListingsJewelry(
+  limit = 24,
+  page = 1,
+  seller = true,
+  active = false,
+  tag = "jewelry",
+) {
+  const endpoint = new URL(API_AUCTION_LISTINGS);
+  endpoint.searchParams.append("limit", limit);
+  endpoint.searchParams.append("page", page);
+  endpoint.searchParams.append("_seller", seller);
+  endpoint.searchParams.append("_tag", tag);
+
+  if (active !== false) {
+    endpoint.searchParams.append("_active", active);
+  }
+  showLoadingSpinner();
+  try {
+    const response = await fetch(endpoint, {
+      headers: headers(),
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error("Failed to fetch posts: " + errorText);
+    }
+
+    const listingsData = await response.json();
+    return listingsData;
+  } catch (error) {
+    console.error("Fetching listings failed: ", error);
+    throw error;
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
 /*export async function fetchListing(
   id,
   title,

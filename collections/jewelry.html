@@ -167,7 +167,49 @@
         </div>
       </nav>
     </header>
-    <main></main>
+    <main class="mt-20">
+      <section>
+        <div
+          class="bannerImageContainer relative flex w-full h-[170px] md:h-[200px] lg:h-[270px] overflow-hidden mb-8 lg:mb-12"
+        >
+          <img
+            src="/images/jewelry_category1.jpg"
+            class="w-full object-cover h-full"
+          />
+          <div
+            class="bannerOverlay absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"
+          ></div>
+          <p
+            class="font-special text-white text-4xl absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 lg:text-5xl"
+          >
+            Jewelry
+          </p>
+        </div>
+      </section>
+      <section id="show-jewelry-listings">
+        <div
+          class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
+        ></div>
+        <div
+          class="pagination-controls flex justify-center items-center mt-6 gap-4"
+        >
+          <button
+            id="prevPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+            disabled
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span id="currentPage" class="font-body text-sm md:text-base"></span>
+          <button
+            id="nextPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
+    </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
         <i
