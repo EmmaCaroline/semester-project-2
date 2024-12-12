@@ -56,7 +56,6 @@ export async function createAndReadListings(listing) {
   const sellerName = document.createElement("p");
   sellerName.classList.add("text-sm", "font-body", "md:text-base");
   sellerName.textContent = listing.seller.name;
-  //console.log("Seller name:", sellerName.textContent);
 
   const sellerAvatar = document.createElement("img");
   sellerAvatar.classList.add("w-8", "h-8", "rounded-full", "mr-2");
@@ -67,7 +66,6 @@ export async function createAndReadListings(listing) {
     sellerAvatar.src = "../../../../images/default-avatar.jpg";
     sellerAvatar.alt = "Default avatar image";
   }
-  //console.log("Seller avatar:", sellerAvatar.src);
 
   seller.append(sellerAvatar, sellerName);
 
