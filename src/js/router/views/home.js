@@ -9,7 +9,7 @@ import {
 
 setupNewsletterSubscription("newsletter-button", "subscribe-email");
 
-addTypewriterEffect("typewriter", "Welcome to TreasureBid", 100);
+addTypewriterEffect("typewriter", "TreasureBid Auction House", 100);
 
 onReadAllListings();
 
