@@ -1,5 +1,6 @@
 import {
   fetchListings,
+  fetchSingleListing,
   fetchListingsArt,
   fetchListingsBooks,
   fetchListingsJewelry,
@@ -7,6 +8,7 @@ import {
 } from "../../api/listings/listings";
 import { save } from "../../api/auth/key";
 import defaultImage from "../../../../images/No_Image_Available.jpg";
+import defaultAvatar from "../../../../images/default-avatar.jpg";
 import { load } from "../../api/auth/key";
 import {
   showLoadingSpinner,
@@ -23,7 +25,14 @@ function formatDate(isoDate) {
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
 
-  return `${day} ${month} ${year}, ${hours}:${minutes}`;
+  // Normalize the URL check to avoid issues with trailing slashes
+  const pathname = window.location.pathname.replace(/\/$/, "");
+
+  if (pathname === "/listing/listing.html") {
+    return `${day} ${month} ${year}`;
+  } else {
+    return `${day} ${month} ${year}, ${hours}:${minutes}`;
+  }
 }
 
 export async function createAndReadListings(listing) {
@@ -68,7 +77,7 @@ export async function createAndReadListings(listing) {
     sellerAvatar.src = listing.seller.avatar.url;
     sellerAvatar.alt = listing.seller.avatar.alt;
   } else {
-    sellerAvatar.src = "../../../../images/default-avatar.jpg";
+    sellerAvatar.src = defaultAvatar;
     sellerAvatar.alt = "Default avatar image";
   }
 
@@ -140,7 +149,6 @@ export async function createAndReadListings(listing) {
     listingImage.alt = listing.media[0].alt;
   } else {
     listingImage.src = defaultImage;
-    console.log("defaultImage: ", defaultImage);
     listingImage.alt = "No image available";
   }
 
@@ -148,7 +156,7 @@ export async function createAndReadListings(listing) {
 
   // Function to handle the click event
   const imageClick = () => {
-    save("postID", JSON.stringify(listing.id));
+    save("listingID", listing.id);
     window.location.href = "/listing/listing.html";
   };
 
@@ -240,6 +248,162 @@ function handleSort(sortSelect) {
       listings.forEach((listing) => createAndReadListings(listing));
     })
     .catch((error) => console.error("Error fetching listings:", error));
+}
+
+export async function createAndReadSingleListing(listing) {
+  const singleListingContainer = document.querySelector(
+    ".single-listing-container",
+  );
+
+  const listingContainer = document.createElement("div");
+  listingContainer.classList.add(
+    "flex",
+    "flex-col",
+    "md:flex-row",
+    "md:w-full",
+  );
+
+  const imageCarousel = document.createElement("div");
+  imageCarousel.classList.add(
+    "w-full",
+    "md:w-1/2",
+    "h-96",
+    "overflow-hidden",
+    "relative",
+  );
+
+  const carouselInner = document.createElement("div");
+  carouselInner.classList.add("flex", "transition-transform", "duration-500");
+
+  const mediaArray =
+    listing.data.media && listing.data.media.length > 0
+      ? listing.data.media
+      : [{ url: defaultImage, alt: "No image available" }];
+
+  mediaArray.forEach((mediaItem) => {
+    const imageDiv = document.createElement("div");
+    imageDiv.classList.add("flex-shrink-0", "w-full");
+
+    const listingImage = document.createElement("img");
+    listingImage.classList.add(
+      "object-cover",
+      "object-center",
+      "w-full",
+      "h-full",
+    );
+
+    // Set the image source and alt text based on media item
+    listingImage.src = mediaItem.url;
+    listingImage.alt = mediaItem.alt;
+
+    // Append the image to the carousel container
+    imageDiv.appendChild(listingImage);
+    carouselInner.appendChild(imageDiv);
+  });
+
+  // Carousel navigation buttons
+  const prevButton = document.createElement("button");
+  prevButton.classList.add(
+    "prev-btn",
+    "absolute",
+    "top-1/2",
+    "left-0",
+    "transform",
+    "translate-y-[-50%]",
+    "bg-black",
+    "text-white",
+    "px-4",
+    "py-2",
+  );
+  prevButton.innerHTML = "←";
+
+  const nextButton = document.createElement("button");
+  nextButton.classList.add(
+    "next-btn",
+    "absolute",
+    "top-1/2",
+    "right-0",
+    "transform",
+    "translate-y-[-50%]",
+    "bg-black",
+    "text-white",
+    "px-4",
+    "py-2",
+  );
+  nextButton.innerHTML = "→";
+
+  imageCarousel.appendChild(carouselInner);
+  imageCarousel.appendChild(prevButton);
+  imageCarousel.appendChild(nextButton);
+
+  let currentIndex = 0; // Start at the first image
+
+  // Function to update carousel position
+  function updateCarousel() {
+    const offset = -currentIndex * 100; // Move the carousel by the width of one image (100% of the container width)
+    carouselInner.style.transform = `translateX(${offset}%)`;
+  }
+
+  // Event listeners to buttons
+  prevButton.addEventListener("click", () => {
+    // Move to the previous image, or loop to the last image
+    currentIndex = (currentIndex - 1 + mediaArray.length) % mediaArray.length;
+    updateCarousel();
+  });
+
+  nextButton.addEventListener("click", () => {
+    // Move to the next image, or loop to the first image
+    currentIndex = (currentIndex + 1) % mediaArray.length;
+    updateCarousel();
+  });
+
+  const listingInfo = document.createElement("div");
+  listingInfo.classList.add("w-full", "md:w-1/2", "p-4");
+
+  const listingTitle = document.createElement("h2");
+  listingTitle.classList.add("text-xl", "font-bold", "mb-2");
+  listingTitle.textContent = listing.data.title;
+
+  const sellerAndCreated = document.createElement("div");
+  sellerAndCreated.classList.add("flex", "flex-col", "mb-2");
+
+  const seller = document.createElement("div");
+  seller.classList.add("flex", "items-center");
+  const sellerName = document.createElement("p");
+  sellerName.classList.add("text-sm", "font-body", "md:text-base");
+  sellerName.textContent = listing.data.seller.name;
+
+  const sellerAvatar = document.createElement("img");
+  sellerAvatar.classList.add("w-8", "h-8", "rounded-full", "mr-2");
+  if (listing.data.seller?.avatar) {
+    sellerAvatar.src = listing.data.seller.avatar.url;
+    sellerAvatar.alt = listing.data.seller.avatar.alt;
+  } else {
+    sellerAvatar.src = defaultAvatar;
+    sellerAvatar.alt = "Default avatar image";
+  }
+
+  seller.append(sellerAvatar, sellerName);
+
+  const created = document.createElement("p");
+  created.classList.add("text-sm", "font-body", "md:text-base");
+  created.textContent = "Listed: " + formatDate(listing.data.created);
+
+  sellerAndCreated.append(seller, created);
+
+  const description = document.createElement("p");
+  description.classList.add("text-sm", "md:text-base", "mt-2");
+  description.textContent = listing.data.description;
+
+  listingInfo.append(listingTitle, sellerAndCreated, description);
+
+  // Append both the image carousel and listing info to the main container
+  listingContainer.append(imageCarousel, listingInfo);
+
+  // Append the listing container to the main container on the page
+  singleListingContainer.appendChild(listingContainer);
+
+  return singleListingContainer;
 }
 
 export async function onReadAllListings() {
@@ -355,6 +519,29 @@ export async function onReadAllListingsJewelry() {
     });
   } catch (error) {
     console.error("Error reading all listings:", error);
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
+export async function onReadSingleListing() {
+  const listingID = JSON.parse(localStorage.getItem("listingID"));
+
+  if (!listingID || typeof listingID !== "string") {
+    console.error("Invalid post ID:", listingID);
+    return;
+  }
+
+  console.log("Listing ID:", listingID);
+
+  try {
+    console.log("Attempting to fetch and create listing...");
+    showLoadingSpinner();
+    const singleListing = await fetchSingleListing(listingID);
+    console.log("Fetched single listing:", singleListing); // Should display listing data
+    await createAndReadSingleListing(singleListing);
+  } catch (error) {
+    console.error("Error reading single post: ", error);
   } finally {
     hideLoadingSpinner();
   }
