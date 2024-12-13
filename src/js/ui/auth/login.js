@@ -28,8 +28,10 @@ export async function onLogin(event) {
     const loginEvent = new Event("userLoggedIn");
     document.dispatchEvent(loginEvent);
 
-    // Redirect the user
-    window.location.href = "/";
+    // Delay navigation for a few seconds
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 3000); // 3000 milliseconds = 3 seconds
   } catch (error) {
     console.error("Login failed:", error);
     alert(`Login failed: ${error.message}`);

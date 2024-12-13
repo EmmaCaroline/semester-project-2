@@ -3,6 +3,7 @@ import {
   showLoadingSpinner,
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
+import { showMessageWithButtonAndRedirect } from "../../utilities/alertMessage";
 
 /**
  * Handles the registration form submission and processes user registration.
@@ -27,8 +28,11 @@ export async function onRegister(event) {
   try {
     const response = await register(user);
     console.log("Registration ok", response);
-    alert("You are now registered. Log in to start TreasureBidding");
-    window.location.href = "/auth/login/";
+
+    showMessageWithButtonAndRedirect(
+      "Registered! 1000 credits are given to your account.",
+      "/auth/login.html",
+    );
   } catch (error) {
     console.error("Registration failed:", error);
   } finally {

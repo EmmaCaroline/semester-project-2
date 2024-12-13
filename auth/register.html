@@ -230,7 +230,7 @@
             </div>
 
             <a
-              href="/auth/login/"
+              href="/auth/login.html"
               class="block text-sm font-body text-blue-500 hover:underline mb-4 md:text-base"
               >Login</a
             >
@@ -244,6 +244,18 @@
           </form>
         </div>
       </section>
+      <div
+        id="clickableMessageBox"
+        class="hidden fixed flex flex-col justify-center items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 border border-customGray text-black py-4 px-4 md:px-10 rounded shadow-lg text-center"
+      >
+        <span id="clickableMessageText" class="mb-3"></span>
+        <button
+          id="closeMessageButton"
+          class="bg-customGray border border-gray-200 py-2 px-4 rounded text-white hover:bg-gray-500"
+        >
+          Got it!
+        </button>
+      </div>
     </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
