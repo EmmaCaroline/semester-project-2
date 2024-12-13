@@ -185,18 +185,20 @@ export async function fetchSingleListing(id, seller = true, bids = true) {
   }
 }
 
-export async function fetchSingleListingSpecific1(
-  id,
-  seller = true,
-  bids = true,
-  tag = "myUniqueTag932",
+export async function fetchListingsSpecific(
+  //seller = true,
+  //active = false,
+  tag = "myUniqueTag",
 ) {
+  const endpoint = new URL(API_AUCTION_LISTINGS);
+  //endpoint.searchParams.append("_seller", seller);
+  endpoint.searchParams.append("_tag", tag);
+
+  /*if (active !== false) {
+    endpoint.searchParams.append("_active", active);
+  }*/
+  showLoadingSpinner();
   try {
-    const endpoint = new URL(`${API_AUCTION_LISTINGS}/${id}`);
-    endpoint.searchParams.append("_seller", seller);
-    endpoint.searchParams.append("_bids", bids);
-    endpoint.searchParams.append("_tag", tag);
-    console.log("API Endpoint:", endpoint.toString());
     const response = await fetch(endpoint, {
       headers: headers(),
       method: "GET",
@@ -204,14 +206,16 @@ export async function fetchSingleListingSpecific1(
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error("Failed to fetch post: " + errorText);
+      throw new Error("Failed to fetch posts: " + errorText);
     }
 
-    const listingData = await response.json();
-    return listingData;
+    const listingsData = await response.json();
+    return listingsData;
   } catch (error) {
-    console.error("Fetching post failed: ", error);
+    console.error("Fetching listings failed: ", error);
     throw error;
+  } finally {
+    hideLoadingSpinner();
   }
 }
 

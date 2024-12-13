@@ -15,6 +15,7 @@ import {
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
 import { onDeletePost } from "./delete";
+import { onEditButton } from "./update";
 
 function formatDate(isoDate) {
   const date = new Date(isoDate);
@@ -418,15 +419,30 @@ export async function createAndReadSingleListing(listing) {
   // Append both the image carousel and listing info to the main container
   listingContainer.append(imageCarousel, listingInfo);
 
-  // Assuming the listing object has the post data
-  const post = listing.data; // Use your actual data structure here
+  // Ensure the edit button exists and append it
+  let editButton = document.getElementById("edit-listing-button-container");
+  if (!editButton) {
+    // Create the edit button dynamically
+    editButton = document.createElement("button");
+    editButton.id = "edit-listing-button-container";
+    editButton.classList.add(
+      "btn",
+      "btn-primary",
+      "my-4",
+      "dark:text-gray-200",
+      "dark:border-gray-400",
+    );
+    editButton.style.display = "none"; // Hidden by default
+    editButton.innerText = "Edit Post";
+  }
+
+  // Ensure the button is visible for the author
+  const post = listing.data;
   const author = post.seller.name; // Assuming the seller is the author
+  onEditButton(post, author);
 
-  // Pass post and author to onDeletePost
-  onDeletePost(post, author);
-
-  // Append the listing container to the main container on the page
-  singleListingContainer.appendChild(listingContainer);
+  // Append the edit button and listing container to the single listing container
+  singleListingContainer.append(listingContainer, editButton);
 
   return singleListingContainer;
 }
@@ -568,30 +584,8 @@ export async function onReadSingleListing() {
     const post = singleListing.data;
     const author = post.seller.name;
     onDeletePost(post, author);
+    onEditButton(post, author);
 
-    await createAndReadSingleListing(singleListing);
-  } catch (error) {
-    console.error("Error reading single post: ", error);
-  } finally {
-    hideLoadingSpinner();
-  }
-}
-
-export async function onReadSpecificSingleListing() {
-  const listingID = JSON.parse(localStorage.getItem("listingID"));
-
-  if (!listingID || typeof listingID !== "string") {
-    console.error("Invalid post ID:", listingID);
-    return;
-  }
-
-  console.log("Listing ID:", listingID);
-
-  try {
-    console.log("Attempting to fetch and create listing...");
-    showLoadingSpinner();
-    const singleListing = await fetchSingleListing(listingID);
-    console.log("Fetched single listing:", singleListing);
     await createAndReadSingleListing(singleListing);
   } catch (error) {
     console.error("Error reading single post: ", error);

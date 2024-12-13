@@ -6,12 +6,15 @@ import {
   fetchAndRenderListings,
   initializePagination,
 } from "../../utilities/pagination";
+import { onReadAlSpecificListings } from "../../ui/listings/listingsSpecific";
 
 setupNewsletterSubscription("newsletter-button", "subscribe-email");
 
 addTypewriterEffect("typewriter", "TreasureBid Auction House", 100);
 
 onReadAllListings();
+
+onReadAlSpecificListings();
 
 initializePagination();
 fetchAndRenderListings();
