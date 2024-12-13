@@ -3,6 +3,7 @@ import {
   showLoadingSpinner,
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
+import { showMessage } from "../../utilities/alertMessage";
 
 /**
  * Handles the post creation form submission and processes the creation of a new post.
@@ -50,11 +51,14 @@ export async function onCreateListing(event) {
   showLoadingSpinner();
   try {
     await createListing(listing);
-    alert("Post created successfully!");
+    showMessage("Listing created!", 3000);
     form.reset();
     document.getElementById("mediaFields").innerHTML = ""; // Clear media inputs on success
     addImageField(); // Ensure at least one media field is available after reset
-    window.location.href = "/profile/";
+    // Delay navigation for a few seconds
+    setTimeout(() => {
+      window.location.href = "/profile/profile.html";
+    }, 3000); // 3000 milliseconds = 3 seconds
   } catch (error) {
     console.error("Error creating post: ", error);
     alert("Failed to create post. Please try again.");

@@ -5,6 +5,7 @@ import {
   showLoadingSpinner,
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
+import { showMessage } from "../../utilities/alertMessage";
 
 /**
  * Handles the profile update form submission.
@@ -64,11 +65,15 @@ export async function onUpdateProfile(event) {
   if (Object.keys(updated).length > 0) {
     showLoadingSpinner();
     await updateProfile(username, updated);
-    alert("Profile is now updated");
-    window.location.reload();
+    showMessage("Profile is now updated", 3000);
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000); // 3000 milliseconds = 3 seconds
   } else {
-    alert("No changes were made to the profile.");
-    window.location.reload();
+    showMessage("No changes were made to the profile.", 3000);
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000); // 3000 milliseconds = 3 seconds
   }
   hideLoadingSpinner();
 }

@@ -4,6 +4,7 @@ import {
   showLoadingSpinner,
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
+import { showMessage } from "../../utilities/alertMessage";
 
 const token = localStorage.getItem("token");
 const welcomeMessage = document.querySelector("#unregistered-welcome-message");
@@ -25,7 +26,8 @@ export function setupNewsletterSubscription(buttonId, inputId) {
     // Check if the email is not empty and matches the pattern
     if (email && emailPattern.test(email)) {
       emailInput.value = ""; // Clear the input field
-      alert("Thank you for subscribing!");
+      //alert("Thank you for subscribing!");
+      showMessage("Thank you for subscribing!", 3000);
     } else {
       alert("Please enter a valid email address.");
     }
