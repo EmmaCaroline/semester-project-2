@@ -24,10 +24,6 @@ export async function onLogin(event) {
     //alert(`Hello ${response.data.name}`);
     showMessage(`Hello ${response.data.name}`, 3000);
 
-    // Dispatch a custom event for global updates
-    const loginEvent = new Event("userLoggedIn");
-    document.dispatchEvent(loginEvent);
-
     // Delay navigation for a few seconds
     setTimeout(() => {
       window.location.href = "/";
