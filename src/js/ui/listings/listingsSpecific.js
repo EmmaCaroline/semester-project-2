@@ -121,7 +121,6 @@ function createSpecificListings(listing) {
       "md:text-base",
       "mr-6",
       "md:mr-0",
-*/
     );
     secondImageText.textContent = secondPost.title;
     secondImageLink.appendChild(secondImageText);
