@@ -185,18 +185,10 @@ export async function fetchSingleListing(id, seller = true, bids = true) {
   }
 }
 
-export async function fetchListingsSpecific(
-  //seller = true,
-  //active = false,
-  tag = "myUniqueTag",
-) {
+export async function fetchListingsSpecific(tag = "myUniqueTag932") {
   const endpoint = new URL(API_AUCTION_LISTINGS);
-  //endpoint.searchParams.append("_seller", seller);
   endpoint.searchParams.append("_tag", tag);
 
-  /*if (active !== false) {
-    endpoint.searchParams.append("_active", active);
-  }*/
   showLoadingSpinner();
   try {
     const response = await fetch(endpoint, {
@@ -210,6 +202,10 @@ export async function fetchListingsSpecific(
     }
 
     const listingsData = await response.json();
+
+    // Log the full response to inspect its structure
+    console.log("Listings data response:", listingsData);
+
     return listingsData;
   } catch (error) {
     console.error("Fetching listings failed: ", error);
