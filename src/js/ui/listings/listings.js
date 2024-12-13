@@ -259,15 +259,16 @@ export async function createAndReadSingleListing(listing) {
   listingContainer.classList.add(
     "flex",
     "flex-col",
-    "md:flex-row",
-    "md:w-full",
+    "sm:flex-row",
+    "sm:w-full",
   );
 
   const imageCarousel = document.createElement("div");
   imageCarousel.classList.add(
     "w-full",
     "md:w-1/2",
-    "h-96",
+    "h-80",
+    "lg:h-[450px]",
     "overflow-hidden",
     "relative",
   );
@@ -288,8 +289,9 @@ export async function createAndReadSingleListing(listing) {
     listingImage.classList.add(
       "object-cover",
       "object-center",
-      "w-full",
-      "h-full",
+      "aspect-square",
+      "sm:aspect-4/3",
+      "w-full" /*"h-full"*/,
     );
 
     // Set the image source and alt text based on media item
@@ -361,16 +363,21 @@ export async function createAndReadSingleListing(listing) {
   listingInfo.classList.add("w-full", "md:w-1/2", "p-4");
 
   const listingTitle = document.createElement("h2");
-  listingTitle.classList.add("text-xl", "font-bold", "mb-2");
+  listingTitle.classList.add(
+    "font-heading",
+    "text-3xl",
+    "lg:text-4xl",
+    "font-bold",
+    "mb-4",
+    "mr-8",
+    "lg:mr-20",
+  );
   listingTitle.textContent = listing.data.title;
 
-  const sellerAndCreated = document.createElement("div");
-  sellerAndCreated.classList.add("flex", "flex-col", "mb-2");
-
   const seller = document.createElement("div");
-  seller.classList.add("flex", "items-center");
+  seller.classList.add("flex", "items-center", "mb-4");
   const sellerName = document.createElement("p");
-  sellerName.classList.add("text-sm", "font-body", "md:text-base");
+  sellerName.classList.add("font-body", "text-sm", "md:text-base");
   sellerName.textContent = listing.data.seller.name;
 
   const sellerAvatar = document.createElement("img");
@@ -386,16 +393,26 @@ export async function createAndReadSingleListing(listing) {
   seller.append(sellerAvatar, sellerName);
 
   const created = document.createElement("p");
-  created.classList.add("text-sm", "font-body", "md:text-base");
+  created.classList.add(
+    "text-sm",
+    "font-body",
+    "md:text-base",
+    "mb-4",
+    "text-gray-600",
+  );
   created.textContent = "Listed: " + formatDate(listing.data.created);
 
-  sellerAndCreated.append(seller, created);
-
   const description = document.createElement("p");
-  description.classList.add("text-sm", "md:text-base", "mt-2");
+  description.classList.add(
+    "font-body",
+    "text-sm",
+    "md:text-base",
+    "mr-8",
+    "lg:mr-20",
+  );
   description.textContent = listing.data.description;
 
-  listingInfo.append(listingTitle, sellerAndCreated, description);
+  listingInfo.append(listingTitle, seller, created, description);
 
   // Append both the image carousel and listing info to the main container
   listingContainer.append(imageCarousel, listingInfo);
