@@ -14,6 +14,7 @@ import {
   showLoadingSpinner,
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
+import { onDeletePost } from "./delete";
 
 function formatDate(isoDate) {
   const date = new Date(isoDate);
@@ -291,7 +292,7 @@ export async function createAndReadSingleListing(listing) {
       "object-center",
       "aspect-square",
       "sm:aspect-4/3",
-      "w-full" /*"h-full"*/,
+      "w-full",
     );
 
     // Set the image source and alt text based on media item
@@ -416,6 +417,13 @@ export async function createAndReadSingleListing(listing) {
 
   // Append both the image carousel and listing info to the main container
   listingContainer.append(imageCarousel, listingInfo);
+
+  // Assuming the listing object has the post data
+  const post = listing.data; // Use your actual data structure here
+  const author = post.seller.name; // Assuming the seller is the author
+
+  // Pass post and author to onDeletePost
+  onDeletePost(post, author);
 
   // Append the listing container to the main container on the page
   singleListingContainer.appendChild(listingContainer);
@@ -555,7 +563,35 @@ export async function onReadSingleListing() {
     console.log("Attempting to fetch and create listing...");
     showLoadingSpinner();
     const singleListing = await fetchSingleListing(listingID);
-    console.log("Fetched single listing:", singleListing); // Should display listing data
+    console.log("Fetched single listing:", singleListing);
+
+    const post = singleListing.data;
+    const author = post.seller.name;
+    onDeletePost(post, author);
+
+    await createAndReadSingleListing(singleListing);
+  } catch (error) {
+    console.error("Error reading single post: ", error);
+  } finally {
+    hideLoadingSpinner();
+  }
+}
+
+export async function onReadSpecificSingleListing() {
+  const listingID = JSON.parse(localStorage.getItem("listingID"));
+
+  if (!listingID || typeof listingID !== "string") {
+    console.error("Invalid post ID:", listingID);
+    return;
+  }
+
+  console.log("Listing ID:", listingID);
+
+  try {
+    console.log("Attempting to fetch and create listing...");
+    showLoadingSpinner();
+    const singleListing = await fetchSingleListing(listingID);
+    console.log("Fetched single listing:", singleListing);
     await createAndReadSingleListing(singleListing);
   } catch (error) {
     console.error("Error reading single post: ", error);
@@ -569,19 +605,15 @@ export async function onReadListingsByProfile() {
   const userName = user.name;
   showLoadingSpinner();
   try {
-    // Fetch listings from the API
     const response = await fetchListingsByProfile(userName);
 
-    // Access the listings data inside the 'data' property
     const listingsArray = Array.isArray(response.data) ? response.data : [];
 
-    // Check if the array is empty
     if (listingsArray.length === 0) {
       console.warn("No listings found in the response.");
       return;
     }
 
-    // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
       createAndReadListings(listing);
     });
