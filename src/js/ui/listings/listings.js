@@ -565,7 +565,7 @@ export async function onReadAllListingsJewelry() {
   }
 }
 
-export async function onReadSingleListing() {
+/*export async function onReadSingleListing() {
   const listingID = JSON.parse(localStorage.getItem("listingID"));
 
   if (!listingID || typeof listingID !== "string") {
@@ -591,6 +591,44 @@ export async function onReadSingleListing() {
     console.error("Error reading single post: ", error);
   } finally {
     hideLoadingSpinner();
+  }
+}*/
+
+export async function onReadSingleListing() {
+  const listingID = localStorage.getItem("listingID");
+
+  if (!listingID) {
+    console.error("No listing ID found in localStorage");
+    return;
+  }
+
+  try {
+    const parsedID = JSON.parse(listingID);
+    if (typeof parsedID !== "string") {
+      throw new Error("Invalid listing ID");
+    }
+
+    console.log("Listing ID:", parsedID);
+
+    try {
+      console.log("Attempting to fetch and create listing...");
+      showLoadingSpinner();
+      const singleListing = await fetchSingleListing(parsedID);
+      console.log("Fetched single listing:", singleListing);
+
+      const post = singleListing.data;
+      const author = post.seller.name;
+      onDeletePost(post, author);
+      onEditButton(post, author);
+
+      await createAndReadSingleListing(singleListing);
+    } catch (error) {
+      console.error("Error reading single post: ", error);
+    } finally {
+      hideLoadingSpinner();
+    }
+  } catch (error) {
+    console.error("Error parsing listing ID:", error);
   }
 }
 
