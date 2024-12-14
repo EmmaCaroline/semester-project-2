@@ -1,3 +1,4 @@
+import { authGuard } from "../../utilities/authGuard";
 import { fetchSingleListing } from "../../api/listings/listings";
 import { addImageField } from "../../ui/listings/update";
 import { onUpdateListing } from "../../ui/listings/update";
@@ -94,3 +95,5 @@ function attachImageButtonListener() {
     console.error("Add Image button is not found in the DOM.");
   }
 }
+
+authGuard();
