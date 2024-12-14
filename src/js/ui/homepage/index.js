@@ -171,6 +171,7 @@ export async function createCarouselSlides() {
       "border-gray-600",
       "hover:bg-customGray",
       "hover:text-gray-300",
+      "cursor-pointer",
     );
 
     // Add an event listener to the button

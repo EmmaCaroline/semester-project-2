@@ -157,13 +157,13 @@ export async function createAndReadListings(listing) {
   imageContainer.appendChild(listingImage);
 
   // Function to handle the click event
-  const imageClick = () => {
+  const linkClick = () => {
     save("listingID", listing.id);
     window.location.href = "/listing/listing.html";
   };
 
   // Make the image clickable
-  listingImage.addEventListener("click", imageClick);
+  listingImage.addEventListener("click", linkClick);
 
   const listingTitle = document.createElement("h2");
   listingTitle.textContent = listing.title || "Untitled";
@@ -195,6 +195,8 @@ export async function createAndReadListings(listing) {
   );
   listingsButton.textContent = "View items";
   buttonContainer.appendChild(listingsButton);
+
+  buttonContainer.addEventListener("click", linkClick);
 
   listingElement.append(
     sellerAndBidCount,
