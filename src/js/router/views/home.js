@@ -13,7 +13,6 @@ setupNewsletterSubscription("newsletter-button", "subscribe-email");
 addTypewriterEffect("typewriter", "TreasureBid Auction House", 100);
 
 onReadAllListings();
-
 onReadAllSpecificListings();
 
 initializePagination();
