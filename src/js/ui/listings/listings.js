@@ -393,6 +393,15 @@ export async function createAndReadSingleListing(listing) {
   );
   listingTitle.textContent = listing.data.title;
 
+  const sellerAndBids = document.createElement("div");
+  sellerAndBids.classList.add(
+    "flex",
+    "justify-between",
+    "items-center",
+    "mr-14",
+    "sm:mr-8",
+  );
+
   const seller = document.createElement("div");
   seller.classList.add("flex", "items-center", "mb-4");
   const sellerName = document.createElement("p");
@@ -410,6 +419,12 @@ export async function createAndReadSingleListing(listing) {
   }
 
   seller.append(sellerAvatar, sellerName);
+
+  const bids = document.createElement("p");
+  bids.classList.add("mb-4", "font-body", "text-sm", "md:text-base");
+  bids.textContent = "Bids: " + listing.data._count.bids;
+
+  sellerAndBids.append(seller, bids);
 
   const created = document.createElement("p");
   created.classList.add(
@@ -431,7 +446,7 @@ export async function createAndReadSingleListing(listing) {
   );
   description.textContent = listing.data.description;
 
-  listingInfo.append(listingTitle, seller, created, description);
+  listingInfo.append(listingTitle, sellerAndBids, created, description);
 
   // Append both the image carousel and listing info to the main container
   listingContainer.append(imageCarousel, listingInfo);
