@@ -281,13 +281,5 @@ function prevImage() {
   showSlide(currentSlideIndex);
 }
 
-// Removed drag-to-change logic entirely
-
 window.nextImage = nextImage;
 window.prevImage = prevImage;
-
-// Function calls
-
-createCarouselSlides();
-
-ifLoggedIn();
