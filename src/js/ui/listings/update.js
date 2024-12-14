@@ -1,6 +1,10 @@
 import { updateListing } from "../../api/listings/update";
 import { fetchSingleListing } from "../../api/listings/listings";
 import { load } from "../../api/auth/key";
+import {
+  showLoadingSpinner,
+  hideLoadingSpinner,
+} from "../../utilities/loadingSpinner";
 
 export async function onUpdateListing(event) {
   event.preventDefault();
@@ -51,6 +55,7 @@ export async function onUpdateListing(event) {
   }
 
   try {
+    showLoadingSpinner();
     await updateListing(id, updatedData);
     alert("Listing updated successfully!");
     window.location.href = `/listing/listing.html?id=${id}`;
@@ -58,6 +63,7 @@ export async function onUpdateListing(event) {
     console.error("Failed to update listing:", error);
     alert("Failed to update listing.");
   }
+  hideLoadingSpinner();
 }
 
 const cancelButton = document.getElementById("cancelButton");

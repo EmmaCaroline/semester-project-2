@@ -263,6 +263,7 @@ export async function createAndReadSingleListing(listing) {
     "flex-col",
     "sm:flex-row",
     "sm:w-full",
+    "overflow-hidden",
   );
 
   const imageCarousel = document.createElement("div");
@@ -311,30 +312,38 @@ export async function createAndReadSingleListing(listing) {
     "prev-btn",
     "absolute",
     "top-1/2",
-    "left-0",
+    "left-3",
     "transform",
     "translate-y-[-50%]",
     "bg-black",
     "text-white",
-    "px-4",
+    "px-2",
     "py-2",
+    "rounded",
+    "bg-opacity-60",
   );
-  prevButton.innerHTML = "←";
+  const prevButtonIcon = document.createElement("i");
+  prevButtonIcon.classList.add("fa-solid", "fa-arrow-left");
+  prevButton.appendChild(prevButtonIcon);
 
   const nextButton = document.createElement("button");
   nextButton.classList.add(
     "next-btn",
     "absolute",
     "top-1/2",
-    "right-0",
+    "right-3",
     "transform",
     "translate-y-[-50%]",
     "bg-black",
     "text-white",
-    "px-4",
+    "px-2",
     "py-2",
+    "rounded",
+    "bg-opacity-60",
   );
-  nextButton.innerHTML = "→";
+  const nextButtonIcon = document.createElement("i");
+  nextButtonIcon.classList.add("fa-solid", "fa-arrow-right");
+  nextButton.appendChild(nextButtonIcon);
 
   imageCarousel.appendChild(carouselInner);
   imageCarousel.appendChild(prevButton);
@@ -362,7 +371,15 @@ export async function createAndReadSingleListing(listing) {
   });
 
   const listingInfo = document.createElement("div");
-  listingInfo.classList.add("w-full", "md:w-1/2", "p-4");
+  listingInfo.classList.add(
+    "w-full",
+    "md:w-1/2",
+    "sm:p-4",
+    "ml-8",
+    "sm:ml-1",
+    "mt-4",
+    "sm:mt-0",
+  );
 
   const listingTitle = document.createElement("h2");
   listingTitle.classList.add(
@@ -564,35 +581,6 @@ export async function onReadAllListingsJewelry() {
     hideLoadingSpinner();
   }
 }
-
-/*export async function onReadSingleListing() {
-  const listingID = JSON.parse(localStorage.getItem("listingID"));
-
-  if (!listingID || typeof listingID !== "string") {
-    console.error("Invalid post ID:", listingID);
-    return;
-  }
-
-  console.log("Listing ID:", listingID);
-
-  try {
-    console.log("Attempting to fetch and create listing...");
-    showLoadingSpinner();
-    const singleListing = await fetchSingleListing(listingID);
-    console.log("Fetched single listing:", singleListing);
-
-    const post = singleListing.data;
-    const author = post.seller.name;
-    onDeletePost(post, author);
-    onEditButton(post, author);
-
-    await createAndReadSingleListing(singleListing);
-  } catch (error) {
-    console.error("Error reading single post: ", error);
-  } finally {
-    hideLoadingSpinner();
-  }
-}*/
 
 export async function onReadSingleListing() {
   const listingID = localStorage.getItem("listingID");
