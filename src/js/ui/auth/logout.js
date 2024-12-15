@@ -15,7 +15,7 @@ export function onLogout() {
   try {
     remove("token");
     remove("user");
-    window.location.href = "/";
+    window.location.href = "./";
   } catch (error) {
     console.error("Failed to sign out:", error);
   }

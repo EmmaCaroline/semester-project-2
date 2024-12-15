@@ -79,7 +79,7 @@ function createSpecificListings(listing) {
     // Add an event listener to the first image link
     firstImageLink.addEventListener("click", () => {
       localStorage.setItem("listingID", JSON.stringify(firstPost.id)); // Ensure storing as string
-      window.location.href = "/listing/listing.html"; // Redirect to the specific post page
+      window.location.href = "./listing/listing.html"; // Redirect to the specific post page
     });
 
     // Create the second and third image links inside a single container
@@ -157,7 +157,7 @@ function createSpecificListings(listing) {
     // Add an event listener to the second image link
     secondImageLink.addEventListener("click", () => {
       localStorage.setItem("listingID", JSON.stringify(secondPost.id)); // Ensure storing as string
-      window.location.href = "/listing/listing.html"; // Redirect to the specific post page
+      window.location.href = "./listing/listing.html"; // Redirect to the specific post page
     });
 
     const thirdImageLink = document.createElement("a");
@@ -223,7 +223,7 @@ function createSpecificListings(listing) {
     // Add an event listener to the third image link
     thirdImageLink.addEventListener("click", () => {
       localStorage.setItem("listingID", JSON.stringify(thirdPost.id)); // Ensure storing as string
-      window.location.href = "/listing/listing.html"; // Redirect to the specific post page
+      window.location.href = "./listing/listing.html"; // Redirect to the specific post page
     });
 
     // Append the second and third image links inside the container

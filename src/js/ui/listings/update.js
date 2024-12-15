@@ -58,7 +58,7 @@ export async function onUpdateListing(event) {
     showLoadingSpinner();
     await updateListing(id, updatedData);
     alert("Listing updated successfully!");
-    window.location.href = `/listing/listing/?id=${id}`;
+    window.location.href = `./listing/listing.html/?id=${id}`;
   } catch (error) {
     console.error("Failed to update listing:", error);
     alert("Failed to update listing.");
@@ -69,7 +69,7 @@ export async function onUpdateListing(event) {
 const cancelButton = document.getElementById("cancelButton");
 if (cancelButton) {
   cancelButton.addEventListener("click", () => {
-    window.location.href = `/listing/listing/?id=${new URLSearchParams(window.location.search).get("id")}`;
+    window.location.href = `./listing/listing.html/?id=${new URLSearchParams(window.location.search).get("id")}`;
   });
 }
 
@@ -92,7 +92,7 @@ export const onEditButton = (listing, author) => {
 
     editButton.addEventListener("click", () => {
       console.log("Edit button clicked, navigating to update page.");
-      window.location.href = `/listing/update/?id=${listing.id}`;
+      window.location.href = `./listing/update-listing.html/?id=${listing.id}`;
     });
   } else {
     console.log("User is not the author, edit button hidden.");

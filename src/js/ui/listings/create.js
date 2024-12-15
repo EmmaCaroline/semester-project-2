@@ -57,7 +57,7 @@ export async function onCreateListing(event) {
     addImageField(); // Ensure at least one media field is available after reset
     // Delay navigation for a few seconds
     setTimeout(() => {
-      window.location.href = "/profile/profile/";
+      window.location.href = "./profile/profile.html";
     }, 3000); // 3000 milliseconds = 3 seconds
   } catch (error) {
     console.error("Error creating post: ", error);

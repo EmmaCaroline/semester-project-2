@@ -129,7 +129,7 @@ export async function createWins(listing) {
   // Function to handle the click event
   const linkClick = () => {
     save("listingID", listing.id);
-    window.location.href = "/listing/listing/";
+    window.location.href = "./listing/listing.html";
   };
 
   // Make the image clickable

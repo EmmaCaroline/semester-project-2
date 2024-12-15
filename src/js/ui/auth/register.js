@@ -31,7 +31,7 @@ export async function onRegister(event) {
 
     showMessageWithButtonAndRedirect(
       "Registered! 1000 credits are given to your account.",
-      "/auth/login/",
+      "./auth/login.html",
     );
   } catch (error) {
     console.error("Registration failed:", error);
