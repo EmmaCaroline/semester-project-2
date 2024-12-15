@@ -1,5 +1,5 @@
 export function showMessage(message, duration = 3000) {
-  const messageBox = document.getElementById("messageBox");
+  const messageBox = document.querySelector(".messageBox");
   messageBox.textContent = message;
   messageBox.classList.remove("hidden", "opacity-0");
   messageBox.classList.add("opacity-100");
