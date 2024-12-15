@@ -112,14 +112,16 @@ export function addImageField(url = "", alt = "", index = 0) {
 
   const label = document.createElement("label");
   label.setAttribute("for", `media-url-${index}`);
-  label.className = "block text-sm font-medium text-gray-700 mb-2";
+  label.className =
+    "block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base";
   label.innerText = "Image URL";
 
   const input = document.createElement("input");
   input.type = "url";
   input.placeholder = "Enter image URL";
   input.name = `media-url-${index}`;
-  input.className = "block w-full p-2 border rounded mb-2 media-input";
+  input.className =
+    "block w-full p-2 border rounded mb-2 media-input dark:bg-gray-800 dark:text-gray-100";
   input.value = url;
 
   const preview = document.createElement("img");

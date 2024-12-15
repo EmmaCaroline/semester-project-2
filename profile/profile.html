@@ -22,8 +22,10 @@
       rel="stylesheet"
     />
   </head>
-  <body class="box-border m-0">
-    <header class="bg-customBeige shadow-lg fixed w-full h-20 top-0 z-50">
+  <body class="box-border m-0 dark:bg-black">
+    <header
+      class="bg-customBeige shadow-lg fixed w-full h-20 top-0 z-50 dark:bg-black dark:border-b dark:border-gray-700"
+    >
       <nav class="container mx-auto h-full">
         <div class="flex justify-between items-center" id="navbar">
           <a
@@ -60,18 +62,18 @@
               class="group"
             >
               <i
-                class="fa-solid fa-user text-xl pr-4 md:pr-8 lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600"
+                class="fa-solid fa-user text-xl pr-4 md:pr-8 lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600 dark:text-gray-300"
               ></i>
             </button>
             <button id="dropdown-menu-btn" aria-label="User menu" class="group">
               <i
-                class="fa-solid fa-bars text-2xl pl-4 md:pl-8 lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600"
+                class="fa-solid fa-bars text-2xl pl-4 md:pl-8 lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600 dark:text-gray-300"
               ></i>
             </button>
           </div>
         </div>
         <div
-          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-0 bg-customBeige shadow-md"
+          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-0 bg-customBeige shadow-md dark:bg-black dark:border"
           id="dropdown-menu"
         >
           <ul>
@@ -79,28 +81,28 @@
               <a
                 href="/"
                 id="all-listings-link"
-                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >All Listings</a
               >
             </li>
             <li>
               <a
                 href="/collections/books.html"
-                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Books</a
               >
             </li>
             <li>
               <a
                 href="/collections/jewelry.html"
-                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Jewelry</a
               >
             </li>
             <li>
               <a
                 href="/collections/art.html"
-                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Art</a
               >
             </li>
@@ -108,26 +110,26 @@
         </div>
 
         <div
-          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md"
+          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md dark:bg-black dark:border"
           id="dropdown-profile"
         >
           <ul>
             <li>
               <a
                 href="/auth/login.html"
-                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Log in</a
               >
             </li>
             <li>
               <button class="theme-toggle w-full">
                 <span
-                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >
                   Dark mode
                 </span>
                 <span
-                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
+                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >
                   Light mode
                 </span>
@@ -137,14 +139,14 @@
         </div>
 
         <div
-          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md"
+          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md dark:black dark:border"
           id="dropdown-logged-in"
         >
           <ul>
             <li>
               <a
                 href="/profile/profile.html"
-                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
               >
                 Profile
               </a>
@@ -152,14 +154,14 @@
             <li>
               <a
                 href="/listing/create.html"
-                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
               >
                 Create Listing
               </a>
             </li>
             <li>
               <button
-                class="logout-button block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 w-full text-left"
+                class="logout-button block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 w-full text-left dark:bg-black dark:text-gray-300"
               >
                 Log out
               </button>
@@ -167,12 +169,12 @@
             <li>
               <button class="theme-toggle w-full">
                 <span
-                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >
                   Dark mode
                 </span>
                 <span
-                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
+                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-black transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >
                   Light mode
                 </span>
@@ -346,7 +348,7 @@
         ></div>
       </section>
     </main>
-    <footer class="mt-6">
+    <footer class="pt-6 dark:bg-black">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
         <i
           class="fa-brands fa-facebook-f text-xl px-8 md:text-2xl md:px-16"
@@ -368,7 +370,9 @@
           class="w-40 h-16 mt-6"
         />
         <div class="newsletter py-6">
-          <p class="text-sm font-body pr-12 py-4 md:text-base">
+          <p
+            class="text-sm font-body pr-12 py-4 md:text-base dark:text-gray-300"
+          >
             Stay posted for upcoming auctions by subscribing to our newsletter:
           </p>
           <div class="newsletter-input">
@@ -387,12 +391,13 @@
               Sign up
             </button>
             <div
-              class="messageBox hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 border border-customGray text-black py-4 px-4 md:px-12 md:py-8 rounded shadow-lg text-center opacity-100 transition-opacity duration-1000"
+              id="messageBox"
+              class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 border border-customGray text-black py-4 px-4 md:px-12 md:py-8 rounded shadow-lg text-center opacity-100 transition-opacity duration-1000"
             ></div>
           </div>
         </div>
         <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
-        <div class="footer-pages-first lg:pt-6">
+        <div class="footer-pages-first lg:pt-6 dark:text-gray-300">
           <ul>
             <li>
               <a
@@ -414,7 +419,9 @@
         </div>
         <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
       </div>
-      <div class="footer-pages-second flex justify-center items-center py-4">
+      <div
+        class="footer-pages-second flex justify-center items-center py-4 dark:text-gray-300"
+      >
         <ul>
           <li>
             <a

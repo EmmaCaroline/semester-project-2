@@ -49,6 +49,7 @@ export function createBidSection(listing) {
     "border-bg-customBlue",
     "rounded",
     "my-4",
+    "dark:text-gray-300",
   );
 
   // Create the status element (h3)
@@ -81,7 +82,13 @@ export function createBidSection(listing) {
   const currentBid = getCurrentBid(listing);
 
   const amount = document.createElement("p");
-  amount.classList.add("font-body", "text-sm", "md:text-base", "mb-4");
+  amount.classList.add(
+    "font-body",
+    "text-sm",
+    "md:text-base",
+    "mb-4",
+    "dark:text-gray-300",
+  );
 
   // Change the text based on whether the auction has ended
   if (isAuctionEnded(listing)) {
@@ -122,6 +129,7 @@ export function createBidSection(listing) {
       "w-24",
       "md:w-28",
       "mb-4",
+      "dark:bg-gray-800",
     );
     bidInput.setAttribute("type", "number");
     bidInput.setAttribute("id", "bidAmountInput");
@@ -165,6 +173,7 @@ export function createBidSection(listing) {
       "font-medium",
       "mt-6",
       "pb-4",
+      "dark:text-gray-300",
     );
     biddersTitle.textContent = "List of bidders:";
 
@@ -176,7 +185,12 @@ export function createBidSection(listing) {
       listing.bids.forEach((bid) => {
         // Create a container for each bidder
         const bidderContainer = document.createElement("div");
-        bidderContainer.classList.add("flex", "items-center", "mb-2");
+        bidderContainer.classList.add(
+          "flex",
+          "items-center",
+          "mb-2",
+          "dark:text-gray-300",
+        );
 
         // Create the bidder avatar
         const bidderAvatar = document.createElement("img");

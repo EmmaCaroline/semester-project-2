@@ -43,6 +43,7 @@ export async function createListings(listing) {
     "border-2",
     "rounded",
     "border-bg-#92A6B4",
+    "dark:border-gray-800",
     "shadow-lg",
     "flex",
     "flex-col",
@@ -59,6 +60,7 @@ export async function createListings(listing) {
     "items-center",
     "py-2",
     "px-2",
+    "dark:text-gray-300",
   );
 
   const seller = document.createElement("div");
@@ -91,6 +93,7 @@ export async function createListings(listing) {
     "text-sm",
     "font-body",
     "md:text-base",
+    "dark:text-gray-300",
   );
 
   // Get the current date and the auction's end date
@@ -376,6 +379,7 @@ export async function createSingleListing(listing) {
     "sm:ml-1",
     "mt-4",
     "sm:mt-0",
+    "dark:text-gray-300",
   );
 
   const listingTitle = document.createElement("h2");

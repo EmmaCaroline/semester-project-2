@@ -71,6 +71,7 @@ function createSpecificListings(listing) {
       "text-center",
       "text-sm",
       "md:text-base",
+      "dark:text-gray-300",
     );
     firstImageText.textContent = firstPost.title;
     firstImageLink.appendChild(firstImageText);
@@ -148,6 +149,7 @@ function createSpecificListings(listing) {
       "md:text-base",
       "mr-6",
       "md:mr-0",
+      "dark:text-gray-300",
     );
     secondImageText.textContent = secondPost.title;
     secondImageLink.appendChild(secondImageText);
@@ -213,6 +215,7 @@ function createSpecificListings(listing) {
       "md:text-base",
       "ml-6",
       "md:ml-0",
+      "dark:text-gray-300",
     );
     thirdImageText.textContent = thirdPost.title;
     thirdImageLink.appendChild(thirdImageText);
