@@ -16,8 +16,9 @@ import {
 } from "../../utilities/loadingSpinner";
 import { onDeletePost } from "./delete";
 import { onEditButton } from "./update";
+import { createBidSection } from "./bid";
 
-function formatDate(isoDate) {
+export function formatDate(isoDate) {
   const date = new Date(isoDate);
 
   // Extract parts of the date
@@ -477,8 +478,10 @@ export async function createSingleListing(listing) {
   const author = post.seller.name; // Assuming the seller is the author
   onEditButton(post, author);
 
+  //const bidding = createBidSection(listing);
+
   // Append the edit button and listing container to the single listing container
-  singleListingContainer.append(listingContainer, editButton);
+  singleListingContainer.append(listingContainer /*, bidding*/, editButton);
 
   return singleListingContainer;
 }
@@ -632,6 +635,8 @@ export async function onReadSingleListing() {
       const author = post.seller.name;
       onDeletePost(post, author);
       onEditButton(post, author);
+      // Pass the correct `post` object to createBidSection
+      createBidSection(post);
 
       await createSingleListing(singleListing);
     } catch (error) {
