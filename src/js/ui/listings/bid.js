@@ -1,6 +1,7 @@
 import { formatDate } from "./listings";
 import { fetchBid } from "../../api/listings/bid";
 import { fetchSingleListing } from "../../api/listings/listings";
+//import { list } from "postcss";
 
 function getCurrentBid(listing) {
   if (listing && Array.isArray(listing.bids) && listing.bids.length > 0) {
@@ -153,7 +154,64 @@ export function createBidSection(listing) {
       onPlaceBid(listing.id, bidAmount, bidInput);
     });
 
-    bidSection.append(bidInputLabel, bidInput, placeBidButton);
+    const listOfBidders = document.createElement("div");
+    listOfBidders.classList.add("flex", "flex-col");
+
+    const biddersTitle = document.createElement("p");
+    biddersTitle.classList.add(
+      "font-body",
+      "text-base",
+      "md:text-lg",
+      "font-medium",
+      "mt-6",
+      "pb-4",
+    );
+    biddersTitle.textContent = "List of bidders:";
+
+    if (
+      listing.bids &&
+      Array.isArray(listing.bids) &&
+      listing.bids.length > 0
+    ) {
+      listing.bids.forEach((bid) => {
+        // Create a container for each bidder
+        const bidderContainer = document.createElement("div");
+        bidderContainer.classList.add("flex", "items-center", "mb-2");
+
+        // Create the bidder avatar
+        const bidderAvatar = document.createElement("img");
+        bidderAvatar.classList.add("w-8", "h-8", "rounded-full", "mr-2");
+
+        // Check if the bidder has an avatar, otherwise use a default one
+        if (bid.bidder?.avatar) {
+          bidderAvatar.src = bid.bidder.avatar.url;
+          bidderAvatar.alt = bid.bidder.avatar.alt;
+        } else {
+          bidderAvatar.src = "";
+          bidderAvatar.alt = "";
+        }
+
+        // Create the bidder name and the bid amount text
+        const bidderInfo = document.createElement("p");
+        bidderInfo.classList.add("font-body", "text-sm", "md:text-base");
+        bidderInfo.textContent = `${bid.bidder.name}: $${bid.amount}`;
+
+        // Append the avatar and bidder info to the bidder container
+        bidderContainer.appendChild(bidderAvatar);
+        bidderContainer.appendChild(bidderInfo);
+
+        // Append the bidder container to the list of bidders
+        listOfBidders.appendChild(bidderContainer);
+      });
+    }
+
+    bidSection.append(
+      bidInputLabel,
+      bidInput,
+      placeBidButton,
+      biddersTitle,
+      listOfBidders,
+    );
     console.log("Created bid section:", bidSection);
     return bidSection;
   }

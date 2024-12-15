@@ -6,6 +6,7 @@ import {
 } from "../../ui/profile/profile";
 import { onUpdateProfile, prefillProfileForm } from "../../ui/profile/update";
 import { onReadListingsByProfile } from "../../ui/listings/listings";
+import { onReadAllWins } from "../../ui/listings/wins";
 
 const form = document.forms.updateProfile;
 
@@ -19,9 +20,6 @@ cancelButton.addEventListener("click", function (event) {
   form.classList.add("hidden"); // Hide the form
 });
 
-// Ensure form is hidden initially
-//form.classList.add("hidden");
-
 // Toggle form visibility
 document
   .getElementById("update-profile-button")
@@ -33,8 +31,7 @@ document
       form.classList.add("block");
       prefillProfileForm();
 
-      // Scroll to the form, but a little higher. Couldn't use scrollIntoView() due to some elements being too close to the viewport's edge
-      const formPosition = form.offsetTop; // Get the position of the form
+      const formPosition = form.offsetTop;
       window.scrollTo({
         top: formPosition - 90,
         behavior: "smooth",
@@ -50,3 +47,4 @@ readProfileData();
 onReadListingsByProfile();
 getListingCount();
 getWinsCount();
+onReadAllWins();
