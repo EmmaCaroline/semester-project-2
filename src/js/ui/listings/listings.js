@@ -474,14 +474,12 @@ export async function createSingleListing(listing) {
   }
 
   // Ensure the button is visible for the author
-  const post = listing.data;
-  const author = post.seller.name; // Assuming the seller is the author
-  onEditButton(post, author);
-
-  //const bidding = createBidSection(listing);
+  const listingData = listing.data;
+  const author = listingData.seller.name; // Assuming the seller is the author
+  onEditButton(listingData, author);
 
   // Append the edit button and listing container to the single listing container
-  singleListingContainer.append(listingContainer /*, bidding*/, editButton);
+  singleListingContainer.append(listingContainer, editButton);
 
   return singleListingContainer;
 }
@@ -608,7 +606,6 @@ export async function onReadAllListingsJewelry() {
   }
 }
 
-// Fetch and read a single listing
 export async function onReadSingleListing() {
   const listingID = localStorage.getItem("listingID");
 
@@ -635,9 +632,20 @@ export async function onReadSingleListing() {
       const author = listing.seller.name;
       onDeletePost(listing, author);
       onEditButton(listing, author);
-      createBidSection(listing);
 
+      // First, create the single listing details (image, title, etc.)
       await createSingleListing(singleListing);
+
+      // Now create and append the bid section
+      const bidSection = createBidSection(listing);
+
+      // Get the container where the bid section should go
+      const singleListingContainer = document.querySelector(
+        ".single-listing-container",
+      );
+
+      // Make sure bid section is appended last
+      singleListingContainer.appendChild(bidSection); // Append bid section last
     } catch (error) {
       console.error("Error reading single listing: ", error);
     } finally {
