@@ -631,16 +631,15 @@ export async function onReadSingleListing() {
       const singleListing = await fetchSingleListing(parsedID);
       console.log("Fetched single listing:", singleListing);
 
-      const post = singleListing.data;
-      const author = post.seller.name;
-      onDeletePost(post, author);
-      onEditButton(post, author);
-      // Pass the correct `post` object to createBidSection
-      createBidSection(post);
+      const listing = singleListing.data;
+      const author = listing.seller.name;
+      onDeletePost(listing, author);
+      onEditButton(listing, author);
+      createBidSection(listing);
 
       await createSingleListing(singleListing);
     } catch (error) {
-      console.error("Error reading single post: ", error);
+      console.error("Error reading single listing: ", error);
     } finally {
       hideLoadingSpinner();
     }
