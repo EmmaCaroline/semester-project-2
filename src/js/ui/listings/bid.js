@@ -18,19 +18,13 @@ function getCurrentBid(listing) {
   return null; // No bids
 }
 
-/**
- * Create and display the bid section for a listing.
- * @param {Object} listing - The listing object.
- */
+function isAuctionEnded(listing) {
+  const currentDate = new Date();
+  const endDate = new Date(listing.endsAt);
+  return currentDate > endDate;
+}
+
 export function createBidSection(listing) {
-  // Ensure the listing object is valid and has the 'endsAt' property
-  if (!listing || !listing.endsAt) {
-    console.error(
-      "Listing data is missing or 'endsAt' property is unavailable:",
-      listing,
-    );
-    return; // Do not proceed if data is missing
-  }
   const container = document.querySelector(".single-listing-container");
   if (!container) {
     console.error("Container not found!");
@@ -40,15 +34,45 @@ export function createBidSection(listing) {
   const currentDate = new Date();
   const endDate = new Date(listing.endsAt);
   const auctionStatus =
-    currentDate > endDate
-      ? "Auction ended"
-      : `Auction ends on ${formatDate(listing.endsAt)}`;
+    currentDate > endDate ? "Auction ended: " : `Auction ends at: `;
 
+  // Create the bid section container
   const bidSection = document.createElement("div");
-  bidSection.classList.add("bid-section");
+  bidSection.classList.add(
+    "bid-section",
+    "flex",
+    "flex-col",
+    "justify-center",
+    "items-center",
+    "border",
+    "border-bg-customBlue",
+    "rounded",
+    "my-4",
+  );
 
+  // Create the status element (h3)
   const statusElement = document.createElement("h3");
+
+  // Create a span for the formatted date
+  const dateSpan = document.createElement("span");
+  dateSpan.textContent = formatDate(listing.endsAt);
+
+  // Add a class to the span for styling (you can style this in CSS)
+  dateSpan.classList.add("text-red-600"); // Tailwind example, or add your own CSS class
+
+  // Append the text and span to the status element
   statusElement.textContent = auctionStatus;
+  statusElement.appendChild(dateSpan);
+  statusElement.classList.add(
+    "font-body",
+    "text-base",
+    "font-medium",
+    "md:text-lg",
+    "mt-4",
+    "mb-8",
+  );
+
+  // Append the status element to the bid section
   bidSection.appendChild(statusElement);
 
   const bidAmountContainer = document.createElement("div");
@@ -56,24 +80,67 @@ export function createBidSection(listing) {
   const currentBid = getCurrentBid(listing);
 
   const amount = document.createElement("p");
-  amount.textContent = currentBid
-    ? `Current bid: $${currentBid}`
-    : "No bids yet";
+  amount.classList.add("font-body", "text-sm", "md:text-base", "mb-4");
+
+  // Change the text based on whether the auction has ended
+  if (isAuctionEnded(listing)) {
+    amount.textContent = currentBid
+      ? `Final bid was: $${currentBid}`
+      : "No bids was placed on this listing";
+  } else {
+    amount.textContent = currentBid
+      ? `Current bid: $${currentBid}`
+      : "No bids yet";
+  }
+
   bidAmountContainer.appendChild(amount);
   bidSection.appendChild(bidAmountContainer);
 
   if (currentDate <= endDate) {
     const bidInputLabel = document.createElement("label");
     bidInputLabel.setAttribute("for", "bidAmountInput");
+    bidInputLabel.classList.add(
+      "font-body",
+      "text-sm",
+      "md:text-base",
+      "mx-2",
+      "mb-1",
+    );
     bidInputLabel.textContent = "Place your bid:";
 
     const bidInput = document.createElement("input");
+    bidInput.classList.add(
+      "font-body",
+      "text-sm",
+      "md:text-base",
+      "border",
+      "border-black",
+      "rounded",
+      "pl-2",
+      "py-1",
+      "w-24",
+      "md:w-28",
+      "mb-4",
+    );
     bidInput.setAttribute("type", "number");
     bidInput.setAttribute("id", "bidAmountInput");
-    bidInput.setAttribute("placeholder", "Enter your bid amount");
+    bidInput.setAttribute("placeholder", "Bid amount");
     bidInput.setAttribute("min", currentBid ? currentBid + 1 : 1);
 
     const placeBidButton = document.createElement("button");
+    placeBidButton.classList.add(
+      "w-auto",
+      "font-body",
+      "text-sm",
+      "py-1.5",
+      "px-8",
+      "rounded-lg",
+      "md:text-base",
+      "bg-customGray",
+      "text-white",
+      "hover:bg-gray-400",
+      "mb-4",
+    );
     placeBidButton.textContent = "Place Bid";
     placeBidButton.setAttribute("id", "placeBidButton");
 
@@ -86,9 +153,9 @@ export function createBidSection(listing) {
       onPlaceBid(listing.id, bidAmount, bidInput);
     });
 
-    bidSection.appendChild(bidInputLabel);
-    bidSection.appendChild(bidInput);
-    bidSection.appendChild(placeBidButton);
+    bidSection.append(bidInputLabel, bidInput, placeBidButton);
+    console.log("Created bid section:", bidSection);
+    return bidSection;
   }
 
   container.appendChild(bidSection);
@@ -122,7 +189,9 @@ async function onPlaceBid(listingId, bidAmount, bidInput) {
     alert(`Your bid of $${bidAmount} has been placed successfully!`);
   } catch (error) {
     console.error("Error placing bid:", error);
-    alert("Failed to place bid. Please try again.");
+    alert(
+      "Failed to place bid. Please try again. Note that you cannot bid on your own listing.",
+    );
   }
 }
 

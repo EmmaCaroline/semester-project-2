@@ -28,14 +28,7 @@ export function formatDate(isoDate) {
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
 
-  // Normalize the URL check to avoid issues with trailing slashes
-  const pathname = window.location.pathname.replace(/\/$/, "");
-
-  if (pathname === "/listing/listing.html") {
-    return `${day} ${month} ${year}`;
-  } else {
-    return `${day} ${month} ${year}, ${hours}:${minutes}`;
-  }
+  return `${day} ${month} ${year}, ${hours}:${minutes}`;
 }
 
 // Create listing cards for all listings
@@ -636,16 +629,40 @@ export async function onReadSingleListing() {
       // First, create the single listing details (image, title, etc.)
       await createSingleListing(singleListing);
 
-      // Now create and append the bid section
-      const bidSection = createBidSection(listing);
+      // Check if the user is logged in
+      const token = localStorage.getItem("token");
 
       // Get the container where the bid section should go
       const singleListingContainer = document.querySelector(
         ".single-listing-container",
       );
 
-      // Make sure bid section is appended last
-      singleListingContainer.appendChild(bidSection); // Append bid section last
+      if (token) {
+        const bidSection = createBidSection(listing);
+
+        // Check if bidSection is a valid Node before appending
+        if (bidSection instanceof Node) {
+          const singleListingContainer = document.querySelector(
+            ".single-listing-container",
+          );
+          singleListingContainer.appendChild(bidSection);
+        } else {
+          console.error("Failed to create a valid bid section.");
+        }
+      } else {
+        // If the user is not logged in, show a message
+        const loginMessage = document.createElement("p");
+        loginMessage.classList.add(
+          "font-body",
+          "text-sm",
+          "md:text-base",
+          "text-center",
+          "mt-4",
+        );
+        loginMessage.textContent =
+          "Please log in to view more info about this listing and to place a bid.";
+        singleListingContainer.appendChild(loginMessage);
+      }
     } catch (error) {
       console.error("Error reading single listing: ", error);
     } finally {

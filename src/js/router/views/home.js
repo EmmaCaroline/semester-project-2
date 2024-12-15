@@ -8,7 +8,7 @@ import {
 } from "../../utilities/pagination";
 import { onReadAllSpecificListings } from "../../ui/listings/listingsSpecific";
 import { createCarouselSlides } from "../../ui/homepage/index";
-import { ifLoggedIn } from "../../ui/homepage/index";
+import { hideWelcomeifLoggedIn } from "../../ui/homepage/index";
 
 setupNewsletterSubscription("newsletter-button", "subscribe-email");
 
@@ -21,7 +21,7 @@ initializePagination();
 fetchAndRenderListings();
 
 createCarouselSlides();
-ifLoggedIn();
+hideWelcomeifLoggedIn();
 
 const searchInput = document.getElementById("search-input");
 

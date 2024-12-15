@@ -60,7 +60,7 @@ export function addTypewriterEffect(elementId, text, speed = 100) {
   typeWriter();
 }
 
-export function ifLoggedIn() {
+export function hideWelcomeifLoggedIn() {
   if (token) {
     // User is logged in: hide the welcome message
     welcomeMessage.classList.add("hidden");
