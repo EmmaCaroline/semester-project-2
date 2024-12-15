@@ -120,16 +120,14 @@
               >
             </li>
             <li>
-              <button id="theme-toggle" class="w-full">
+              <button class="theme-toggle w-full">
                 <span
-                  id="isLightmode"
-                  class="text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >
                   Dark mode
                 </span>
                 <span
-                  id="isDarkmode"
-                  class="text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
+                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
                 >
                   Light mode
                 </span>
@@ -167,19 +165,17 @@
               </button>
             </li>
             <li>
-              <button id="theme-toggle" class="w-full">
-                <p
-                  id="isLightmode"
-                  class="text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+              <button class="theme-toggle w-full">
+                <span
+                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >
                   Dark mode
-                </p>
-                <p
-                  id="isDarkmode"
-                  class="text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
+                </span>
+                <span
+                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
                 >
                   Light mode
-                </p>
+                </span>
               </button>
             </li>
           </ul>
@@ -209,22 +205,21 @@
             Want to become a TreasureBidder? Sign up to start placing bids or
             create listings
           </p>
-          <a href="/auth/register.html">
-            <button
-              class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
-            >
-              Register
-            </button>
+          <a
+            href="/auth/register.html"
+            class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
+          >
+            Register
           </a>
+
           <p class="font-body text-sm py-4 md:text-base">
             Already a TreasureBidder?
           </p>
-          <a href="/auth/login.html">
-            <button
-              class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
-            >
-              Log in
-            </button>
+          <a
+            href="/auth/login.html"
+            class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
+          >
+            Log in
           </a>
           <hr class="border-t-2 border-customBlue mt-8 lg:mt-12 w-full" />
         </div>
@@ -431,15 +426,15 @@
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
         <i
           class="fa-brands fa-facebook-f text-xl px-8 md:text-2xl md:px-16"
-          aria-label="Facebook"
+          aria-hidden="true"
         ></i>
         <i
           class="fa-brands fa-instagram text-xl px-8 md:text-2xl md:px-16"
-          aria-label="Instagram"
+          aria-hidden="true"
         ></i>
         <i
           class="fa-brands fa-x-twitter text-xl px-8 md:text-2xl md:px-16"
-          aria-label="Twitter"
+          aria-hidden="true"
         ></i>
       </div>
       <div class="flex flex-col px-8 lg:px-20">

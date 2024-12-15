@@ -82,10 +82,10 @@ function applyInitialTheme() {
 
   document.documentElement.classList.toggle("dark", isDarkMode);
 
-  document.querySelectorAll("#isLightmode").forEach((lightModeElem) => {
+  document.querySelectorAll(".isLightmode").forEach((lightModeElem) => {
     lightModeElem.classList.toggle("hidden", isDarkMode);
   });
-  document.querySelectorAll("#isDarkmode").forEach((darkModeElem) => {
+  document.querySelectorAll(".isDarkmode").forEach((darkModeElem) => {
     darkModeElem.classList.toggle("hidden", !isDarkMode);
   });
 }
@@ -96,17 +96,17 @@ function toggleTheme() {
 
   localStorage.setItem("theme", isDarkMode ? "dark" : "light");
 
-  document.querySelectorAll("#isLightmode").forEach((lightModeElem) => {
+  document.querySelectorAll(".isLightmode").forEach((lightModeElem) => {
     lightModeElem.classList.toggle("hidden", isDarkMode);
   });
-  document.querySelectorAll("#isDarkmode").forEach((darkModeElem) => {
+  document.querySelectorAll(".isDarkmode").forEach((darkModeElem) => {
     darkModeElem.classList.toggle("hidden", !isDarkMode);
   });
 }
 
 // Add event listeners to all theme-toggle buttons
 function setupThemeToggleListeners() {
-  document.querySelectorAll("#theme-toggle").forEach((toggleBtn) => {
+  document.querySelectorAll(".theme-toggle").forEach((toggleBtn) => {
     toggleBtn.addEventListener("click", toggleTheme);
   });
 }
