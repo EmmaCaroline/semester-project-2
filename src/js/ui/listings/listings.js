@@ -37,7 +37,8 @@ function formatDate(isoDate) {
   }
 }
 
-export async function createAndReadListings(listing) {
+// Create listing cards for all listings
+export async function createListings(listing) {
   const listingElement = document.createElement("a");
   if (!listingElement) {
     console.error("Failed to create listing container for:", listing);
@@ -223,7 +224,7 @@ function handleSearch(searchInput, listingsArray) {
   listingContainer.innerHTML = "";
 
   // Re-render filtered listings
-  filteredListings.forEach((listing) => createAndReadListings(listing));
+  filteredListings.forEach((listing) => createListings(listing));
 }
 
 function handleSort(sortSelect) {
@@ -249,12 +250,13 @@ function handleSort(sortSelect) {
     .then((listings) => {
       const listingContainer = document.querySelector(".listings-container");
       listingContainer.innerHTML = "";
-      listings.forEach((listing) => createAndReadListings(listing));
+      listings.forEach((listing) => createListings(listing));
     })
     .catch((error) => console.error("Error fetching listings:", error));
 }
 
-export async function createAndReadSingleListing(listing) {
+// Create a single listing
+export async function createSingleListing(listing) {
   const singleListingContainer = document.querySelector(
     ".single-listing-container",
   );
@@ -481,6 +483,7 @@ export async function createAndReadSingleListing(listing) {
   return singleListingContainer;
 }
 
+// Fetch and read all listings
 export async function onReadAllListings() {
   showLoadingSpinner();
   try {
@@ -512,7 +515,7 @@ export async function onReadAllListings() {
 
     // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
-      createAndReadListings(listing);
+      createListings(listing);
     });
   } catch (error) {
     console.error("Error reading all listings:", error);
@@ -521,6 +524,7 @@ export async function onReadAllListings() {
   }
 }
 
+// Fetch and read all listings for 'Art' collection page, that has a unique tag
 export async function onReadAllListingsArt() {
   showLoadingSpinner();
   try {
@@ -538,7 +542,7 @@ export async function onReadAllListingsArt() {
 
     // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
-      createAndReadListings(listing);
+      createListings(listing);
     });
   } catch (error) {
     console.error("Error reading all listings:", error);
@@ -547,6 +551,7 @@ export async function onReadAllListingsArt() {
   }
 }
 
+// Fetch and read all listings for 'Books' collection page, that has a unique tag
 export async function onReadAllListingsBooks() {
   showLoadingSpinner();
   try {
@@ -564,7 +569,7 @@ export async function onReadAllListingsBooks() {
 
     // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
-      createAndReadListings(listing);
+      createListings(listing);
     });
   } catch (error) {
     console.error("Error reading all listings:", error);
@@ -573,6 +578,7 @@ export async function onReadAllListingsBooks() {
   }
 }
 
+// Fetch and read all listings for 'Jewelry' collection page, that has a unique tag
 export async function onReadAllListingsJewelry() {
   showLoadingSpinner();
   try {
@@ -590,7 +596,7 @@ export async function onReadAllListingsJewelry() {
 
     // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
-      createAndReadListings(listing);
+      createListings(listing);
     });
   } catch (error) {
     console.error("Error reading all listings:", error);
@@ -599,6 +605,7 @@ export async function onReadAllListingsJewelry() {
   }
 }
 
+// Fetch and read a single listing
 export async function onReadSingleListing() {
   const listingID = localStorage.getItem("listingID");
 
@@ -626,7 +633,7 @@ export async function onReadSingleListing() {
       onDeletePost(post, author);
       onEditButton(post, author);
 
-      await createAndReadSingleListing(singleListing);
+      await createSingleListing(singleListing);
     } catch (error) {
       console.error("Error reading single post: ", error);
     } finally {
@@ -637,6 +644,7 @@ export async function onReadSingleListing() {
   }
 }
 
+// Fetch and read all listings by a profile
 export async function onReadListingsByProfile() {
   const user = load("user");
   const userName = user.name;
@@ -652,7 +660,7 @@ export async function onReadListingsByProfile() {
     }
 
     listingsArray.forEach((listing) => {
-      createAndReadListings(listing);
+      createListings(listing);
     });
   } catch (error) {
     console.error("Error reading all listings:", error);

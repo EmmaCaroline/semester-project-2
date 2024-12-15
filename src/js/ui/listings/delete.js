@@ -18,8 +18,6 @@ export async function onDeletePost(post, author) {
 
     deleteButton.style.display = "block";
 
-    deleteButton.removeEventListener("click", handleDelete);
-
     // Add new event listener
     deleteButton.addEventListener("click", handleDelete);
   } else {

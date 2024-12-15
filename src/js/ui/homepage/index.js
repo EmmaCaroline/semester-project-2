@@ -241,13 +241,8 @@ export async function createCarouselSlides() {
   carouselContainer.appendChild(prevBtn);
   carouselContainer.appendChild(nextBtn);
 
-  // Remove the drag-to-change functionality
-  // addDragToChangeSlides(carouselContainer);  // <-- Removed this line
-
-  showSlide(currentSlideIndex); // Show the first slide initially
+  showSlide(currentSlideIndex);
 }
-
-// Update the showSlide function to highlight the active dot
 function showSlide(index) {
   const slides = document.querySelectorAll(".carousel-slide");
   const dots = document.querySelectorAll(".single-dot");
@@ -257,8 +252,8 @@ function showSlide(index) {
   });
 
   dots.forEach((dot, i) => {
-    dot.classList.toggle("bg-gray-700", i === index); // Highlight active dot
-    dot.classList.toggle("bg-gray-400", i !== index); // Dim inactive dots
+    dot.classList.toggle("bg-gray-700", i === index);
+    dot.classList.toggle("bg-gray-400", i !== index);
   });
 }
 
