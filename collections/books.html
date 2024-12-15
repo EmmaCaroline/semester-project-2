@@ -37,6 +37,22 @@
               class="w-40 h-16"
             />
           </a>
+
+          <div class="hidden lg:flex items-center relative">
+            <input
+              type="text"
+              aria-label="Search"
+              id="search-input"
+              placeholder="Search listings"
+              class="pl-10 py-2 w-80 border bg-customBeige placeholder-customGray text-base border-black rounded focus:bg-white focus:ring focus:ring-customBlue transition-all duration-300"
+            />
+            <a href="#scroll-to-listings">
+              <i
+                class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2"
+              ></i>
+            </a>
+          </div>
+
           <div class="flex justify-center items-center pr-6 md:pr-20">
             <button
               id="dropdown-profile-btn"
@@ -104,23 +120,22 @@
               >
             </li>
             <li>
-              <button id="theme-toggle" class="w-full">
-                <p
-                  id="isLightmode"
-                  class="text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+              <button class="theme-toggle w-full">
+                <span
+                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >
                   Dark mode
-                </p>
-                <p
-                  id="isDarkmode"
-                  class="text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
+                </span>
+                <span
+                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
                 >
                   Light mode
-                </p>
+                </span>
               </button>
             </li>
           </ul>
         </div>
+
         <div
           class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md"
           id="dropdown-logged-in"
@@ -150,16 +165,14 @@
               </button>
             </li>
             <li>
-              <button id="theme-toggle" class="w-full">
+              <button class="theme-toggle w-full">
                 <span
-                  id="isLightmode"
-                  class="text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
+                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300"
                 >
                   Dark mode
                 </span>
                 <span
-                  id="isDarkmode"
-                  class="text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
+                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300"
                 >
                   Light mode
                 </span>
