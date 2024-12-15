@@ -4,7 +4,7 @@ import {
   fetchListingsBooks,
   fetchListingsJewelry,
 } from "../api/listings/listings";
-import { createAndReadListings } from "../ui/listings/listings";
+import { createListings } from "../ui/listings/listings";
 import { showLoadingSpinner, hideLoadingSpinner } from "./loadingSpinner";
 
 let currentPage = 1;
@@ -53,7 +53,7 @@ export async function fetchAndRenderListings() {
       }
 
       listingsArray.forEach((listing) => {
-        createAndReadListings(listing);
+        createListings(listing);
       });
 
       updatePaginationButtons();
@@ -96,7 +96,7 @@ export async function fetchAndRenderListingsArt() {
       }
 
       listingsArray.forEach((listing) => {
-        createAndReadListings(listing);
+        createListings(listing);
       });
 
       updatePaginationButtons();
@@ -139,7 +139,7 @@ export async function fetchAndRenderListingsBooks() {
       }
 
       listingsArray.forEach((listing) => {
-        createAndReadListings(listing);
+        createListings(listing);
       });
 
       updatePaginationButtons();
@@ -182,7 +182,7 @@ export async function fetchAndRenderListingsJewelry() {
       }
 
       listingsArray.forEach((listing) => {
-        createAndReadListings(listing);
+        createListings(listing);
       });
 
       updatePaginationButtons();

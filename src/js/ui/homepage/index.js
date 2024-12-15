@@ -4,6 +4,7 @@ import {
   showLoadingSpinner,
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
+import { showMessage } from "../../utilities/alertMessage";
 
 const token = localStorage.getItem("token");
 const welcomeMessage = document.querySelector("#unregistered-welcome-message");
@@ -25,7 +26,8 @@ export function setupNewsletterSubscription(buttonId, inputId) {
     // Check if the email is not empty and matches the pattern
     if (email && emailPattern.test(email)) {
       emailInput.value = ""; // Clear the input field
-      alert("Thank you for subscribing!");
+      //alert("Thank you for subscribing!");
+      showMessage("Thank you for subscribing!", 3000);
     } else {
       alert("Please enter a valid email address.");
     }
@@ -58,7 +60,7 @@ export function addTypewriterEffect(elementId, text, speed = 100) {
   typeWriter();
 }
 
-export function ifLoggedIn() {
+export function hideWelcomeifLoggedIn() {
   if (token) {
     // User is logged in: hide the welcome message
     welcomeMessage.classList.add("hidden");
@@ -67,16 +69,18 @@ export function ifLoggedIn() {
   }
 }
 
-// CarouselFunctions.js
-
-let currentSlideIndex = 0; // Track the current slide index
+let currentSlideIndex = 0;
 
 async function readPostsForCarousel() {
   showLoadingSpinner();
+
   try {
-    const { data: listing } = await fetchListings();
-    listing.sort((a, b) => new Date(b.created) - new Date(a.created));
-    return listing.slice(0, 3);
+    const { data: listings } = await fetchListings();
+    listings.sort(
+      (listingA, listingB) =>
+        new Date(listingB.created) - new Date(listingA.created),
+    );
+    return listings.slice(0, 3);
   } catch (error) {
     console.error("Failed to fetch listing:", error);
     return [];
@@ -148,7 +152,6 @@ export async function createCarouselSlides() {
     );
 
     const viewButton = document.createElement("a");
-    viewButton.href = `/listing/listing.html?id=${listing.id}`;
     viewButton.textContent = "View items";
     viewButton.classList.add(
       "font-body",
@@ -168,7 +171,14 @@ export async function createCarouselSlides() {
       "border-gray-600",
       "hover:bg-customGray",
       "hover:text-gray-300",
+      "cursor-pointer",
     );
+
+    // Add an event listener to the button
+    viewButton.addEventListener("click", () => {
+      localStorage.setItem("listingID", JSON.stringify(listing.id)); // Ensure storing as string
+      window.location.href = "/listing/listing.html"; // Redirect to the specific post page
+    });
 
     imageCarousel.append(bannerImage, bannerOverlay, bannerTitle, viewButton);
     carouselContainer.appendChild(imageCarousel);
@@ -231,13 +241,8 @@ export async function createCarouselSlides() {
   carouselContainer.appendChild(prevBtn);
   carouselContainer.appendChild(nextBtn);
 
-  // Add drag-to-change functionality for mobile
-  addDragToChangeSlides(carouselContainer);
-
-  showSlide(currentSlideIndex); // Show the first slide initially
+  showSlide(currentSlideIndex);
 }
-
-// Update the showSlide function to highlight the active dot
 function showSlide(index) {
   const slides = document.querySelectorAll(".carousel-slide");
   const dots = document.querySelectorAll(".single-dot");
@@ -247,8 +252,8 @@ function showSlide(index) {
   });
 
   dots.forEach((dot, i) => {
-    dot.classList.toggle("bg-gray-700", i === index); // Highlight active dot
-    dot.classList.toggle("bg-gray-400", i !== index); // Dim inactive dots
+    dot.classList.toggle("bg-gray-700", i === index);
+    dot.classList.toggle("bg-gray-400", i !== index);
   });
 }
 
@@ -272,38 +277,5 @@ function prevImage() {
   showSlide(currentSlideIndex);
 }
 
-// Drag-to-change logic for mobile
-function addDragToChangeSlides(carouselContainer) {
-  let startX = 0;
-  let endX = 0;
-  let isDragging = false;
-
-  carouselContainer.addEventListener("touchstart", (e) => {
-    isDragging = true;
-    startX = e.touches[0].pageX;
-  });
-
-  carouselContainer.addEventListener("touchmove", (e) => {
-    if (!isDragging) return;
-    endX = e.touches[0].pageX;
-  });
-
-  carouselContainer.addEventListener("touchend", () => {
-    if (!isDragging) return;
-    isDragging = false;
-    if (startX - endX > 50) {
-      // Swiped left
-      nextImage();
-    } else if (endX - startX > 50) {
-      // Swiped right
-      prevImage();
-    }
-  });
-}
-
 window.nextImage = nextImage;
 window.prevImage = prevImage;
-
-// Function calls
-ifLoggedIn();
-createCarouselSlides();

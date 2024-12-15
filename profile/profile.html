@@ -14,6 +14,7 @@
       src="https://kit.fontawesome.com/7f993fe397.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -248,6 +249,10 @@
           </form>
         </div>
       </section>
+      <div
+        id="messageBox"
+        class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 border border-customGray text-black py-4 px-4 md:px-10 rounded shadow-lg text-center opacity-100 transition-opacity duration-1000"
+      ></div>
       <section id="profile-card">
         <div
           id="profile-container"
@@ -320,6 +325,9 @@
           Your Wins
         </h2>
         <div id="wins-count" class="mx-8 lg:mx-20 mb-2"></div>
+        <div
+          class="wins-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
+        ></div>
       </section>
     </main>
     <footer class="mt-6">

@@ -1,20 +1,27 @@
 // router/views/home.js
-import { setupNewsletterSubscription } from "../../ui/homepage";
+import { setupNewsletterSubscription } from "../../ui/homepage/index";
 import { addTypewriterEffect } from "../../ui/homepage/index";
 import { onReadAllListings } from "../../ui/listings/listings";
 import {
   fetchAndRenderListings,
   initializePagination,
 } from "../../utilities/pagination";
+import { onReadAllSpecificListings } from "../../ui/listings/listingsSpecific";
+import { createCarouselSlides } from "../../ui/homepage/index";
+import { hideWelcomeifLoggedIn } from "../../ui/homepage/index";
 
 setupNewsletterSubscription("newsletter-button", "subscribe-email");
 
 addTypewriterEffect("typewriter", "TreasureBid Auction House", 100);
 
 onReadAllListings();
+onReadAllSpecificListings();
 
 initializePagination();
 fetchAndRenderListings();
+
+createCarouselSlides();
+hideWelcomeifLoggedIn();
 
 const searchInput = document.getElementById("search-input");
 

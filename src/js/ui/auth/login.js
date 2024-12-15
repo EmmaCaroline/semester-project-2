@@ -3,6 +3,7 @@ import {
   showLoadingSpinner,
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
+import { showMessage } from "../../utilities/alertMessage";
 
 /**
  * Handles the user login process on form submission.
@@ -20,13 +21,13 @@ export async function onLogin(event) {
     // Call the login API function
     const response = await login(user);
     console.log("Login successful:", response);
+    //alert(`Hello ${response.data.name}`);
+    showMessage(`Hello ${response.data.name}`, 3000);
 
-    // Dispatch a custom event for global updates
-    const loginEvent = new Event("userLoggedIn");
-    document.dispatchEvent(loginEvent);
-
-    // Redirect the user
-    window.location.href = "/";
+    // Delay navigation for a few seconds
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 3000); // 3000 milliseconds = 3 seconds
   } catch (error) {
     console.error("Login failed:", error);
     alert(`Login failed: ${error.message}`);

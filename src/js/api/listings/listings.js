@@ -160,31 +160,13 @@ export async function fetchListingsJewelry(
   }
 }
 
-/*export async function fetchListing(
-  id,
-  title,
-  description,
-  tags,
-  media,
-  created,
-  _seller,
-  _bids,
-) {
-  if (isNaN(id)) {
-    throw new Error("Invalid post ID: must be a number");
-  }
-
+export async function fetchSingleListing(id, seller = true, bids = true) {
   try {
-    // Construct the endpoint with query parameters
     const endpoint = new URL(`${API_AUCTION_LISTINGS}/${id}`);
-    if (title) endpoint.searchParams.append("title", title);
-    if (description) endpoint.searchParams.append("description", description);
-    if (tags) endpoint.searchParams.append("tags", tags);
-    if (media) endpoint.searchParams.append("media", media);
-    if (created) endpoint.searchParams.append("created", created);
-    if (_seller) endpoint.searchParams.append("_seller", _seller);
-    if (_bids) endpoint.searchParams.append("_bids", _bids);
+    endpoint.searchParams.append("_seller", seller);
+    endpoint.searchParams.append("_bids", bids);
 
+    console.log("API Endpoint:", endpoint.toString());
     const response = await fetch(endpoint, {
       headers: headers(),
       method: "GET",
@@ -196,54 +178,42 @@ export async function fetchListingsJewelry(
     }
 
     const listingData = await response.json();
-    return listingData; // Adjust to `listingData.data` if the API returns data in a nested object
+    return listingData;
   } catch (error) {
     console.error("Fetching post failed: ", error);
     throw error;
   }
 }
 
-export async function fetchListingsByUser(
-  username,
-  title,
-  tags,
-  media,
-  endsAt,
-  _seller,
-  _count,
-) {
+export async function fetchListingsSpecific(tag = "myUniqueTag932") {
+  const endpoint = new URL(API_AUCTION_LISTINGS);
+  endpoint.searchParams.append("_tag", tag);
+
+  showLoadingSpinner();
   try {
-    // Construct the endpoint URL with the base path
-    const endpoint = new URL(`${API_AUCTION_PROFILES}/${username}/listings`);
-
-    // Add query parameters if provided
-    if (title) endpoint.searchParams.append("title", title);
-    if (tags) endpoint.searchParams.append("tags", tags);
-    if (media) endpoint.searchParams.append("media", media);
-    if (endsAt) endpoint.searchParams.append("endsAt", endsAt);
-    if (_seller) endpoint.searchParams.append("_seller", _seller);
-    if (_count) endpoint.searchParams.append("_count", _count);
-
-    // Make the fetch request
     const response = await fetch(endpoint, {
       headers: headers(),
       method: "GET",
     });
 
-    // Handle response errors
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error("Failed to fetch listings: " + errorText);
+      throw new Error("Failed to fetch posts: " + errorText);
     }
 
-    // Parse and return the response JSON
     const listingsData = await response.json();
-    return listingsData; // Adjust to `listingsData.data` if needed based on API structure
+
+    // Log the full response to inspect its structure
+    console.log("Listings data response:", listingsData);
+
+    return listingsData;
   } catch (error) {
     console.error("Fetching listings failed: ", error);
     throw error;
+  } finally {
+    hideLoadingSpinner();
   }
-}*/
+}
 
 export async function fetchListingsByProfile(
   username,

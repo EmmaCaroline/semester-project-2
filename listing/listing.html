@@ -14,6 +14,7 @@
       src="https://kit.fontawesome.com/7f993fe397.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -168,9 +169,22 @@
         </div>
       </nav>
     </header>
-    <main>
-      <!-- Added image carousel before anything else to get my functions for create post to work-->
-      <div id="carouselImages"></div>
+    <main class="mt-20">
+      <div class="single-listing-container"></div>
+      <button
+        id="edit-listing-button-container"
+        class="btn btn-secondary my-4 hover:bg-gray-400 dark:text-gray-200 dark:border-gray-400 mx-8 lg:mx-20"
+        style="display: none"
+      >
+        Edit Post
+      </button>
+      <button
+        id="delete-button-container"
+        class="btn btn-secondary hover:bg-gray-400 dark:text-gray-200 dark:border-gray-400 mx-8 lg:mx-20"
+        style="display: none"
+      >
+        Delete Post
+      </button>
     </main>
     <footer class="mt-6">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
