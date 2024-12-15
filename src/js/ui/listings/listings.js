@@ -8,7 +8,6 @@ import {
 } from "../../api/listings/listings";
 import { save } from "../../api/auth/key";
 import defaultImage from "../../../../images/No_Image_Available.jpg";
-import defaultAvatar from "../../../../images/default-avatar.jpg";
 import { load } from "../../api/auth/key";
 import {
   showLoadingSpinner,
@@ -74,8 +73,8 @@ export async function createListings(listing) {
     sellerAvatar.src = listing.seller.avatar.url;
     sellerAvatar.alt = listing.seller.avatar.alt;
   } else {
-    sellerAvatar.src = defaultAvatar;
-    sellerAvatar.alt = "Default avatar image";
+    sellerAvatar.src = "";
+    sellerAvatar.alt = "";
   }
 
   seller.append(sellerAvatar, sellerName);
@@ -412,8 +411,8 @@ export async function createSingleListing(listing) {
     sellerAvatar.src = listing.data.seller.avatar.url;
     sellerAvatar.alt = listing.data.seller.avatar.alt;
   } else {
-    sellerAvatar.src = defaultAvatar;
-    sellerAvatar.alt = "Default avatar image";
+    sellerAvatar.src = "";
+    sellerAvatar.alt = "";
   }
 
   seller.append(sellerAvatar, sellerName);

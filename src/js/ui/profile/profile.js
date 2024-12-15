@@ -62,7 +62,7 @@ export const readProfileData = async () => {
   // Append icon after the text
   totalCredits.appendChild(coinIcon);
 
-  bio.textContent = profile.bio;
+  bio.textContent = profile.bio || "No bio available";
 
   // Check if the logged-in user is viewing their own profile
   if (user.name === username) {

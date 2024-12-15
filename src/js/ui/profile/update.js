@@ -59,7 +59,9 @@ export async function onUpdateProfile(event) {
 
   if (bioText && bioText !== profile.bio) {
     updated.bio = bioText;
+    console.log(updated.bio);
   }
+  console.log(updated.bio);
 
   // Check if the 'updated' object has any keys
   if (Object.keys(updated).length > 0) {

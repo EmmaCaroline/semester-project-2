@@ -21,6 +21,7 @@ export async function readProfile(username) {
       headers: headers(),
       method: "GET",
     });
+    console.log(response); // Log profile to ensure bio exists
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -28,6 +29,7 @@ export async function readProfile(username) {
     }
 
     const userdata = await response.json();
+    console.log(userdata); // Log profile to ensure bio exists
     return userdata.data;
   } catch (error) {
     if (error.name === "TypeError") {
