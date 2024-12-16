@@ -3,5 +3,4 @@
 node_modules/
 
 # Ignore other build files
-dist/
 build/

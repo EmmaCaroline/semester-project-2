@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="TreasureBid auction site - Browse collections and listings, and bid online"
+    />
+    <title>TreasureBid</title>
+    <script
+      src="https://kit.fontawesome.com/7f993fe397.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="icon" href="./assets/favicon-BDP7TwHa.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="./assets/index-CWKkjwGO.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-tXIP1fMS.css">
+  </head>
+  <body class="box-border m-0 dark-bg-black">
+    <header
+      class="bg-customBeige shadow-lg fixed w-full h-20 top-0 z-50 dark:bg-black dark:border-b dark:border-gray-700"
+    >
+      <nav class="container mx-auto h-full">
+        <div class="flex justify-between items-center" id="navbar">
+          <a
+            href="/"
+            class="flex items-center py-2 px-6 md:px-20"
+            aria-label="Home"
+          >
+            <img
+              src="./assets/treasurebid-logo-9n-_Qj2A.png"
+              alt="TreasureBid Logo"
+              class="w-40 h-16"
+            />
+          </a>
+
+          <div class="hidden lg:flex items-center relative">
+            <input
+              type="text"
+              aria-label="Search"
+              id="search-input"
+              placeholder="Search listings"
+              class="pl-10 py-2 w-80 border bg-customBeige placeholder-customGray text-base border-black rounded focus:bg-white focus:ring focus:ring-customBlue transition-all duration-300"
+            />
+            <a href="#scroll-to-listings">
+              <i
+                class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2"
+              ></i>
+            </a>
+          </div>
+
+          <div class="flex justify-center items-center pr-6 md:pr-20">
+            <button
+              id="dropdown-profile-btn"
+              aria-label="Profile options"
+              class="group"
+            >
+              <i
+                class="fa-solid fa-user text-xl pr-4 md:pr-8 lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600 dark:text-gray-300"
+              ></i>
+            </button>
+            <button id="dropdown-menu-btn" aria-label="User menu" class="group">
+              <i
+                class="fa-solid fa-bars text-2xl pl-4 md:pl-8 lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600 dark:text-gray-300"
+              ></i>
+            </button>
+          </div>
+        </div>
+        <div
+          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-0 bg-customBeige shadow-md dark:bg-black dark:border"
+          id="dropdown-menu"
+        >
+          <ul>
+            <li>
+              <a
+                href="/"
+                id="all-listings-link"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >All Listings</a
+              >
+            </li>
+            <li>
+              <a
+                href="/collections/books.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >Books</a
+              >
+            </li>
+            <li>
+              <a
+                href="/collections/jewelry.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >Jewelry</a
+              >
+            </li>
+            <li>
+              <a
+                href="/collections/art.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >Art</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md dark:bg-black dark:border"
+          id="dropdown-profile"
+        >
+          <ul>
+            <li>
+              <a
+                href="/auth/login.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >Log in</a
+              >
+            </li>
+            <li>
+              <button class="theme-toggle w-full">
+                <span
+                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >
+                  Dark mode
+                </span>
+                <span
+                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-white hover:text-black transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >
+                  Light mode
+                </span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="hidden absolute w-1/2 md:w-1/4 lg:w-1/5 right-12 md:right-16 lg:right-20 bg-customBeige shadow-md dark:black dark:border"
+          id="dropdown-logged-in"
+        >
+          <ul>
+            <li>
+              <a
+                href="/profile/profile.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+              >
+                Profile
+              </a>
+            </li>
+            <li>
+              <a
+                href="/listing/create.html"
+                class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+              >
+                Create Listing
+              </a>
+            </li>
+            <li>
+              <button
+                class="logout-button block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 w-full text-left dark:bg-black dark:text-gray-300"
+              >
+                Log out
+              </button>
+            </li>
+            <li>
+              <button class="theme-toggle w-full">
+                <span
+                  class="isLightmode text-black block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >
+                  Dark mode
+                </span>
+                <span
+                  class="isDarkmode text-white block text-left text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-black transition-colors duration-300 dark:bg-black dark:text-gray-300"
+                >
+                  Light mode
+                </span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="mt-20 dark:bg-black">
+      <div
+        id="loading-spinner"
+        class="hidden fixed inset-0 justify-center items-center bg-gray-800 bg-opacity-50 z-50"
+      >
+        <div
+          class="spinner-border animate-spin inline-block w-16 h-16 border-4 border-t-transparent border-gray-200 rounded-full"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <section id="unregistered-welcome-message" class="hidden">
+        <div class="px-8 pt-8 flex flex-col md:items-center lg:px-20 lg:pt-12">
+          <h1
+            id="typewriter"
+            class="font-heading text-3xl md:text-4xl md:pb-4 text-left lg:text-center dark:text-gray-300"
+          ></h1>
+
+          <p
+            class="font-body text-sm py-4 max-w-xs md:text-base dark:text-gray-300"
+          >
+            Want to become a TreasureBidder? Sign up to start placing bids or
+            create listings
+          </p>
+          <a
+            href="/auth/register.html"
+            class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
+          >
+            Register
+          </a>
+
+          <p class="font-body text-sm py-4 md:text-base dark:text-gray-300">
+            Already a TreasureBidder?
+          </p>
+          <a
+            href="/auth/login.html"
+            class="btn btn-primary self-start md:self-center hover:border-4 hover:bg-customGray hover:text-white transition-all duration-300"
+          >
+            Log in
+          </a>
+          <hr class="border-t-2 border-customBlue mt-8 lg:mt-12 w-full" />
+        </div>
+      </section>
+      <section id="featured-section">
+        <h2
+          class="font-heading text-xl text-center pt-4 pb-6 md:pt-10 md:text-2xl dark:bg-black dark:text-gray-300"
+        >
+          Featured auctions
+        </h2>
+        <div class="diamond-image-container pb-8 lg:pb-12 dark:bg-black"></div>
+      </section>
+      <hr
+        class="border-t-2 border-customBlue mb-8 mx-8 lg:mx-20 lg:mb-12 dark:bg-black"
+      />
+      <section id="newly-added-carousel" class="dark:bg-black">
+        <h2
+          class="font-heading text-xl text-center mb-6 md:text-2xl dark:bg-black dark:text-gray-300"
+        >
+          Newly added
+        </h2>
+        <div
+          id="image-carousel"
+          class="w-full relative dark:bg-black dark:text-gray-300"
+        >
+          <button
+            id="prev-btn"
+            class="absolute top-1/2 left-6 transform -translate-y-1/2"
+            onclick="prevImage()"
+          >
+            <i class="fa-solid fa-chevron-left text-white text-2xl"></i>
+          </button>
+          <button
+            id="next-btn"
+            class="absolute top-1/2 right-6 transform -translate-y-1/2"
+            onclick="nextImage()"
+          >
+            <i class="fa-solid fa-chevron-right text-white text-2xl"></i>
+          </button>
+        </div>
+        <div
+          id="dots-container"
+          class="flex justify-center items-center py-2"
+        ></div>
+      </section>
+      <section id="collections" class="mx-8 lg:mx-20 dark:text-gray-300">
+        <h2
+          class="font-heading text-xl text-center mt-8 pb-2 lg:mt-12 md:text-2xl"
+        >
+          Collections
+        </h2>
+        <div
+          class="flex flex-col items-center lg:flex-row lg:justify-center lg:gap-16"
+        >
+          <div class="collections-image-container py-4">
+            <a href="/collections/books.html">
+              <div
+                class="flex w-64 h-64 overflow-hidden rounded-full relative group"
+              >
+                <img
+                  src="./assets/books-category1-CckEuaAW.jpg"
+                  alt="Stack of old books"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 flex items-center justify-center rounded-full"
+                >
+                  <p
+                    class="text-white text-lg lg:text-xl font-semibold opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    View collection
+                  </p>
+                </div>
+              </div>
+            </a>
+            <p class="text-center font-special text-2xl md:text-3xl pt-2">
+              Books
+            </p>
+          </div>
+          <div class="collections-image-container py-4">
+            <a href="/collections/jewelry.html">
+              <div
+                class="flex w-64 h-64 overflow-hidden rounded-full relative group"
+              >
+                <img
+                  src="./assets/jewelry_category1-DpOoU7fD.jpg"
+                  alt="Hanging necklaces"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 flex items-center justify-center rounded-full"
+                >
+                  <p
+                    class="text-white text-lg lg:text-xl font-semibold opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    View collection
+                  </p>
+                </div>
+              </div>
+            </a>
+            <p class="text-center font-special text-2xl md:text-3xl pt-2">
+              Jewelry
+            </p>
+          </div>
+          <div class="collections-image-container py-4">
+            <a href="/collections/art.html">
+              <div
+                class="flex w-64 h-64 overflow-hidden rounded-full relative group"
+              >
+                <img
+                  src="./assets/art-category1-lbBJyrMk.jpg"
+                  alt="Modern artwork, bronze coloured"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 flex items-center justify-center rounded-full"
+                >
+                  <p
+                    class="text-white text-lg lg:text-xl font-semibold opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    View collection
+                  </p>
+                </div>
+              </div>
+            </a>
+            <p class="text-center font-special text-2xl md:text-3xl pt-2">
+              Art
+            </p>
+          </div>
+        </div>
+      </section>
+      <hr
+        class="border-t-2 border-customBlue mb-8 mt-8 mx-8 lg:mx-20 lg:mb-12"
+      />
+      <section id="all-listings">
+        <h2
+          class="font-heading text-xl mx-8 mt-8 pb-6 lg:mt-12 lg:mx-20 md:text-2xl"
+        >
+          All listings
+        </h2>
+        <div class="sort-by mx-8 lg:mx-20 mb-4">
+          <label
+            for="sort-select"
+            class="mr-2 font-body text-sm md:text-base dark:text-gray-300"
+            >Sort by:</label
+          >
+          <select
+            id="sort-select"
+            class="border border-customBlue rounded cursor-pointer pr-2"
+          >
+            <option value="newest" class="font-body text-sm md:text-base">
+              Most Recent
+            </option>
+            <option value="oldest" class="font-body text-sm md:text-base">
+              Least Recent
+            </option>
+            <option value="ending-soon" class="font-body text-sm md:text-base">
+              Ending Soon
+            </option>
+          </select>
+        </div>
+        <div
+          id="scroll-to-listings"
+          class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4 dark:text-gray-300"
+        ></div>
+        <div
+          class="pagination-controls flex justify-center items-center mt-6 gap-4 dark:text-gray-300"
+        >
+          <button
+            id="prevPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+            disabled
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span id="currentPage" class="font-body text-sm md:text-base"></span>
+          <button
+            id="nextPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
+    </main>
+    <footer class="pt-6 dark:bg-black">
+      <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">
+        <i
+          class="fa-brands fa-facebook-f text-xl px-8 md:text-2xl md:px-16"
+          aria-hidden="true"
+        ></i>
+        <i
+          class="fa-brands fa-instagram text-xl px-8 md:text-2xl md:px-16"
+          aria-hidden="true"
+        ></i>
+        <i
+          class="fa-brands fa-x-twitter text-xl px-8 md:text-2xl md:px-16"
+          aria-hidden="true"
+        ></i>
+      </div>
+      <div class="flex flex-col px-8 lg:px-20">
+        <img
+          src="./assets/treasurebid-logo-9n-_Qj2A.png"
+          alt="TreasureBid Logo"
+          class="w-40 h-16 mt-6"
+        />
+        <div class="newsletter py-6">
+          <p
+            class="text-sm font-body pr-12 py-4 md:text-base dark:text-gray-300"
+          >
+            Stay posted for upcoming auctions by subscribing to our newsletter:
+          </p>
+          <div class="newsletter-input">
+            <input
+              type="text"
+              aria-label="Email"
+              id="subscribe-email"
+              placeholder="Email"
+              class="px-2 py-1.5 w-36 md:w-56 border bg-white placeholder-customGray text-sm border-customGray rounded focus:ring-2 focus:ring-customPink focus:outline-none md:text-base"
+            />
+            <button
+              class="btn btn-primary ml-2"
+              id="newsletter-button"
+              aria-label="Sign up for newsletter"
+            >
+              Sign up
+            </button>
+            <div
+              id="messageBox"
+              class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 border border-customGray text-black py-4 px-4 md:px-12 md:py-8 rounded shadow-lg text-center opacity-100 transition-opacity duration-1000"
+            ></div>
+          </div>
+        </div>
+        <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
+        <div class="footer-pages-first lg:pt-6 dark:text-gray-300">
+          <ul>
+            <li>
+              <a
+                href=""
+                class="inline-block font-body font-medium text-sm py-4 md:text-base"
+              >
+                About Us
+              </a>
+            </li>
+            <li>
+              <a
+                href=""
+                class="inline-block font-body font-medium text-sm py-4 md:text-base"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+        <hr class="border-t-2 border-customBlue -px-8 lg:hidden" />
+      </div>
+      <div
+        class="footer-pages-second flex justify-center items-center py-4 dark:text-gray-300"
+      >
+        <ul>
+          <li>
+            <a
+              href=""
+              class="inline-block font-body text-sm md:text-base mx-4 lg:mx-20"
+              >Terms and Conditions</a
+            >
+            <a
+              href=""
+              class="inline-block font-body text-sm md:text-base mx-4 lg:mx-20"
+              >Privacy Policy</a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
