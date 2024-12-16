@@ -2,7 +2,9 @@ import router from "./js/router/index";
 import { setLogoutListener } from "./js/ui/global/logout";
 import { redirectToAndScroll } from "./js/utilities/scrollToListings";
 
-await router(window.location.pathname);
+window.addEventListener("DOMContentLoaded", () => {
+  router();
+});
 
 const token = localStorage.getItem("token");
 
