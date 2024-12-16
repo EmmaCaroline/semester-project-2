@@ -7,6 +7,10 @@ authGuard();
 const form = document.forms.create;
 form.addEventListener("submit", onCreateListing);
 
+/**
+ * Attaches an event listener to the "Add Image" button. When clicked, it triggers the `addImageField` function.
+ * Logs an error if the button is not found in the DOM.
+ */
 function attachImageButtonListener() {
   const addImageButton = document.getElementById("addImageButton");
 

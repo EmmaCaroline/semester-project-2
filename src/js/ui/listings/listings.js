@@ -17,6 +17,18 @@ import { onDeletePost } from "./delete";
 import { onEditButton } from "./update";
 import { createBidSection } from "./bid";
 
+/**
+ * Formats a given ISO date string into a more human-readable format.
+ * The format will be: "DD MMM YYYY, HH:MM", where:
+ * - DD: Day of the month (2 digits)
+ * - MMM: Abbreviated month name (e.g., Jan, Feb, etc.)
+ * - YYYY: Full year
+ * - HH: Hour (2 digits, 24-hour format)
+ * - MM: Minute (2 digits)
+ *
+ * @param {string} isoDate The ISO date string to format (e.g., "2024-12-16T14:30:00Z").
+ * @returns {string} The formatted date string (e.g., "16 Dec 2024, 14:30").
+ */
 export function formatDate(isoDate) {
   const date = new Date(isoDate);
 
@@ -28,7 +40,29 @@ export function formatDate(isoDate) {
 
   return `${day} ${month} ${year}, ${hours}:${minutes}`;
 }
-
+/**
+ * Creates and renders a listing element in the DOM with the provided listing data.
+ * The element includes seller information, bid count, auction ending date, an image,
+ * a title, and a button that links to the single listing page.
+ *
+ * @param {Object} listing The listing object containing the data to render.
+ * @param {Object} listing.seller The seller information.
+ * @param {string} listing.seller.name The name of the seller.
+ * @param {Object} [listing.seller.avatar] The seller's avatar image (optional).
+ * @param {string} listing.seller.avatar.url The URL of the avatar image.
+ * @param {string} listing.seller.avatar.alt The alt text for the avatar image.
+ * @param {Object} listing._count The count of bids for the listing.
+ * @param {number} listing._count.bids The number of bids on the listing.
+ * @param {string} listing.endsAt The ISO string representing the auction's end date.
+ * @param {Array} listing.media The media associated with the listing.
+ * @param {Object} listing.media[0] The first media item.
+ * @param {string} listing.media[0].url The URL of the media image.
+ * @param {string} listing.media[0].alt The alt text for the media image.
+ * @param {string} listing.title The title of the listing.
+ *
+ * @returns {HTMLElement|null} The parent container element (`listingContainer`)
+ * where the new listing has been appended, or `null` if creation fails.
+ */
 export async function createListings(listing) {
   const listingElement = document.createElement("a");
   if (!listingElement) {
@@ -200,6 +234,13 @@ export async function createListings(listing) {
   return listingContainer;
 }
 
+/**
+ * Handles the search functionality on the homepage, filtering listings based on the search input.
+ *
+ * @function handleSearch
+ * @param {HTMLInputElement} searchInput The search input element where the user enters the query.
+ * @param {Array<Object>} listingsArray The array of listings to filter based on the search query.
+ */
 function handleSearch(searchInput, listingsArray) {
   const searchQuery = searchInput.value.toLowerCase();
   const filteredListings = listingsArray.filter((listing) =>
@@ -212,6 +253,12 @@ function handleSearch(searchInput, listingsArray) {
   filteredListings.forEach((listing) => createListings(listing));
 }
 
+/**
+ * Handles the sorting functionality for the listings based on the selected sort option.
+ *
+ * @function handleSort
+ * @param {HTMLSelectElement} sortSelect The select element where the user chooses the sorting option.
+ */
 function handleSort(sortSelect) {
   const selectedSort = sortSelect.value;
   let sortParam = "created";
@@ -240,6 +287,28 @@ function handleSort(sortSelect) {
     .catch((error) => console.error("Error fetching listings:", error));
 }
 
+/**
+ * Creates and displays a detailed view of a single listing on the page.
+ * This includes a carousel for images, seller information, bid count,
+ * description, and an edit button if the user is authorized to edit the post.
+ *
+ * @param {Object} listing - The listing data object.
+ * @param {Object} listing.data - The actual listing data.
+ * @param {Object[]} listing.data.media - An array of media objects for the listing.
+ * @param {string} listing.data.media.url - The URL of the media item.
+ * @param {string} listing.data.media.alt - The alt text for the media item.
+ * @param {Object} listing.data.seller - The seller's information.
+ * @param {string} listing.data.seller.name - The name of the seller.
+ * @param {Object} listing.data.seller.avatar - The seller's avatar information.
+ * @param {string} listing.data.seller.avatar.url - The URL of the seller's avatar.
+ * @param {string} listing.data.seller.avatar.alt - The alt text for the seller's avatar.
+ * @param {Object} listing.data._count - A count of the associated bids.
+ * @param {number} listing.data._count.bids - The number of bids placed on the listing.
+ * @param {string} listing.data.title - The title of the listing.
+ * @param {string} listing.data.created - The ISO date string of when the listing was created.
+ * @param {string} listing.data.description - The description of the listing.
+ * @returns {HTMLElement} The single listing container element containing the detailed view.
+ */
 export async function createSingleListing(listing) {
   const singleListingContainer = document.querySelector(
     ".single-listing-container",
@@ -456,6 +525,14 @@ export async function createSingleListing(listing) {
   return singleListingContainer;
 }
 
+/**
+ * Fetches and displays all listings from the general listings API.
+ * If on the homepage, sets up search and sort functionality for listings.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 export async function onReadAllListings() {
   showLoadingSpinner();
   try {
@@ -492,6 +569,13 @@ export async function onReadAllListings() {
   }
 }
 
+/**
+ * Fetches and displays all art-related listings from the API.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 export async function onReadAllListingsArt() {
   showLoadingSpinner();
   try {
@@ -514,6 +598,13 @@ export async function onReadAllListingsArt() {
   }
 }
 
+/**
+ * Fetches and displays all book-related listings from the API.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 export async function onReadAllListingsBooks() {
   showLoadingSpinner();
   try {
@@ -536,6 +627,13 @@ export async function onReadAllListingsBooks() {
   }
 }
 
+/**
+ * Fetches and displays all jewelry-related listings from the API.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 export async function onReadAllListingsJewelry() {
   showLoadingSpinner();
   try {
@@ -558,6 +656,14 @@ export async function onReadAllListingsJewelry() {
   }
 }
 
+/**
+ * Fetches and displays a single listing based on the ID stored in localStorage.
+ * Displays the listing details and provides options for deleting or editing the post.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 export async function onReadSingleListing() {
   const listingID = localStorage.getItem("listingID");
 
@@ -624,6 +730,13 @@ export async function onReadSingleListing() {
   }
 }
 
+/**
+ * Fetches and displays the listings for the logged-in user's profile.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 export async function onReadListingsByProfile() {
   const user = load("user");
   const userName = user.name;

@@ -6,13 +6,12 @@ import {
 } from "../../utilities/loadingSpinner";
 
 /**
- * API call function to fetch the profile data of a user by their username.
+ * Fetches the profile data for a given user.
  *
  * @param {string} username - The username of the profile to fetch.
- * @returns {Promise<Object>} The user profile data fetched from the API.
- * @throws {Error} If fetching the profile fails.
+ * @returns {Promise<Object>} The user's profile data, including bio and other details.
+ * @throws {Error} If the request to fetch the profile fails or if a network error occurs.
  */
-
 export async function readProfile(username) {
   const endpoint = `${API_AUCTION_PROFILES}/${username}`;
   showLoadingSpinner();

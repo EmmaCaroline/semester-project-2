@@ -6,14 +6,18 @@ import {
 } from "../../utilities/loadingSpinner";
 
 /**
- * API call function to update the profile of a user with the specified username and new data.
+ * Updates the profile of a user with the provided data.
  *
  * @param {string} username - The username of the profile to update.
- * @param {Object} updatedData - The new profile data to update.
- * @returns {Promise<Object>} The result of the update request.
- * @throws {Error} If the update fails.
+ * @param {Object} updatedData - The data to update in the user's profile.
+ * @param {string} updatedData.name - The user's name.
+ * @param {string} updatedData.email - The user's email.
+ * @param {string} [updatedData.bio] - The user's bio (optional).
+ * @param {string[]} [updatedData.tags] - A list of tags associated with the user (optional).
+ * @param {string[]} [updatedData.media] - Media links associated with the user (optional).
+ * @returns {Promise<Object>} The updated profile data.
+ * @throws {Error} If the request to update the profile fails.
  */
-
 export async function updateProfile(username, updatedData) {
   const endpoint = `${API_AUCTION_PROFILES}/${username}`;
   showLoadingSpinner();

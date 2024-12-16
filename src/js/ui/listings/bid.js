@@ -2,6 +2,13 @@ import { formatDate } from "./listings";
 import { fetchBid } from "../../api/listings/bid";
 import { fetchSingleListing } from "../../api/listings/listings";
 
+/**
+ * Gets the current highest bid for a given listing.
+ *
+ * @param {Object} listing - The listing object containing bid data.
+ * @param {Array} listing.bids - An array of bid objects for the listing.
+ * @returns {number|null} - The highest bid amount or null if no bids exist.
+ */
 function getCurrentBid(listing) {
   if (listing && Array.isArray(listing.bids) && listing.bids.length > 0) {
     const highestBid = listing.bids.sort((a, b) => b.amount - a.amount)[0];
@@ -11,12 +18,28 @@ function getCurrentBid(listing) {
   return null;
 }
 
+/**
+ * Checks if the auction for the given listing has ended.
+ *
+ * @param {Object} listing - The listing object containing the auction end date.
+ * @param {string} listing.endsAt - The ISO string date when the auction ends.
+ * @returns {boolean} - True if the auction has ended, otherwise false.
+ */
 function isAuctionEnded(listing) {
   const currentDate = new Date();
   const endDate = new Date(listing.endsAt);
   return currentDate > endDate;
 }
 
+/**
+ * Creates the bid section UI for a listing, including bid input,
+ * the current highest bid, and a list of previous bidders.
+ *
+ * @param {Object} listing - The listing object containing bid and auction data.
+ * @param {Array} listing.bids - An array of bid objects.
+ * @param {string} listing.endsAt - The ISO string date when the auction ends.
+ * @returns {HTMLElement} - The created bid section element.
+ */
 export function createBidSection(listing) {
   const container = document.querySelector(".single-listing-container");
   if (!container) {
@@ -212,6 +235,14 @@ export function createBidSection(listing) {
   container.appendChild(bidSection);
 }
 
+/**
+ * Handles placing a bid on a listing. It validates the bid amount,
+ * sends the bid to the server, and updates the UI with the new bid.
+ *
+ * @param {number} listingId - The ID of the listing being bid on.
+ * @param {number} bidAmount - The amount of the new bid.
+ * @param {HTMLInputElement} bidInput - The input element where the bid is entered.
+ */
 async function onPlaceBid(listingId, bidAmount, bidInput) {
   try {
     await fetchBid(listingId, { amount: bidAmount });
@@ -237,6 +268,12 @@ async function onPlaceBid(listingId, bidAmount, bidInput) {
   }
 }
 
+/**
+ * Updates the bid section UI with the latest bid information after a bid is placed.
+ *
+ * @param {Object} listing - The updated listing object containing bid data.
+ * @param {Array} listing.bids - An array of bid objects.
+ */
 function updateBidSection(listing) {
   const bidAmountContainer = document.querySelector(".bid-amount-container");
   if (!bidAmountContainer) {

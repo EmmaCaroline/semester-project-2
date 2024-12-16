@@ -1,6 +1,14 @@
 import { load } from "../../api/auth/key";
 import { deletePost } from "../../api/listings/delete";
 
+/**
+ * Displays the delete button if the current user is the author of the post.
+ * Sets up an event listener for the delete button to call the `handleDelete` function.
+ *
+ * @param {Object} post - The post object that contains the post's details.
+ * @param {string} author - The name of the post's author.
+ * @returns {void}
+ */
 export async function onDeletePost(post, author) {
   const user = load("user");
   const userName = user?.name;
@@ -19,6 +27,14 @@ export async function onDeletePost(post, author) {
   }
 }
 
+/**
+ * Handles the deletion of a post when the delete button is clicked.
+ * Prompts the user for confirmation and proceeds to delete the post
+ * by calling the `deletePost` function.
+ *
+ * @param {Event} event - The click event triggered by the delete button.
+ * @returns {void}
+ */
 export async function handleDelete(event) {
   const postId = event.target.dataset.postId;
 

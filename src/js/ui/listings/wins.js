@@ -7,6 +7,24 @@ import { formatDate } from "../../ui/listings/listings";
 import defaultImage from "../../../../images/No_Image_Available.jpg";
 import { save, load } from "../../api/auth/key";
 
+/**
+ * Creates and displays a listing element for a "win" (auction won by the user).
+ *
+ * @param {Object} listing - The listing data to be displayed.
+ * @param {Object} listing.seller - The seller of the listing.
+ * @param {string} listing.seller.name - The name of the seller.
+ * @param {Object} [listing.seller.avatar] - The avatar of the seller.
+ * @param {string} listing.seller.avatar.url - The URL of the seller's avatar.
+ * @param {string} listing.seller.avatar.alt - The alt text for the avatar image.
+ * @param {Object} listing._count - The count of bids for the listing.
+ * @param {number} listing._count.bids - The number of bids for the listing.
+ * @param {string} listing.endsAt - The end date of the listing auction.
+ * @param {Array<Object>} [listing.media] - The media associated with the listing.
+ * @param {string} listing.media.url - The URL of the listing's media image.
+ * @param {string} listing.media.alt - The alt text for the listing's media image.
+ *
+ * @returns {HTMLElement|null} The parent container of the newly created listing element, or null if creation fails.
+ */
 export async function createWins(listing) {
   const listingElement = document.createElement("a");
   if (!listingElement) {
@@ -174,6 +192,14 @@ export async function createWins(listing) {
   return listingContainer;
 }
 
+/**
+ * Fetches and displays all the "wins" (auctions the user has won) for the currently logged-in user.
+ * The function fetches the user's profile, retrieves their wins, and creates the corresponding
+ * listing elements using `createWins`.
+ *
+ * @async
+ * @throws {Error} If fetching the wins or user data fails.
+ */
 export async function onReadAllWins() {
   showLoadingSpinner();
   try {

@@ -4,6 +4,14 @@ import {
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
 
+/**
+ * Creates and displays a set of three specific listings with diamond-shaped images.
+ * Each listing image links to a detailed listing page when clicked.
+ *
+ * @param {Array} listing - An array of listing objects. Each listing should contain at least 3 items
+ * with properties `media` (array) and `title` (string).
+ * @throws {Error} If the `listing` array does not contain at least 3 items.
+ */
 function createSpecificListings(listing) {
   const targetContainer = document.querySelector(".diamond-image-container");
 
@@ -233,6 +241,16 @@ function createSpecificListings(listing) {
   }
 }
 
+/**
+ * Fetches and displays all specific listings that contain the tag 'myUniqueTag932'.
+ * It first retrieves a list of all listings, filters them based on the specific tag,
+ * and then creates the display for the filtered listings.
+ * A loading spinner is shown while fetching the data, and hidden when the process is complete.
+ *
+ * @async
+ * @function onReadAllSpecificListings
+ * @throws {Error} If there is an issue with the fetch request or filtering process.
+ */
 export async function onReadAllSpecificListings() {
   showLoadingSpinner();
   try {

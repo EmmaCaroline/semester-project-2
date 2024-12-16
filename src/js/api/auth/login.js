@@ -7,15 +7,14 @@ import {
 } from "../../utilities/loadingSpinner";
 
 /**
- * API call function to log in a user with the provided email and password.
+ * Logs in a user with the provided email and password, and stores the user's data and token in localStorage.
  *
  * @param {Object} params - The login parameters.
  * @param {string} params.email - The user's email.
  * @param {string} params.password - The user's password.
- * @returns {Promise<Object>} The result of the login request, including the user's data and access token.
- * @throws {Error} If the login fails.
+ * @returns {Promise<Object>} A promise that resolves with the login response, including the user's data and access token.
+ * @throws {Error} If the login request fails, an error is thrown with the failure message.
  */
-
 export async function login({ email, password }) {
   showLoadingSpinner();
   const body = JSON.stringify({ email, password });

@@ -5,6 +5,13 @@ import {
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
 
+/**
+ * Fetches the wins of a user by username, including additional properties such as seller and bid details.
+ *
+ * @param {string} username - The username of the user whose wins are to be fetched.
+ * @returns {Promise<Object[]>} A promise that resolves to an array of win data objects.
+ * @throws {Error} If the request to fetch wins fails.
+ */
 export async function readWins(username) {
   // Add query parameters to include additional properties
   const endpoint = `${API_AUCTION_PROFILES}/${username}/wins?_seller=true&_bids=true`;

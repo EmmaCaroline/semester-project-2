@@ -1,21 +1,6 @@
-/*import { defineConfig } from "vite";
-
-export default defineConfig({
-  server: {
-    open: true,
-  },
-  build: {
-    target: "es2022",
-  },
-  base: "./",
-});*/
-
-//import { fileURLToPath } from "url";
-import { /*dirname,*/ resolve } from "path";
+/* eslint-disable no-undef */
+import { resolve } from "path";
 import { defineConfig } from "vite";
-
-//const __filename = fileURLToPath(import.meta.url);
-//const __dirname = dirname(__filename);
 
 export default defineConfig({
   appType: "mpa",

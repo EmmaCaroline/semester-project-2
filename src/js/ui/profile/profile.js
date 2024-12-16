@@ -5,6 +5,14 @@ import {
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
 
+/**
+ * Fetches and displays the profile data of the currently logged-in user, including their banner image,
+ * avatar image, username, total credits, and bio. If the logged-in user matches the profile being viewed,
+ * the "edit profile" icon and total credits section will be shown.
+ *
+ * @async
+ * @throws {Error} If fetching the profile data or user details fails.
+ */
 export const readProfileData = async () => {
   showLoadingSpinner();
   const user = load("user");
@@ -60,6 +68,13 @@ export const readProfileData = async () => {
   }
 };
 
+/**
+ * Fetches and displays the total count of listings for the currently logged-in user.
+ * The count will be appended to an element with the ID "listings-count".
+ *
+ * @async
+ * @throws {Error} If fetching the profile data or listings count fails.
+ */
 export async function getListingCount() {
   try {
     const user = load("user");
@@ -77,6 +92,13 @@ export async function getListingCount() {
   }
 }
 
+/**
+ * Fetches and displays the total count of wins for the currently logged-in user.
+ * The count will be appended to an element with the ID "wins-count".
+ *
+ * @async
+ * @throws {Error} If fetching the profile data or wins count fails.
+ */
 export async function getWinsCount() {
   try {
     const user = load("user");

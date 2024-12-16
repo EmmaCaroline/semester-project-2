@@ -9,6 +9,13 @@ import { showMessage } from "../../utilities/alertMessage";
 const token = localStorage.getItem("token");
 const welcomeMessage = document.querySelector("#unregistered-welcome-message");
 
+/**
+ * Sets up an event listener for the newsletter subscription button. When clicked, it validates the email input.
+ * If the email is valid, it clears the input and shows a success message. If invalid, it alerts the user to provide a valid email.
+ *
+ * @param {string} buttonId - The ID of the button to trigger the subscription.
+ * @param {string} inputId - The ID of the email input field.
+ */
 export function setupNewsletterSubscription(buttonId, inputId) {
   document.getElementById(buttonId).addEventListener("click", function () {
     const emailInput = document.getElementById(inputId);
@@ -26,6 +33,13 @@ export function setupNewsletterSubscription(buttonId, inputId) {
   });
 }
 
+/**
+ * Adds a typewriter effect to an element by gradually typing out the provided text at a given speed.
+ *
+ * @param {string} elementId - The ID of the element where the text will be typed.
+ * @param {string} text - The text to type out.
+ * @param {number} [speed=100] - The speed at which the text appears (in milliseconds).
+ */
 export function addTypewriterEffect(elementId, text, speed = 100) {
   const typewriterElement = document.getElementById(elementId);
   if (!typewriterElement) {
@@ -46,6 +60,9 @@ export function addTypewriterEffect(elementId, text, speed = 100) {
   typeWriter();
 }
 
+/**
+ * Hides the welcome message if the user is logged in.
+ */
 export function hideWelcomeifLoggedIn() {
   if (token) {
     welcomeMessage.classList.add("hidden");
@@ -56,6 +73,11 @@ export function hideWelcomeifLoggedIn() {
 
 let currentSlideIndex = 0;
 
+/**
+ * Fetches the latest listings, sorts them by creation date, and returns the top 3 for the carousel.
+ *
+ * @returns {Promise<Array>} A promise that resolves to an array of the top 3 latest listings.
+ */
 async function readPostsForCarousel() {
   showLoadingSpinner();
 
@@ -74,6 +96,12 @@ async function readPostsForCarousel() {
   }
 }
 
+/**
+ * Creates and displays carousel slides based on the latest listings.
+ * Each slide contains an image, title, and a button linking to the listing's detail page.
+ *
+ * @returns {Promise<void>} Resolves when the carousel slides have been created.
+ */
 export async function createCarouselSlides() {
   const listings = await readPostsForCarousel();
   const carouselContainer = document.querySelector("#image-carousel");
@@ -226,6 +254,11 @@ export async function createCarouselSlides() {
 
   showSlide(currentSlideIndex);
 }
+/**
+ * Displays the slide at the specified index and updates the active dot indicator.
+ *
+ * @param {number} index - The index of the slide to show.
+ */
 function showSlide(index) {
   const slides = document.querySelectorAll(".carousel-slide");
   const dots = document.querySelectorAll(".single-dot");
@@ -240,6 +273,9 @@ function showSlide(index) {
   });
 }
 
+/**
+ * Moves to the next slide in the carousel.
+ */
 function nextImage() {
   const slides = document.querySelectorAll(".carousel-slide");
   if (currentSlideIndex < slides.length - 1) {
@@ -250,6 +286,9 @@ function nextImage() {
   showSlide(currentSlideIndex);
 }
 
+/**
+ * Moves to the previous slide in the carousel.
+ */
 function prevImage() {
   const slides = document.querySelectorAll(".carousel-slide");
   if (currentSlideIndex > 0) {

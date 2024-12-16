@@ -5,6 +5,13 @@ import {
 } from "../../utilities/loadingSpinner";
 import { showMessageWithButtonAndRedirect } from "../../utilities/alertMessage";
 
+/**
+ * Handles the registration form submission. Prevents the default form submission, gathers the form data,
+ * and sends a request to the `register` function. If registration is successful, displays a success message
+ * with a button that redirects the user to the login page. If registration fails, logs an error.
+ *
+ * @param {Event} event - The form submit event.
+ */
 export async function onRegister(event) {
   event.preventDefault();
 

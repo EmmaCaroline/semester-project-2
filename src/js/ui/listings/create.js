@@ -5,6 +5,14 @@ import {
 } from "../../utilities/loadingSpinner";
 import { showMessage } from "../../utilities/alertMessage";
 
+/**
+ * Handles the form submission for creating a new listing.
+ * It validates the input, constructs a listing object,
+ * and calls the `createListing` function to submit the data.
+ *
+ * @param {Event} event - The form submission event.
+ * @returns {void}
+ */
 export async function onCreateListing(event) {
   event.preventDefault();
   const form = event.target;
@@ -58,6 +66,12 @@ export async function onCreateListing(event) {
   }
 }
 
+/**
+ * Adds a new input field for entering an image URL to the listing creation form.
+ * It also includes a preview image and a remove button for the added field.
+ *
+ * @returns {void}
+ */
 export function addImageField() {
   const mediaFieldsContainer = document.getElementById("mediaFields");
 

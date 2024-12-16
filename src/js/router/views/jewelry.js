@@ -1,9 +1,9 @@
 import { onReadAllListingsJewelry } from "../../ui/listings/listings";
 import {
   fetchAndRenderListingsJewelry,
-  initializePaginationJewelry,
+  initializePagination,
 } from "../../utilities/pagination";
 
 onReadAllListingsJewelry();
 fetchAndRenderListingsJewelry();
-initializePaginationJewelry();
+initializePagination();

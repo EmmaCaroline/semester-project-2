@@ -1,9 +1,9 @@
 import { onReadAllListingsBooks } from "../../ui/listings/listings";
 import {
   fetchAndRenderListingsBooks,
-  initializePaginationBooks,
+  initializePagination,
 } from "../../utilities/pagination";
 
 onReadAllListingsBooks();
 fetchAndRenderListingsBooks();
-initializePaginationBooks();
+initializePagination();

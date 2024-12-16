@@ -5,6 +5,16 @@ import {
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
 
+/**
+ * Registers a new user with the provided name, email, and password.
+ *
+ * @param {Object} params - The registration parameters.
+ * @param {string} params.name - The user's name.
+ * @param {string} params.email - The user's email.
+ * @param {string} params.password - The user's password.
+ * @returns {Promise<Object>} A promise that resolves with the registration response, including the user’s data.
+ * @throws {Error} If the registration request fails, an error is thrown with the failure message. A network error triggers an alert with a message.
+ */
 export async function register({ name, email, password }) {
   showLoadingSpinner();
   const body = JSON.stringify({ name, email, password });

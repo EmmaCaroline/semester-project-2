@@ -6,6 +6,17 @@ import {
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
 
+/**
+ * Handles the update of a listing. This function is triggered when the form is submitted to update a listing.
+ * It compares the updated data with the existing listing to determine if any changes were made.
+ * If changes are detected, it sends the updated data to the server and redirects to the updated listing page.
+ * If no changes are made, it alerts the user and prevents further actions.
+ *
+ * @async
+ * @function onUpdateListing
+ * @param {Event} event - The submit event triggered when the update form is submitted.
+ * @throws {Error} If there is an issue updating the listing or fetching the existing listing data.
+ */
 export async function onUpdateListing(event) {
   event.preventDefault();
 
@@ -67,6 +78,14 @@ if (cancelButton) {
   });
 }
 
+/**
+ * Displays the "Edit Post" button for a specific listing if the logged-in user is the author.
+ * This button allows the user to edit the listing. If the user is not the author, the button will be hidden.
+ *
+ * @function onEditButton
+ * @param {Object} listing - The listing object containing information about the post.
+ * @param {string} author - The name of the author of the listing.
+ */
 export const onEditButton = (listing, author) => {
   const user = load("user");
   const userName = user?.name;
@@ -89,6 +108,16 @@ export const onEditButton = (listing, author) => {
   }
 };
 
+/**
+ * Adds a new media input field for entering an image URL and an optional alt text.
+ * This function dynamically creates the HTML elements for the URL input, an image preview,
+ * and a remove button. The input allows users to add multiple images to a listing.
+ *
+ * @function addImageField
+ * @param {string} [url=""] - The initial URL for the image (optional).
+ * @param {string} [alt=""] - The alt text for the image (optional).
+ * @param {number} [index=0] - The index used to uniquely name the input field (optional).
+ */
 export function addImageField(url = "", alt = "", index = 0) {
   const mediaFieldsContainer = document.getElementById("mediaFields");
 

@@ -12,6 +12,12 @@ const limit = 24;
 let totalListings = 0;
 const maxPages = 16;
 
+/**
+ * Updates the visibility and enabled/disabled state of the pagination buttons.
+ * Disables the "Previous" button if the current page is the first page,
+ * and disables the "Next" button if the current page is the last page.
+ * Also updates the text displaying the current page and the total pages.
+ */
 function updatePaginationButtons() {
   const prevPageButton = document.getElementById("prevPage");
   const nextPageButton = document.getElementById("nextPage");
@@ -24,6 +30,15 @@ function updatePaginationButtons() {
   nextPageButton.disabled = currentPage === totalPages;
 }
 
+/**
+ * Fetches listings from the server and renders them to the page.
+ * It displays a loading spinner during the fetching process and handles page transitions smoothly.
+ * If there are no listings on the current page, it will adjust the page and retry fetching.
+ * After fetching the listings, it calls `createListings` for each listing and updates the pagination buttons.
+ *
+ * @async
+ * @throws {Error} If there is an issue with fetching the listings or rendering the page.
+ */
 export async function fetchAndRenderListings() {
   showLoadingSpinner();
   try {
@@ -63,6 +78,16 @@ export async function fetchAndRenderListings() {
     hideLoadingSpinner();
   }
 }
+
+/**
+ * Fetches listings with tag 'art' from the server and renders them to the page.
+ * It displays a loading spinner during the fetching process and handles page transitions smoothly.
+ * If there are no art listings on the current page, it will adjust the page and retry fetching.
+ * After fetching the listings, it calls `createListings` for each listing and updates the pagination buttons.
+ *
+ * @async
+ * @throws {Error} If there is an issue with fetching the listings or rendering the page.
+ */
 
 export async function fetchAndRenderListingsArt() {
   showLoadingSpinner();
@@ -104,6 +129,15 @@ export async function fetchAndRenderListingsArt() {
   }
 }
 
+/**
+ * Fetches listings with tag 'books' from the server and renders them to the page.
+ * It displays a loading spinner during the fetching process and handles page transitions smoothly.
+ * If there are no art listings on the current page, it will adjust the page and retry fetching.
+ * After fetching the listings, it calls `createListings` for each listing and updates the pagination buttons.
+ *
+ * @async
+ * @throws {Error} If there is an issue with fetching the listings or rendering the page.
+ */
 export async function fetchAndRenderListingsBooks() {
   showLoadingSpinner();
   try {
@@ -144,6 +178,15 @@ export async function fetchAndRenderListingsBooks() {
   }
 }
 
+/**
+ * Fetches listings with tag 'jewelry' from the server and renders them to the page.
+ * It displays a loading spinner during the fetching process and handles page transitions smoothly.
+ * If there are no art listings on the current page, it will adjust the page and retry fetching.
+ * After fetching the listings, it calls `createListings` for each listing and updates the pagination buttons.
+ *
+ * @async
+ * @throws {Error} If there is an issue with fetching the listings or rendering the page.
+ */
 export async function fetchAndRenderListingsJewelry() {
   showLoadingSpinner();
   try {
@@ -184,91 +227,41 @@ export async function fetchAndRenderListingsJewelry() {
   }
 }
 
+/**
+ * Initializes the pagination functionality for the listings page and the collection pages.
+ * Adds event listeners to the 'Previous' and 'Next' page buttons to update the `currentPage`
+ * and fetch/render listings accordingly. The page will scroll smoothly to the listings container
+ * after each page change.
+ *
+ * @function
+ * @throws {Error} If there is an issue with selecting the pagination buttons or the listings container.
+ */
 export function initializePagination() {
-  document.getElementById("prevPage").addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      fetchAndRenderListings();
-
-      const listingContainer = document.querySelector(".listings-container");
-      listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-
-  document.getElementById("nextPage").addEventListener("click", () => {
-    const totalPages = Math.min(Math.ceil(totalListings / limit), maxPages);
-    if (currentPage < totalPages) {
-      currentPage++;
-      fetchAndRenderListings();
-
-      const listingContainer = document.querySelector(".listings-container");
-      listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-}
-
-export function initializePaginationArt() {
-  document.getElementById("prevPage").addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      fetchAndRenderListingsArt();
-
-      const listingContainer = document.querySelector(".listings-container");
-      listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-
-  document.getElementById("nextPage").addEventListener("click", () => {
-    const totalPages = Math.min(Math.ceil(totalListings / limit), maxPages);
-    if (currentPage < totalPages) {
-      currentPage++;
-      fetchAndRenderListingsArt();
-
-      const listingContainer = document.querySelector(".listings-container");
-      listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-}
-
-export function initializePaginationBooks() {
-  document.getElementById("prevPage").addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      fetchAndRenderListingsBooks();
-
-      const listingContainer = document.querySelector(".listings-container");
-      listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-
-  document.getElementById("nextPage").addEventListener("click", () => {
-    const totalPages = Math.min(Math.ceil(totalListings / limit), maxPages);
-    if (currentPage < totalPages) {
-      currentPage++;
-      fetchAndRenderListingsBooks();
-
-      const listingContainer = document.querySelector(".listings-container");
-      listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-}
-
-export function initializePaginationJewelry() {
   const totalPages = Math.min(Math.ceil(totalListings / limit), maxPages);
-
   document.getElementById("prevPage").addEventListener("click", () => {
     if (currentPage > 1) {
       currentPage--;
-      fetchAndRenderListingsJewelry();
+      if (window.location.pathname === "/") {
+        fetchAndRenderListings();
+      } else if (window.location.pathname === "/collections/art") {
+        fetchAndRenderListingsArt();
+      } else if (window.location.pathname === "/collections/books") {
+        fetchAndRenderListingsBooks();
+      } else if (window.location.pathname === "/collections/jewelry") {
+        fetchAndRenderListingsJewelry();
+      }
+
       const listingContainer = document.querySelector(".listings-container");
       listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
 
   document.getElementById("nextPage").addEventListener("click", () => {
+    const totalPages = Math.min(Math.ceil(totalListings / limit), maxPages);
     if (currentPage < totalPages) {
       currentPage++;
-      fetchAndRenderListingsJewelry();
+      fetchAndRenderListings();
+
       const listingContainer = document.querySelector(".listings-container");
       listingContainer.scrollIntoView({ behavior: "smooth", block: "start" });
     }
