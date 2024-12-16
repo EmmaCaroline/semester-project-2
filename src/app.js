@@ -1,6 +1,6 @@
-import router from "./src/js/router/index";
-import { setLogoutListener } from "./src/js/ui/global/logout";
-import { redirectToAndScroll } from "./src/js/utilities/scrollToListings";
+import router from "./js/router/index";
+import { setLogoutListener } from "./js/ui/global/logout";
+import { redirectToAndScroll } from "./js/utilities/scrollToListings";
 
 await router(window.location.pathname);
 
