@@ -2,6 +2,7 @@ import { authGuard } from "../../utilities/authGuard";
 import { fetchSingleListing } from "../../api/listings/listings";
 import { addImageField } from "../../ui/listings/update";
 import { onUpdateListing } from "../../ui/listings/update";
+import { setupNewsletterSubscription } from "../../ui/homepage";
 
 console.log("views/update.js loaded");
 
@@ -86,3 +87,4 @@ function attachImageButtonListener() {
 }
 
 authGuard();
+setupNewsletterSubscription();

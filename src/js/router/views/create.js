@@ -1,6 +1,7 @@
 import { onCreateListing } from "../../ui/listings/create";
 import { authGuard } from "../../utilities/authGuard";
 import { addImageField } from "../../ui/listings/create";
+import { setupNewsletterSubscription } from "../../ui/homepage";
 
 authGuard();
 
@@ -24,3 +25,4 @@ function attachImageButtonListener() {
 attachImageButtonListener();
 
 addImageField();
+setupNewsletterSubscription();

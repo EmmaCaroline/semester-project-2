@@ -7,6 +7,7 @@ import {
 import { onUpdateProfile, prefillProfileForm } from "../../ui/profile/update";
 import { onReadListingsByProfile } from "../../ui/listings/listings";
 import { onReadAllWins } from "../../ui/listings/wins";
+import { setupNewsletterSubscription } from "../../ui/homepage";
 
 const form = document.forms.updateProfile;
 
@@ -46,3 +47,4 @@ onReadListingsByProfile();
 getListingCount();
 getWinsCount();
 onReadAllWins();
+setupNewsletterSubscription();

@@ -713,8 +713,11 @@ export async function onReadSingleListing() {
           "font-body",
           "text-sm",
           "md:text-base",
-          "text-center",
+          "sm:text-center",
           "mt-4",
+          "px-8",
+          "lg:px-20",
+          "dark:text-gray-300",
         );
         loginMessage.textContent =
           "Please log in to view more info about this listing and to place a bid.";
