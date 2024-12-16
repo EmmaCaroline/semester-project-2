@@ -17,8 +17,6 @@ function attachImageButtonListener() {
   }
 }
 
-// Call listener to dynamically add images on click
 attachImageButtonListener();
 
-// Ensure at least one media field is visible by default when DOM loads
 addImageField();

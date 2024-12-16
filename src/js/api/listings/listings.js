@@ -203,9 +203,6 @@ export async function fetchListingsSpecific(tag = "myUniqueTag932") {
 
     const listingsData = await response.json();
 
-    // Log the full response to inspect its structure
-    console.log("Listings data response:", listingsData);
-
     return listingsData;
   } catch (error) {
     console.error("Fetching listings failed: ", error);

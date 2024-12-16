@@ -20,7 +20,6 @@ import { createBidSection } from "./bid";
 export function formatDate(isoDate) {
   const date = new Date(isoDate);
 
-  // Extract parts of the date
   const day = String(date.getDate()).padStart(2, "0");
   const month = date.toLocaleString("en-US", { month: "short" });
   const year = date.getFullYear();
@@ -30,12 +29,11 @@ export function formatDate(isoDate) {
   return `${day} ${month} ${year}, ${hours}:${minutes}`;
 }
 
-// Create listing cards for all listings
 export async function createListings(listing) {
   const listingElement = document.createElement("a");
   if (!listingElement) {
     console.error("Failed to create listing container for:", listing);
-    return null; // Return null if something goes wrong
+    return null;
   }
   listingElement.setAttribute("aria-label", "View listing");
   listingElement.classList.add(
@@ -96,13 +94,10 @@ export async function createListings(listing) {
     "dark:text-gray-300",
   );
 
-  // Get the current date and the auction's end date
   const currentDate = new Date();
   const endDate = new Date(listing.endsAt);
 
-  // Check if the auction has ended
   if (endDate > currentDate) {
-    // Auction is still active
     const redText = document.createElement("span");
     redText.classList.add(
       "text-red-600",
@@ -113,11 +108,9 @@ export async function createListings(listing) {
     );
     redText.textContent = formatDate(listing.endsAt);
 
-    // Append the black text and the red text to the `p` element
     endingDate.textContent = "Ends at: ";
     endingDate.appendChild(redText);
   } else {
-    // Auction has ended
     endingDate.textContent = "Auction ended";
     endingDate.classList.add(
       "text-gray-500",
@@ -153,18 +146,16 @@ export async function createListings(listing) {
 
   imageContainer.appendChild(listingImage);
 
-  // Function to handle the click event
   const linkClick = () => {
     save("listingID", listing.id);
     window.location.href = "./listing/listing.html";
   };
 
-  // Make the image clickable
   listingImage.addEventListener("click", linkClick);
 
   const listingTitle = document.createElement("h2");
   listingTitle.textContent = listing.title || "Untitled";
-  //console.log("Listing title:", listingTitle.textContent);
+
   listingTitle.classList.add(
     "font-heading",
     "text-xl",
@@ -215,30 +206,28 @@ function handleSearch(searchInput, listingsArray) {
     listing.title.toLowerCase().includes(searchQuery),
   );
 
-  // Clear existing listings
   const listingContainer = document.querySelector(".listings-container");
   listingContainer.innerHTML = "";
 
-  // Re-render filtered listings
   filteredListings.forEach((listing) => createListings(listing));
 }
 
 function handleSort(sortSelect) {
   const selectedSort = sortSelect.value;
-  let sortParam = "created"; // Default sort parameter: sort by creation date
-  let sortOrder = "desc"; // Default sort order: descending
-  let active = false; // Default to include all listings
+  let sortParam = "created";
+  let sortOrder = "desc";
+  let active = false;
 
   if (selectedSort === "newest") {
     sortParam = "created";
-    sortOrder = "desc"; // Sort by newest (descending order)
+    sortOrder = "desc";
   } else if (selectedSort === "oldest") {
     sortParam = "created";
-    sortOrder = "asc"; // Sort by oldest (ascending order)
+    sortOrder = "asc";
   } else if (selectedSort === "ending-soon") {
     sortParam = "endsAt";
-    sortOrder = "asc"; // Sort by ending soon (ascending order)
-    active = true; // Filter for active listings only
+    sortOrder = "asc";
+    active = true;
   }
 
   fetchListings(undefined, undefined, undefined, sortParam, sortOrder, active)
@@ -251,7 +240,6 @@ function handleSort(sortSelect) {
     .catch((error) => console.error("Error fetching listings:", error));
 }
 
-// Create a single listing
 export async function createSingleListing(listing) {
   const singleListingContainer = document.querySelector(
     ".single-listing-container",
@@ -297,16 +285,13 @@ export async function createSingleListing(listing) {
       "w-full",
     );
 
-    // Set the image source and alt text based on media item
     listingImage.src = mediaItem.url;
     listingImage.alt = mediaItem.alt;
 
-    // Append the image to the carousel container
     imageDiv.appendChild(listingImage);
     carouselInner.appendChild(imageDiv);
   });
 
-  // Carousel navigation buttons
   const prevButton = document.createElement("button");
   prevButton.classList.add(
     "prev-btn",
@@ -349,23 +334,19 @@ export async function createSingleListing(listing) {
   imageCarousel.appendChild(prevButton);
   imageCarousel.appendChild(nextButton);
 
-  let currentIndex = 0; // Start at the first image
+  let currentIndex = 0;
 
-  // Function to update carousel position
   function updateCarousel() {
-    const offset = -currentIndex * 100; // Move the carousel by the width of one image (100% of the container width)
+    const offset = -currentIndex * 100;
     carouselInner.style.transform = `translateX(${offset}%)`;
   }
 
-  // Event listeners to buttons
   prevButton.addEventListener("click", () => {
-    // Move to the previous image, or loop to the last image
     currentIndex = (currentIndex - 1 + mediaArray.length) % mediaArray.length;
     updateCarousel();
   });
 
   nextButton.addEventListener("click", () => {
-    // Move to the next image, or loop to the first image
     currentIndex = (currentIndex + 1) % mediaArray.length;
     updateCarousel();
   });
@@ -449,13 +430,10 @@ export async function createSingleListing(listing) {
 
   listingInfo.append(listingTitle, sellerAndBids, created, description);
 
-  // Append both the image carousel and listing info to the main container
   listingContainer.append(imageCarousel, listingInfo);
 
-  // Ensure the edit button exists and append it
   let editButton = document.getElementById("edit-listing-button-container");
   if (!editButton) {
-    // Create the edit button dynamically
     editButton = document.createElement("button");
     editButton.id = "edit-listing-button-container";
     editButton.classList.add(
@@ -465,32 +443,26 @@ export async function createSingleListing(listing) {
       "dark:text-gray-200",
       "dark:border-gray-400",
     );
-    editButton.style.display = "none"; // Hidden by default
+    editButton.style.display = "none";
     editButton.innerText = "Edit Post";
   }
 
-  // Ensure the button is visible for the author
   const listingData = listing.data;
-  const author = listingData.seller.name; // Assuming the seller is the author
+  const author = listingData.seller.name;
   onEditButton(listingData, author);
 
-  // Append the edit button and listing container to the single listing container
   singleListingContainer.append(listingContainer, editButton);
 
   return singleListingContainer;
 }
 
-// Fetch and read all listings
 export async function onReadAllListings() {
   showLoadingSpinner();
   try {
-    // Fetch listings from the API
     const response = await fetchListings();
 
-    // Access the listings data inside the 'data' property
     const listingsArray = Array.isArray(response.data) ? response.data : [];
 
-    // Check if the array is empty
     if (listingsArray.length === 0) {
       console.warn("No listings found in the response.");
       return;
@@ -510,7 +482,6 @@ export async function onReadAllListings() {
       );
     }
 
-    // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
       createListings(listing);
     });
@@ -521,23 +492,18 @@ export async function onReadAllListings() {
   }
 }
 
-// Fetch and read all listings for 'Art' collection page, that has a unique tag
 export async function onReadAllListingsArt() {
   showLoadingSpinner();
   try {
-    // Fetch listings from the API
     const response = await fetchListingsArt();
 
-    // Access the listings data inside the 'data' property
     const listingsArray = Array.isArray(response.data) ? response.data : [];
 
-    // Check if the array is empty
     if (listingsArray.length === 0) {
       console.warn("No listings found in the response.");
       return;
     }
 
-    // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
       createListings(listing);
     });
@@ -548,23 +514,18 @@ export async function onReadAllListingsArt() {
   }
 }
 
-// Fetch and read all listings for 'Books' collection page, that has a unique tag
 export async function onReadAllListingsBooks() {
   showLoadingSpinner();
   try {
-    // Fetch listings from the API
     const response = await fetchListingsBooks();
 
-    // Access the listings data inside the 'data' property
     const listingsArray = Array.isArray(response.data) ? response.data : [];
 
-    // Check if the array is empty
     if (listingsArray.length === 0) {
       console.warn("No listings found in the response.");
       return;
     }
 
-    // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
       createListings(listing);
     });
@@ -575,23 +536,18 @@ export async function onReadAllListingsBooks() {
   }
 }
 
-// Fetch and read all listings for 'Jewelry' collection page, that has a unique tag
 export async function onReadAllListingsJewelry() {
   showLoadingSpinner();
   try {
-    // Fetch listings from the API
     const response = await fetchListingsJewelry();
 
-    // Access the listings data inside the 'data' property
     const listingsArray = Array.isArray(response.data) ? response.data : [];
 
-    // Check if the array is empty
     if (listingsArray.length === 0) {
       console.warn("No listings found in the response.");
       return;
     }
 
-    // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
       createListings(listing);
     });
@@ -616,26 +572,20 @@ export async function onReadSingleListing() {
       throw new Error("Invalid listing ID");
     }
 
-    console.log("Listing ID:", parsedID);
-
     try {
       console.log("Attempting to fetch and create listing...");
       showLoadingSpinner();
       const singleListing = await fetchSingleListing(parsedID);
-      console.log("Fetched single listing:", singleListing);
 
       const listing = singleListing.data;
       const author = listing.seller.name;
       onDeletePost(listing, author);
       onEditButton(listing, author);
 
-      // First, create the single listing details (image, title, etc.)
       await createSingleListing(singleListing);
 
-      // Check if the user is logged in
       const token = localStorage.getItem("token");
 
-      // Get the container where the bid section should go
       const singleListingContainer = document.querySelector(
         ".single-listing-container",
       );
@@ -643,7 +593,6 @@ export async function onReadSingleListing() {
       if (token) {
         const bidSection = createBidSection(listing);
 
-        // Check if bidSection is a valid Node before appending
         if (bidSection instanceof Node) {
           const singleListingContainer = document.querySelector(
             ".single-listing-container",
@@ -653,7 +602,6 @@ export async function onReadSingleListing() {
           console.error("Failed to create a valid bid section.");
         }
       } else {
-        // If the user is not logged in, show a message
         const loginMessage = document.createElement("p");
         loginMessage.classList.add(
           "font-body",
@@ -676,7 +624,6 @@ export async function onReadSingleListing() {
   }
 }
 
-// Fetch and read all listings by a profile
 export async function onReadListingsByProfile() {
   const user = load("user");
   const userName = user.name;

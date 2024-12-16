@@ -5,18 +5,6 @@ import {
   hideLoadingSpinner,
 } from "../../utilities/loadingSpinner";
 
-/**
- * API call function to create a new post with the provided title, body, tags, and media.
- *
- * @param {Object} params - The post parameters.
- * @param {string} params.title - The title of the post.
- * @param {string} params.body - The content of the post.
- * @param {Array<string>} params.tags - An array of tags associated with the post.
- * @param {string} [params.media] - The media URL associated with the post (optional).
- * @returns {Promise<Object>} The result of the post creation request.
- * @throws {Error} If the post creation fails.
- */
-
 export async function createListing({
   title,
   description,

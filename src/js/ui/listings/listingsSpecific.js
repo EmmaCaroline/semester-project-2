@@ -18,7 +18,6 @@ function createSpecificListings(listing) {
   );
 
   if (Array.isArray(listing) && listing.length >= 3) {
-    // Create the first image link
     const firstImageLink = document.createElement("a");
     firstImageLink.id = "post-link1";
     firstImageLink.classList.add(
@@ -47,8 +46,8 @@ function createSpecificListings(listing) {
     );
 
     const firstImage = document.createElement("img");
-    const firstPost = listing[0]; // Get the first post
-    const firstImageData = firstPost.media[0]; // Get the first image
+    const firstPost = listing[0];
+    const firstImageData = firstPost.media[0];
     firstImage.src = firstImageData ? firstImageData.url : "default-image.jpg";
     firstImage.alt = firstImageData ? firstImageData.alt : "Default Image";
     firstImage.classList.add(
@@ -76,13 +75,11 @@ function createSpecificListings(listing) {
     firstImageText.textContent = firstPost.title;
     firstImageLink.appendChild(firstImageText);
 
-    // Add an event listener to the first image link
     firstImageLink.addEventListener("click", () => {
-      localStorage.setItem("listingID", JSON.stringify(firstPost.id)); // Ensure storing as string
-      window.location.href = "./listing/listing.html"; // Redirect to the specific post page
+      localStorage.setItem("listingID", JSON.stringify(firstPost.id));
+      window.location.href = "./listing/listing.html";
     });
 
-    // Create the second and third image links inside a single container
     const secondAndThirdContainer = document.createElement("div");
     secondAndThirdContainer.classList.add(
       "flex",
@@ -154,10 +151,9 @@ function createSpecificListings(listing) {
     secondImageText.textContent = secondPost.title;
     secondImageLink.appendChild(secondImageText);
 
-    // Add an event listener to the second image link
     secondImageLink.addEventListener("click", () => {
-      localStorage.setItem("listingID", JSON.stringify(secondPost.id)); // Ensure storing as string
-      window.location.href = "./listing/listing.html"; // Redirect to the specific post page
+      localStorage.setItem("listingID", JSON.stringify(secondPost.id));
+      window.location.href = "./listing/listing.html";
     });
 
     const thirdImageLink = document.createElement("a");
@@ -220,21 +216,17 @@ function createSpecificListings(listing) {
     thirdImageText.textContent = thirdPost.title;
     thirdImageLink.appendChild(thirdImageText);
 
-    // Add an event listener to the third image link
     thirdImageLink.addEventListener("click", () => {
-      localStorage.setItem("listingID", JSON.stringify(thirdPost.id)); // Ensure storing as string
-      window.location.href = "./listing/listing.html"; // Redirect to the specific post page
+      localStorage.setItem("listingID", JSON.stringify(thirdPost.id));
+      window.location.href = "./listing/listing.html";
     });
 
-    // Append the second and third image links inside the container
     secondAndThirdContainer.appendChild(secondImageLink);
     secondAndThirdContainer.appendChild(thirdImageLink);
 
-    // Append the first image link and the second/third container to the wrapper
     wrapperDiv.appendChild(firstImageLink);
     wrapperDiv.appendChild(secondAndThirdContainer);
 
-    // Finally, append the entire wrapper to the target container
     targetContainer.appendChild(wrapperDiv);
   } else {
     console.error("listing does not contain enough posts:", listing);
@@ -244,37 +236,25 @@ function createSpecificListings(listing) {
 export async function onReadAllSpecificListings() {
   showLoadingSpinner();
   try {
-    // Fetch listings from the API
     const response = await fetchListingsSpecific();
 
-    // Log the response to check its structure
-    console.log(response);
-
-    // Access the listings data inside the 'data' property
     const listingsArray = Array.isArray(response.data) ? response.data : [];
 
-    // Check if the array is empty
     if (listingsArray.length === 0) {
       console.warn("No listings found in the response.");
       return;
     }
 
-    // Filter listings that contain the specific tag
     const filteredListings = listingsArray.filter(
-      (listing) => listing.tags && listing.tags.includes("myUniqueTag932"), // Match the tag
+      (listing) => listing.tags && listing.tags.includes("myUniqueTag932"),
     );
 
-    // Log the filtered listings to confirm they contain the correct tag
-    console.log("Filtered listings:", filteredListings);
-
-    // Check if the filtered list is empty
     if (filteredListings.length === 0) {
       console.warn("No listings found with the tag 'myUniqueTag932'.");
       return;
     }
 
-    // Pass the entire filtered listings array to createSpecificListings
-    createSpecificListings(filteredListings); // Passing the entire array at once
+    createSpecificListings(filteredListings);
   } catch (error) {
     console.error("Error reading all listings:", error);
   } finally {

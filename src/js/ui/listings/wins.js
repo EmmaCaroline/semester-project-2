@@ -11,7 +11,7 @@ export async function createWins(listing) {
   const listingElement = document.createElement("a");
   if (!listingElement) {
     console.error("Failed to create listing container for:", listing);
-    return null; // Return null if something goes wrong
+    return null;
   }
   listingElement.setAttribute("aria-label", "View listing");
   listingElement.classList.add(
@@ -69,13 +69,10 @@ export async function createWins(listing) {
     "md:text-base",
   );
 
-  // Get the current date and the auction's end date
   const currentDate = new Date();
   const endDate = new Date(listing.endsAt);
 
-  // Check if the auction has ended
   if (endDate > currentDate) {
-    // Auction is still active
     const redText = document.createElement("span");
     redText.classList.add(
       "text-red-600",
@@ -86,11 +83,9 @@ export async function createWins(listing) {
     );
     redText.textContent = formatDate(listing.endsAt);
 
-    // Append the black text and the red text to the `p` element
     endingDate.textContent = "Ends at: ";
     endingDate.appendChild(redText);
   } else {
-    // Auction has ended
     endingDate.textContent = "Auction ended";
     endingDate.classList.add(
       "text-gray-500",
@@ -126,18 +121,15 @@ export async function createWins(listing) {
 
   imageContainer.appendChild(listingImage);
 
-  // Function to handle the click event
   const linkClick = () => {
     save("listingID", listing.id);
     window.location.href = "./listing/listing.html";
   };
 
-  // Make the image clickable
   listingImage.addEventListener("click", linkClick);
 
   const listingTitle = document.createElement("h2");
   listingTitle.textContent = listing.title || "Untitled";
-  //console.log("Listing title:", listingTitle.textContent);
   listingTitle.classList.add(
     "font-heading",
     "text-xl",
@@ -194,17 +186,13 @@ export async function onReadAllWins() {
 
     const username = profile.name;
 
-    // Fetch wins for the user
     const listingsArray = await readWins(username);
-    console.log(listingsArray);
 
-    // Check if the array is empty
     if (!listingsArray || listingsArray.length === 0) {
       console.warn("No wins found for user:", username);
       return;
     }
 
-    // Loop through the listings and create a listing for each one
     listingsArray.forEach((listing) => {
       createWins(listing);
     });

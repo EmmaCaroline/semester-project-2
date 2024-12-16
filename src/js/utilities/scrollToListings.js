@@ -3,9 +3,8 @@ export function redirectToAndScroll() {
 
   if (allListingsLink) {
     allListingsLink.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent default link behavior
+      event.preventDefault();
 
-      // Redirect to homepage with a hash
       window.location.href = "/#scroll-to-listings";
     });
   }

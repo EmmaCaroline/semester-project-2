@@ -5,23 +5,16 @@ import {
 } from "../../utilities/loadingSpinner";
 import { showMessage } from "../../utilities/alertMessage";
 
-/**
- * Handles the post creation form submission and processes the creation of a new post.
- *
- * @param {Event} event - The event object from the form submission.
- */
 export async function onCreateListing(event) {
   event.preventDefault();
   const form = event.target;
   const formData = new FormData(form);
   const listing = Object.fromEntries(formData.entries());
 
-  // Convert tags to array
   listing.tags = listing.tags
     ? listing.tags.split(",").map((tag) => tag.trim())
     : [];
 
-  // Collect all media inputs dynamically
   const mediaInputs = document.querySelectorAll(".media-input");
   const media = [];
   mediaInputs.forEach((input) => {
@@ -34,16 +27,14 @@ export async function onCreateListing(event) {
 
   listing.media = media.length ? media : null;
 
-  // Process endsAt date to ISO 8601 format
-  const endsAtInput = document.querySelector("#endsAt").value; // Read the value from input
+  const endsAtInput = document.querySelector("#endsAt").value;
   if (endsAtInput) {
-    listing.endsAt = new Date(endsAtInput).toISOString(); // Convert to ISO 8601
+    listing.endsAt = new Date(endsAtInput).toISOString();
   } else {
     alert("Please select an end date for the auction.");
     return;
   }
 
-  // Check if the title is empty
   if (!listing.title) {
     alert("Title is required for creating a post");
     return;
@@ -53,12 +44,12 @@ export async function onCreateListing(event) {
     await createListing(listing);
     showMessage("Listing created!", 3000);
     form.reset();
-    document.getElementById("mediaFields").innerHTML = ""; // Clear media inputs on success
-    addImageField(); // Ensure at least one media field is available after reset
-    // Delay navigation for a few seconds
+    document.getElementById("mediaFields").innerHTML = "";
+    addImageField();
+
     setTimeout(() => {
       window.location.href = "./profile/profile.html";
-    }, 3000); // 3000 milliseconds = 3 seconds
+    }, 3000);
   } catch (error) {
     console.error("Error creating post: ", error);
     alert("Failed to create post. Please try again.");
@@ -67,9 +58,6 @@ export async function onCreateListing(event) {
   }
 }
 
-/**
- * Dynamically adds a new image input field for media entry with a remove button.
- */
 export function addImageField() {
   const mediaFieldsContainer = document.getElementById("mediaFields");
 

@@ -1,22 +1,14 @@
 import { formatDate } from "./listings";
 import { fetchBid } from "../../api/listings/bid";
 import { fetchSingleListing } from "../../api/listings/listings";
-//import { list } from "postcss";
 
 function getCurrentBid(listing) {
   if (listing && Array.isArray(listing.bids) && listing.bids.length > 0) {
-    // Log the bids array to verify the data
-    console.log("Bids array:", listing.bids);
-
-    // Sort bids by amount, descending, and return the highest bid amount
     const highestBid = listing.bids.sort((a, b) => b.amount - a.amount)[0];
-
-    // Log the highest bid to confirm it's the correct one
-    console.log("Highest bid:", highestBid);
 
     return highestBid.amount;
   }
-  return null; // No bids
+  return null;
 }
 
 function isAuctionEnded(listing) {
@@ -37,7 +29,6 @@ export function createBidSection(listing) {
   const auctionStatus =
     currentDate > endDate ? "Auction ended: " : `Auction ends at: `;
 
-  // Create the bid section container
   const bidSection = document.createElement("div");
   bidSection.classList.add(
     "bid-section",
@@ -52,17 +43,13 @@ export function createBidSection(listing) {
     "dark:text-gray-300",
   );
 
-  // Create the status element (h3)
   const statusElement = document.createElement("h3");
 
-  // Create a span for the formatted date
   const dateSpan = document.createElement("span");
   dateSpan.textContent = formatDate(listing.endsAt);
 
-  // Add a class to the span for styling (you can style this in CSS)
-  dateSpan.classList.add("text-red-600"); // Tailwind example, or add your own CSS class
+  dateSpan.classList.add("text-red-600");
 
-  // Append the text and span to the status element
   statusElement.textContent = auctionStatus;
   statusElement.appendChild(dateSpan);
   statusElement.classList.add(
@@ -74,7 +61,6 @@ export function createBidSection(listing) {
     "mb-8",
   );
 
-  // Append the status element to the bid section
   bidSection.appendChild(statusElement);
 
   const bidAmountContainer = document.createElement("div");
@@ -90,7 +76,6 @@ export function createBidSection(listing) {
     "dark:text-gray-300",
   );
 
-  // Change the text based on whether the auction has ended
   if (isAuctionEnded(listing)) {
     amount.textContent = currentBid
       ? `Final bid was: $${currentBid}`
@@ -183,7 +168,6 @@ export function createBidSection(listing) {
       listing.bids.length > 0
     ) {
       listing.bids.forEach((bid) => {
-        // Create a container for each bidder
         const bidderContainer = document.createElement("div");
         bidderContainer.classList.add(
           "flex",
@@ -192,11 +176,9 @@ export function createBidSection(listing) {
           "dark:text-gray-300",
         );
 
-        // Create the bidder avatar
         const bidderAvatar = document.createElement("img");
         bidderAvatar.classList.add("w-8", "h-8", "rounded-full", "mr-2");
 
-        // Check if the bidder has an avatar, otherwise use a default one
         if (bid.bidder?.avatar) {
           bidderAvatar.src = bid.bidder.avatar.url;
           bidderAvatar.alt = bid.bidder.avatar.alt;
@@ -205,16 +187,13 @@ export function createBidSection(listing) {
           bidderAvatar.alt = "";
         }
 
-        // Create the bidder name and the bid amount text
         const bidderInfo = document.createElement("p");
         bidderInfo.classList.add("font-body", "text-sm", "md:text-base");
         bidderInfo.textContent = `${bid.bidder.name}: $${bid.amount}`;
 
-        // Append the avatar and bidder info to the bidder container
         bidderContainer.appendChild(bidderAvatar);
         bidderContainer.appendChild(bidderInfo);
 
-        // Append the bidder container to the list of bidders
         listOfBidders.appendChild(bidderContainer);
       });
     }
@@ -226,7 +205,7 @@ export function createBidSection(listing) {
       biddersTitle,
       listOfBidders,
     );
-    console.log("Created bid section:", bidSection);
+
     return bidSection;
   }
 
@@ -234,30 +213,21 @@ export function createBidSection(listing) {
 }
 
 async function onPlaceBid(listingId, bidAmount, bidInput) {
-  console.log(`Placing bid of $${bidAmount} for listing ${listingId}`);
   try {
-    // Place the bid
-    const result = await fetchBid(listingId, { amount: bidAmount });
-    console.log("Bid placed successfully:", result);
+    await fetchBid(listingId, { amount: bidAmount });
 
-    // Re-fetch the updated listing data
     const updatedListing = await fetchSingleListing(listingId);
-    console.log("Updated listing data after bid:", updatedListing);
 
-    // Ensure the updatedListing.data contains the correct structure
     if (!updatedListing || !updatedListing.data) {
       console.error("Updated listing data is missing:", updatedListing);
       return;
     }
 
-    // Update the bid section with the new data
     updateBidSection(updatedListing.data);
 
-    // Reset input and set the minimum bid to the new value
     bidInput.value = "";
     bidInput.setAttribute("min", bidAmount + 1);
 
-    // Display success message
     alert(`Your bid of $${bidAmount} has been placed successfully!`);
   } catch (error) {
     console.error("Error placing bid:", error);
@@ -268,31 +238,23 @@ async function onPlaceBid(listingId, bidAmount, bidInput) {
 }
 
 function updateBidSection(listing) {
-  console.log("Updated listing data:", listing); // Debug: Check if bids are included
-
   const bidAmountContainer = document.querySelector(".bid-amount-container");
   if (!bidAmountContainer) {
     console.error("Bid amount container not found.");
     return;
   }
 
-  // Extract the highest bid using the `bids` array
-  const bidAmount = getCurrentBid(listing); // Ensure this function works correctly
+  const bidAmount = getCurrentBid(listing);
 
-  console.log("Calculated bid amount:", bidAmount);
-
-  // Select or create the paragraph element to display the bid
   let amount = bidAmountContainer.querySelector("p");
   if (!amount) {
     amount = document.createElement("p");
     bidAmountContainer.appendChild(amount);
   }
 
-  // If there is a valid bid amount, update the displayed bid amount immediately
   if (bidAmount !== null) {
     amount.textContent = `Current bid: $${bidAmount}`;
   } else {
-    // Fallback if there are no bids yet
     amount.textContent = "No bids yet";
   }
 }

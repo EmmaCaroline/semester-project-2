@@ -14,8 +14,6 @@ export async function onUpdateListing(event) {
 
   const existingListing = await fetchSingleListing(id);
 
-  console.log("Existing Listing Data:", existingListing);
-
   const updatedData = {
     title: formData.get("title") || "",
     description: formData.get("description") || "",
@@ -37,8 +35,6 @@ export async function onUpdateListing(event) {
     }
   });
 
-  console.log("Updated Data:", updatedData);
-
   const isUnchanged =
     updatedData.title === existingListing.data.title &&
     updatedData.description === existingListing.data.description &&
@@ -46,8 +42,6 @@ export async function onUpdateListing(event) {
       JSON.stringify(existingListing.data.tags) &&
     JSON.stringify(updatedData.media) ===
       JSON.stringify(existingListing.data.media);
-
-  console.log("Is Unchanged:", isUnchanged);
 
   if (isUnchanged) {
     alert("No changes made to the listing.");
@@ -86,16 +80,12 @@ export const onEditButton = (listing, author) => {
   editButton.style.display = "none";
 
   if (author === userName) {
-    console.log("User is the author, showing the edit button.");
     editButton.innerText = "Edit Post";
     editButton.style.display = "block";
 
     editButton.addEventListener("click", () => {
-      console.log("Edit button clicked, navigating to update page.");
       window.location.href = `./listing/update-listing.html/?id=${listing.id}`;
     });
-  } else {
-    console.log("User is not the author, edit button hidden.");
   }
 };
 
@@ -160,6 +150,4 @@ export function addImageField(url = "", alt = "", index = 0) {
   container.appendChild(removeButton);
 
   mediaFieldsContainer.appendChild(container);
-
-  console.log("Image field added");
 }

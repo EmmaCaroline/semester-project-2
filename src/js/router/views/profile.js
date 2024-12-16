@@ -14,13 +14,11 @@ form.addEventListener("submit", onUpdateProfile);
 
 const cancelButton = document.getElementById("cancel-update");
 
-// Add event listener for cancel functionality
 cancelButton.addEventListener("click", function (event) {
-  event.preventDefault(); // Prevent default button behavior
-  form.classList.add("hidden"); // Hide the form
+  event.preventDefault();
+  form.classList.add("hidden");
 });
 
-// Toggle form visibility
 document
   .getElementById("update-profile-button")
   .addEventListener("click", function () {

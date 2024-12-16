@@ -20,8 +20,8 @@ export default [
       prettier: prettierPlugin,
     },
     rules: {
-      ...prettierConfig.rules, // Applies Prettier configuration to disable conflicting ESLint rules
-      "prettier/prettier": "error", // Makes Prettier issues show as ESLint errors
+      ...prettierConfig.rules,
+      "prettier/prettier": "error",
     },
   },
 ];

@@ -2,12 +2,12 @@ import { headers } from "../../headers";
 import { API_AUCTION_LISTINGS } from "../../constants";
 
 export async function fetchBid(id, { amount }) {
-  const bodyData = { amount }; // Ensure this matches the API request format
+  const bodyData = { amount };
 
   try {
     const response = await fetch(`${API_AUCTION_LISTINGS}/${id}/bids`, {
       headers: headers(),
-      method: "POST", // Correct HTTP method for creating a new bid
+      method: "POST",
       body: JSON.stringify(bodyData),
     });
 
@@ -17,8 +17,8 @@ export async function fetchBid(id, { amount }) {
     }
 
     const result = await response.json();
-    console.log("api result" + result);
-    return result; // Return the API response for further processing
+
+    return result;
   } catch (error) {
     console.error("Fetching bid failed:", error);
     throw error;

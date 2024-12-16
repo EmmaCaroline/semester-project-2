@@ -7,18 +7,6 @@ import {
 } from "../../utilities/loadingSpinner";
 import { showMessage } from "../../utilities/alertMessage";
 
-/**
- * Handles the profile update form submission.
- *
- * This function prevents the default form submission behavior and checks if the user
- * is logged in by validating the user object. It collects the updated avatar, banner,
- * and bio information from the form, and if any of these fields have changed, it
- * sends the updated data to the server. If no changes are detected, it alerts the user.
- *
- * @param {Event} event - The form submission event.
- * @returns {Promise<void>} A promise that resolves when the profile update is complete.
- */
-
 export async function onUpdateProfile(event) {
   event.preventDefault();
   showLoadingSpinner();
@@ -39,10 +27,8 @@ export async function onUpdateProfile(event) {
   const bannerURL = formData.get("banner-url");
   const bioText = formData.get("bio");
 
-  // Fetch current profile data
   const profile = await readProfile(username);
 
-  // Compare new data with existing data before adding to updated object
   if (avatarURL && avatarURL !== profile.avatar?.url) {
     updated.avatar = {
       url: avatarURL,
@@ -59,38 +45,23 @@ export async function onUpdateProfile(event) {
 
   if (bioText && bioText !== profile.bio) {
     updated.bio = bioText;
-    console.log(updated.bio);
   }
-  console.log(updated.bio);
 
-  // Check if the 'updated' object has any keys
   if (Object.keys(updated).length > 0) {
     showLoadingSpinner();
     await updateProfile(username, updated);
     showMessage("Profile is now updated", 3000);
     setTimeout(() => {
       window.location.reload();
-    }, 3000); // 3000 milliseconds = 3 seconds
+    }, 3000);
   } else {
     showMessage("No changes were made to the profile.", 3000);
     setTimeout(() => {
       window.location.reload();
-    }, 3000); // 3000 milliseconds = 3 seconds
+    }, 3000);
   }
   hideLoadingSpinner();
 }
-
-/**
- * Prefills the profile update form with the current user's information.
- *
- * This function retrieves the logged-in user's profile data and populates the
- * corresponding fields in the update profile form. It checks if the user is logged
- * in and if the user's profile contains a bio. If the user is not logged in or the
- * profile is invalid, it logs an error message.
- *
- * @returns {Promise<void>} A promise that resolves when the profile data has been fetched
- * and the form has been populated.
- */
 
 export async function prefillProfileForm() {
   showLoadingSpinner();
@@ -106,7 +77,7 @@ export async function prefillProfileForm() {
 
   const bioInput = document.forms["updateProfile"].elements["bio"];
   if (bioInput && profile.bio) {
-    bioInput.value = profile.bio; // Prefill the bio field with current bio
+    bioInput.value = profile.bio;
   }
   hideLoadingSpinner();
 }

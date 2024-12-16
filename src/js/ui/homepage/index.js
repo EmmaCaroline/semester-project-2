@@ -9,24 +9,16 @@ import { showMessage } from "../../utilities/alertMessage";
 const token = localStorage.getItem("token");
 const welcomeMessage = document.querySelector("#unregistered-welcome-message");
 
-/**
- * Adds a click event listener to the newsletter button for handling subscriptions.
- * Clears the email input field and shows an alert based on the input's validity.
- * @param {string} buttonId - The ID of the newsletter button.
- * @param {string} inputId - The ID of the email input field.
- */
 export function setupNewsletterSubscription(buttonId, inputId) {
   document.getElementById(buttonId).addEventListener("click", function () {
     const emailInput = document.getElementById(inputId);
-    const email = emailInput.value.trim(); // Remove leading and trailing whitespaces
+    const email = emailInput.value.trim();
 
-    // Email validation pattern (requires "@" symbol) for 'newsletter subscription'
     const emailPattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
-    // Check if the email is not empty and matches the pattern
     if (email && emailPattern.test(email)) {
-      emailInput.value = ""; // Clear the input field
-      //alert("Thank you for subscribing!");
+      emailInput.value = "";
+
       showMessage("Thank you for subscribing!", 3000);
     } else {
       alert("Please enter a valid email address.");
@@ -34,12 +26,6 @@ export function setupNewsletterSubscription(buttonId, inputId) {
   });
 }
 
-/**
- * Adds a typewriter effect to the specified element.
- * @param {string} elementId - The ID of the element where the typewriter effect will be applied.
- * @param {string} text - The text to display with the typewriter effect.
- * @param {number} speed - The speed of the typing effect in milliseconds (default: 100ms).
- */
 export function addTypewriterEffect(elementId, text, speed = 100) {
   const typewriterElement = document.getElementById(elementId);
   if (!typewriterElement) {
@@ -62,7 +48,6 @@ export function addTypewriterEffect(elementId, text, speed = 100) {
 
 export function hideWelcomeifLoggedIn() {
   if (token) {
-    // User is logged in: hide the welcome message
     welcomeMessage.classList.add("hidden");
   } else {
     welcomeMessage.classList.remove("hidden");
@@ -94,8 +79,8 @@ export async function createCarouselSlides() {
   const carouselContainer = document.querySelector("#image-carousel");
   const dotsContainer = document.querySelector("#dots-container");
 
-  carouselContainer.innerHTML = ""; // Clear existing slides
-  dotsContainer.innerHTML = ""; // Clear existing dots
+  carouselContainer.innerHTML = "";
+  dotsContainer.innerHTML = "";
 
   listings.forEach((listing, index) => {
     const imageCarousel = document.createElement("div");
@@ -174,10 +159,9 @@ export async function createCarouselSlides() {
       "cursor-pointer",
     );
 
-    // Add an event listener to the button
     viewButton.addEventListener("click", () => {
-      localStorage.setItem("listingID", JSON.stringify(listing.id)); // Ensure storing as string
-      window.location.href = "./listing/listing.html"; // Redirect to the specific post page
+      localStorage.setItem("listingID", JSON.stringify(listing.id));
+      window.location.href = "./listing/listing.html";
     });
 
     imageCarousel.append(bannerImage, bannerOverlay, bannerTitle, viewButton);
@@ -201,7 +185,6 @@ export async function createCarouselSlides() {
       "cursor-pointer",
     );
 
-    // Click event to navigate to the corresponding slide
     dot.addEventListener("click", () => {
       currentSlideIndex = index;
       showSlide(currentSlideIndex);

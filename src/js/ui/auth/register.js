@@ -5,19 +5,6 @@ import {
 } from "../../utilities/loadingSpinner";
 import { showMessageWithButtonAndRedirect } from "../../utilities/alertMessage";
 
-/**
- * Handles the registration form submission and processes user registration.
- *
- * This function prevents the default form submission, retrieves the form data,
- * and attempts to register the user. On successful registration, it displays a success
- * message and redirects the user to the login page. If registration fails, it logs
- * the error to the console.
- *
- * @param {Event} event - The event object from the form submission.
- * @returns {Promise<void>} A promise that resolves when the registration process is complete.
- * @throws {Error} If the registration process encounters an error.
- */
-
 export async function onRegister(event) {
   event.preventDefault();
 
@@ -26,8 +13,7 @@ export async function onRegister(event) {
   const user = Object.fromEntries(formData.entries());
   showLoadingSpinner();
   try {
-    const response = await register(user);
-    console.log("Registration ok", response);
+    await register(user);
 
     showMessageWithButtonAndRedirect(
       "Registered! 1000 credits are given to your account.",
