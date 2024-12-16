@@ -9,8 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",

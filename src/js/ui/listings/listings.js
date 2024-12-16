@@ -148,7 +148,7 @@ export async function createListings(listing) {
 
   const linkClick = () => {
     save("listingID", listing.id);
-    window.location.href = "./listing/listing.html";
+    window.location.href = "/listing/listing/";
   };
 
   listingImage.addEventListener("click", linkClick);
@@ -468,7 +468,7 @@ export async function onReadAllListings() {
       return;
     }
 
-    if (window.location.pathname === "./") {
+    if (window.location.pathname === "/") {
       window.listingsArray = listingsArray;
 
       const searchInput = document.getElementById("search-input");

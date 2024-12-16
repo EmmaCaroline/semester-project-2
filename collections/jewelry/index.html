@@ -87,21 +87,21 @@
             </li>
             <li>
               <a
-                href="/collections/books.html"
+                href="/collections/books/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Books</a
               >
             </li>
             <li>
               <a
-                href="/collections/jewelry.html"
+                href="/collections/jewelry/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Jewelry</a
               >
             </li>
             <li>
               <a
-                href="/collections/art.html"
+                href="/collections/art/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Art</a
               >
@@ -116,7 +116,7 @@
           <ul>
             <li>
               <a
-                href="/auth/login.html"
+                href="/auth/login/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Log in</a
               >
@@ -145,7 +145,7 @@
           <ul>
             <li>
               <a
-                href="/profile/profile.html"
+                href="/profile/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
               >
                 Profile
@@ -153,7 +153,7 @@
             </li>
             <li>
               <a
-                href="/listing/create.html"
+                href="/listing/create//"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
               >
                 Create Listing
@@ -184,168 +184,49 @@
         </div>
       </nav>
     </header>
-    <main class="mt-20 py-12">
-      <h1 class="hidden">Profile</h1>
-      <section id="update-form">
-        <div
-          class="flex justify-center items-center mb-4 bg-white dark:bg-gray-950"
-        >
-          <form
-            name="updateProfile"
-            class="form-container hidden mx-auto w-64 p-6 bg-white rounded-lg shadow-lg border border-customBlue font-body sm:w-80 md:w-96 dark:bg-gray-900"
-            id="profile-update-form"
-          >
-            <button
-              id="cancel-update"
-              class="btn btn-secondary mb-4 dark:bg-gray-800 dark:text-gray-200"
-            >
-              Cancel update
-            </button>
-            <label
-              for="avatar-url"
-              class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
-              >Avatar URL</label
-            >
-            <input
-              id="avatar-url"
-              type="url"
-              name="avatar-url"
-              placeholder="Insert image URL"
-              class="w-full mb-2 p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
-            />
-            <label
-              for="avatar-alt"
-              class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
-              >Avatar alt</label
-            >
-            <input
-              id="avatar-alt"
-              type="text"
-              name="avatar-alt"
-              placeholder="Alt text for your image"
-              class="w-full mb-2 p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
-            />
-            <label
-              for="banner-url"
-              class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
-              >Banner URL</label
-            >
-            <input
-              id="banner-url"
-              type="url"
-              name="banner-url"
-              placeholder="Insert image URL"
-              class="w-full mb-2 p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
-            />
-            <label
-              for="banner-alt"
-              class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
-              >Banner alt</label
-            >
-            <input
-              id="banner-alt"
-              type="text"
-              name="banner-alt"
-              placeholder="Alt text for your image"
-              class="w-full mb-2 p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
-            />
-            <label
-              for="bio"
-              class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
-              >Bio</label
-            >
-            <textarea
-              name="bio"
-              placeholder="Write a bio about yourself"
-              class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
-            ></textarea>
-            <button
-              type="submit"
-              class="w-auto btn btn-primary mt-4 dark:bg-gray-800 dark:text-gray-200"
-            >
-              Save Profile
-            </button>
-          </form>
-        </div>
-      </section>
-      <div
-        class="messageBox hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 border border-customGray text-black py-4 px-4 md:px-10 rounded shadow-lg text-center opacity-100 transition-opacity duration-1000"
-      ></div>
-      <section id="profile-card">
-        <div
-          id="profile-container"
-          class="bg-white shadow-md rounded-lg border border-customBlue mx-8 lg:mx-20 dark:bg-black"
-        >
-          <div class="relative w-full h-20 sm:h-28 md:h-40 lg:h-56 mb-6">
-            <img
-              id="banner-image"
-              class="absolute inset-0 w-full h-full object-cover"
-              alt=""
-              src=""
-            />
-          </div>
-          <div class="relative flex justify-center px-4 py-4 md:py-8 lg:py-12">
-            <!-- Avatar Image -->
-            <img
-              id="avatar-image"
-              class="absolute w-16 h-16 rounded-full md:w-28 md:h-28 lg:w-44 lg:h-44 -top-14 md:-top-20 lg:-top-28"
-              alt=""
-              src=""
-            />
-            <!-- Icon -->
-            <span
-              id="edit-profile-icon"
-              class="hidden absolute right-1/2 translate-x-16 md:translate-x-24 lg:translate-x-32 bottom-6 md:bottom-8"
-            >
-              <button id="update-profile-button" class="group">
-                <i
-                  class="fa-solid fa-user-pen text-lg lg:text-xl lg:transition-all lg:duration-300 lg:group-hover:scale-110 lg:group-hover:text-gray-600"
-                ></i>
-              </button>
-            </span>
-          </div>
-          <h2
-            id="user-name"
-            class="font-heading text-xl text-center pb-4 md:text-2xl md:pb-8 dark:text-gray-100"
-          ></h2>
-          <p
-            id="total-credits"
-            class="hidden font-body text-sm text-center mx-4 pb-4 md:text-base md:pb-8 dark:text-gray-100"
-          ></p>
-          <p
-            id="bio"
-            class="font-body text-sm text-center px-4 pb-4 md:text-base break-words md:pb-8 sm:px-28 md:px-48 lg:px-60 dark:text-gray-100"
-          ></p>
-        </div>
-      </section>
+    <main class="mt-20">
+      <h1 class="hidden">Collections: jewelry</h1>
       <section>
-        <h2
-          class="font-heading text-xl mx-8 lg:mx-20 mt-8 mb-2 pb-2 lg:mt-12 md:text-2xl"
+        <div
+          class="bannerImageContainer relative flex w-full h-[170px] md:h-[200px] lg:h-[270px] overflow-hidden mb-8 lg:mb-12"
         >
-          Your Listings
-        </h2>
-        <a
-          href="#target-section"
-          class="mx-8 lg:mx-20 font-body text-sm lg:text-base text-customGray"
-          >Go to Your Wins <span><i class="fa-solid fa-arrow-down"></i></span
-        ></a>
-        <div id="listings-count" class="mx-8 lg:mx-20 mb-2 mt-6"></div>
-
+          <img
+            src="/images/jewelry_category1.jpg"
+            alt="Jewelry"
+            class="w-full object-cover h-full"
+          />
+          <div
+            class="bannerOverlay absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"
+          ></div>
+          <p
+            class="font-special text-white text-4xl absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 lg:text-5xl"
+          >
+            Jewelry
+          </p>
+        </div>
+      </section>
+      <section id="show-jewelry-listings">
         <div
           class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
         ></div>
-      </section>
-      <section>
-        <h2
-          id="target-section"
-          class="font-heading text-xl mx-8 lg:mx-20 mt-8 pb-2 lg:mt-12 md:text-2xl"
-        >
-          Your Wins
-        </h2>
-        <div id="wins-count" class="mx-8 lg:mx-20 mb-2"></div>
         <div
-          class="wins-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
-        ></div>
+          class="pagination-controls flex justify-center items-center mt-6 gap-4 dark:text-gray-300"
+        >
+          <button
+            id="prevPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+            disabled
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span id="currentPage" class="font-body text-sm md:text-base"></span>
+          <button
+            id="nextPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
       </section>
     </main>
     <footer class="pt-6 dark:bg-black">

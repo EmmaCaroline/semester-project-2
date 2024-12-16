@@ -77,7 +77,7 @@ function createSpecificListings(listing) {
 
     firstImageLink.addEventListener("click", () => {
       localStorage.setItem("listingID", JSON.stringify(firstPost.id));
-      window.location.href = "./listing/listing.html";
+      window.location.href = "/listing/listing/";
     });
 
     const secondAndThirdContainer = document.createElement("div");
@@ -153,7 +153,7 @@ function createSpecificListings(listing) {
 
     secondImageLink.addEventListener("click", () => {
       localStorage.setItem("listingID", JSON.stringify(secondPost.id));
-      window.location.href = "./listing/listing.html";
+      window.location.href = "/listing/listing/";
     });
 
     const thirdImageLink = document.createElement("a");
@@ -218,7 +218,7 @@ function createSpecificListings(listing) {
 
     thirdImageLink.addEventListener("click", () => {
       localStorage.setItem("listingID", JSON.stringify(thirdPost.id));
-      window.location.href = "./listing/listing.html";
+      window.location.href = "/listing/listing/";
     });
 
     secondAndThirdContainer.appendChild(secondImageLink);

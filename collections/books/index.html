@@ -87,21 +87,21 @@
             </li>
             <li>
               <a
-                href="/collections/books.html"
+                href="/collections/books/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Books</a
               >
             </li>
             <li>
               <a
-                href="/collections/jewelry.html"
+                href="/collections/jewelry/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Jewelry</a
               >
             </li>
             <li>
               <a
-                href="/collections/art.html"
+                href="/collections/art/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Art</a
               >
@@ -116,7 +116,7 @@
           <ul>
             <li>
               <a
-                href="/auth/login.html"
+                href="/auth/login/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
                 >Log in</a
               >
@@ -145,7 +145,7 @@
           <ul>
             <li>
               <a
-                href="/profile/profile.html"
+                href="/profile/"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
               >
                 Profile
@@ -153,7 +153,7 @@
             </li>
             <li>
               <a
-                href="/listing/create.html"
+                href="/listing/create//"
                 class="block text-sm font-body py-4 px-2 md:text-base hover:bg-customGray hover:text-white transition-colors duration-300 dark:bg-black dark:text-gray-300"
               >
                 Create Listing
@@ -184,58 +184,50 @@
         </div>
       </nav>
     </header>
-    <main class="mt-20 py-12">
-      <h1
-        class="font-heading text-xl text-center mb-6 md:text-2xl dark:text-gray-300"
-      >
-        Login
-      </h1>
-      <section id="login-form-container">
-        <div class="flex justify-center bg-white dark:bg-black">
-          <form
-            name="login"
-            class="login-form w-80 mx-8 p-6 bg-white rounded-lg shadow-lg border border-customBlue font-body md:w-96 dark:bg-gray-900"
+    <main class="mt-20">
+      <h1 class="hidden">Collections: books</h1>
+      <section>
+        <div
+          class="bannerImageContainer relative flex w-full h-[170px] md:h-[200px] lg:h-[270px] overflow-hidden mb-8 lg:mb-12"
+        >
+          <img
+            src="/images/books-category1.jpg"
+            alt="books"
+            class="w-full object-cover h-full"
+          />
+          <div
+            class="bannerOverlay absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"
+          ></div>
+          <p
+            class="font-special text-white text-4xl absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 lg:text-5xl"
           >
-            <div class="mb-4">
-              <label
-                for="email"
-                class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
-                >Email</label
-              >
-              <input
-                id="email"
-                type="email"
-                name="email"
-                required
-                class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
-              />
-            </div>
-            <div class="mb-4">
-              <label
-                for="password"
-                class="block text-sm font-body font-medium text-gray-700 mb-2 dark:text-gray-200 md:text-base"
-                >Password</label
-              >
-              <input
-                type="password"
-                name="password"
-                id="password"
-                required
-                class="w-full p-3 border border-customBlue rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-customPink dark:bg-gray-800 dark:text-gray-100"
-              />
-            </div>
-            <a
-              href="/auth/register.html"
-              class="block text-sm text-blue-500 hover:underline mb-4"
-              >Register</a
-            >
-            <button type="submit" class="w-auto btn btn-primary">Login</button>
-          </form>
+            Books
+          </p>
         </div>
       </section>
-      <div
-        class="messageBox hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-200 border border-customGray text-black py-4 px-4 md:px-10 rounded shadow-lg text-center opacity-100 transition-opacity duration-1000"
-      ></div>
+      <section id="show-books-listings">
+        <div
+          class="listings-container mx-8 lg:mx-20 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-y-8 lg:grid-cols-3 xl:grid-cols-4"
+        ></div>
+        <div
+          class="pagination-controls flex justify-center items-center mt-6 gap-4 dark:text-gray-300"
+        >
+          <button
+            id="prevPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+            disabled
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <span id="currentPage" class="font-body text-sm md:text-base"></span>
+          <button
+            id="nextPage"
+            class="bg-gray-300 text-black py-1 px-2.5 rounded-full hover:bg-gray-400 disabled:opacity-50"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </section>
     </main>
     <footer class="pt-6 dark:bg-black">
       <div class="flex justify-center items-center py-2 bg-customBlue lg:py-4">

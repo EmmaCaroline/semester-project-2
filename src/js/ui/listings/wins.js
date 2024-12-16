@@ -123,7 +123,7 @@ export async function createWins(listing) {
 
   const linkClick = () => {
     save("listingID", listing.id);
-    window.location.href = "./listing/listing.html";
+    window.location.href = "/listing/listing/";
   };
 
   listingImage.addEventListener("click", linkClick);

@@ -161,7 +161,7 @@ export async function createCarouselSlides() {
 
     viewButton.addEventListener("click", () => {
       localStorage.setItem("listingID", JSON.stringify(listing.id));
-      window.location.href = "./listing/listing.html";
+      window.location.href = "/listing/listing/";
     });
 
     imageCarousel.append(bannerImage, bannerOverlay, bannerTitle, viewButton);

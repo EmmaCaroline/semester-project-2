@@ -48,7 +48,7 @@ export async function onCreateListing(event) {
     addImageField();
 
     setTimeout(() => {
-      window.location.href = "./profile/profile.html";
+      window.location.href = "/profile/";
     }, 3000);
   } catch (error) {
     console.error("Error creating post: ", error);

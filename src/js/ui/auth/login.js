@@ -23,7 +23,7 @@ export async function onLogin(event) {
     showMessage(`Hello ${response.data.name}`, 3000);
 
     setTimeout(() => {
-      window.location.href = "./";
+      window.location.href = "/";
     }, 3000);
   } catch (error) {
     console.error("Login failed:", error);

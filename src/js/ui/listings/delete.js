@@ -33,7 +33,7 @@ export async function handleDelete(event) {
     if (userConfirmed) {
       await deletePost(postId);
       alert("The post was deleted");
-      window.location.href = "./profile/profile.html";
+      window.location.href = "/profile/";
     } else {
       window.location.reload();
     }
