@@ -1,5 +1,5 @@
-import { headers } from "../../headers";
 import { API_AUCTION_LISTINGS } from "../../constants";
+import { apiFetchWithHandling } from "../apiFetchWithHandling";
 
 /**
  * Updates an auction listing with the specified data.
@@ -14,26 +14,18 @@ import { API_AUCTION_LISTINGS } from "../../constants";
  * @throws {Error} If the update request fails.
  */
 export async function updateListing(id, { title, description, tags, media }) {
-  const bodyData = {
-    title: title,
-    description: description,
-    tags: tags,
-    media: media,
-  };
+  const bodyData = { title, description, tags, media };
 
   try {
-    const response = await fetch(`${API_AUCTION_LISTINGS}/${id}`, {
-      headers: headers(),
-      method: "PUT",
-      body: JSON.stringify(bodyData),
-    });
+    const result = await apiFetchWithHandling(
+      `${API_AUCTION_LISTINGS}/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(bodyData),
+      },
+      "Failed to update listing.",
+    );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error("Failed to update listing: " + errorText);
-    }
-
-    const result = await response.json();
     return result;
   } catch (error) {
     console.error("Updating listing failed:", error);

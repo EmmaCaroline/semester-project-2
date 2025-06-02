@@ -13,9 +13,9 @@ import {
  * @param {string} params.description - The description of the auction listing.
  * @param {Array<string>} params.tags - The tags associated with the auction listing.
  * @param {Array<string>} params.media - The media URLs associated with the auction listing.
- * @param {string} params.endsAt - The date and time when the auction listing ends.
- * @returns {Promise<Object>} A promise that resolves with the response of the listing creation, including the listing details.
- * @throws {Error} If the listing creation request fails, an error is thrown with the failure message. A network error triggers an alert with a message.
+ * @param {string} params.endsAt - The ISO 8601 date-time string representing when the auction ends.
+ * @returns {Promise<Object>} A promise resolving to the API response containing the created listing details.
+ * @throws {Error} Throws if the listing creation fails. Alerts are shown for network errors and other failures.
  */
 export async function createListing({
   title,

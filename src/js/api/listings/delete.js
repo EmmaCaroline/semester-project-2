@@ -2,10 +2,10 @@ import { API_AUCTION_LISTINGS } from "../../constants";
 import { apiFetchWithHandling } from "../apiFetchWithHandling";
 
 /**
- * Deletes an auction listing post by its ID.
+ * Deletes an auction listing by its ID.
  *
- * @param {string} id - The ID of the auction listing to delete. It must be a valid string (UUID).
- * @throws {Error} If the post ID is invalid, or if the delete request fails, an error is thrown with the failure message.
+ * @param {string} id - The ID of the auction listing to delete.
+ * @throws {Error} Throws an error if the ID is invalid or the delete request fails.
  */
 export async function deletePost(id) {
   if (!id || typeof id !== "string") {
