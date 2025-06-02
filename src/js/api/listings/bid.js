@@ -1,5 +1,5 @@
-import { headers } from "../../headers";
 import { API_AUCTION_LISTINGS } from "../../constants";
+import { apiFetchWithHandling } from "../apiFetchWithHandling";
 
 /**
  * Places a bid on an auction listing with the specified amount.
@@ -14,27 +14,14 @@ export async function fetchBid(id, { amount }) {
   const bodyData = { amount };
 
   try {
-    const response = await fetch(`${API_AUCTION_LISTINGS}/${id}/bids`, {
-      headers: headers(),
-      method: "POST",
-      body: JSON.stringify(bodyData),
-    });
-
-    if (!response.ok) {
-      let errorMessage = "Failed to place bid.";
-
-      try {
-        const errorData = await response.json();
-        errorMessage += ` ${errorData.errors?.[0]?.message || errorData.message || ""}`;
-      } catch {
-        const errorText = await response.text();
-        errorMessage += ` ${errorText}`;
-      }
-
-      throw new Error(errorMessage.trim());
-    }
-
-    const result = await response.json();
+    const result = await apiFetchWithHandling(
+      `${API_AUCTION_LISTINGS}/${id}/bids`,
+      {
+        method: "POST",
+        body: JSON.stringify(bodyData),
+      },
+      "Failed to place bid.",
+    );
 
     return result;
   } catch (error) {

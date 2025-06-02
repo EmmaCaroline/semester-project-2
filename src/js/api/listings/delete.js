@@ -1,5 +1,5 @@
 import { API_AUCTION_LISTINGS } from "../../constants";
-import { headers } from "../../headers";
+import { apiFetchWithHandling } from "../apiFetchWithHandling";
 
 /**
  * Deletes an auction listing post by its ID.
@@ -13,18 +13,15 @@ export async function deletePost(id) {
   }
 
   try {
-    const endpoint = `${API_AUCTION_LISTINGS}/${id}`;
-    const response = await fetch(endpoint, {
-      method: "DELETE",
-      headers: headers(),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error("Failed to delete post: " + errorText);
-    }
+    await apiFetchWithHandling(
+      `${API_AUCTION_LISTINGS}/${id}`,
+      {
+        method: "DELETE",
+      },
+      "Failed to delete post.",
+    );
   } catch (error) {
-    console.error("Deleting post failed: ", error);
+    console.error("Deleting post failed:", error);
     throw error;
   }
 }
