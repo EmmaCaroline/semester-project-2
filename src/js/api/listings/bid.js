@@ -21,8 +21,17 @@ export async function fetchBid(id, { amount }) {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error("Failed to fetch bid: " + errorText);
+      let errorMessage = "Failed to place bid.";
+
+      try {
+        const errorData = await response.json();
+        errorMessage += ` ${errorData.errors?.[0]?.message || errorData.message || ""}`;
+      } catch {
+        const errorText = await response.text();
+        errorMessage += ` ${errorText}`;
+      }
+
+      throw new Error(errorMessage.trim());
     }
 
     const result = await response.json();

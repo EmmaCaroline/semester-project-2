@@ -263,7 +263,8 @@ async function onPlaceBid(listingId, bidAmount, bidInput) {
   } catch (error) {
     console.error("Error placing bid:", error);
     alert(
-      "Failed to place bid. Please try again. Note that you cannot bid on your own listing.",
+      error.message ||
+        "An unexpected error occurred while placing your bid. Please try again.",
     );
   }
 }
