@@ -16,15 +16,20 @@ import {
  * @returns {Promise<Object>} The parsed JSON data from the API response.
  * @throws {Error} If the fetch request fails.
  */
-async function fetchListingsCommon(
+export async function fetchListingsCommon(
   url,
   params = {},
   defaultErrorMessage = "Failed to fetch listings",
+  includeFalseValues = false, // new param
 ) {
   const endpoint = new URL(url);
 
   Object.entries(params).forEach(([key, value]) => {
-    if (value !== false && value !== undefined && value !== null) {
+    if (
+      value !== undefined &&
+      value !== null &&
+      (includeFalseValues || value !== false)
+    ) {
       endpoint.searchParams.append(key, value);
     }
   });
@@ -65,14 +70,19 @@ export async function fetchListings(
   sortOrder = "desc",
   active = false,
 ) {
-  return fetchListingsCommon(API_AUCTION_LISTINGS, {
-    limit,
-    page,
-    _seller,
-    sort,
-    sortOrder,
-    _active: active === false ? undefined : active,
-  });
+  return fetchListingsCommon(
+    API_AUCTION_LISTINGS,
+    {
+      limit,
+      page,
+      _seller,
+      sort,
+      sortOrder,
+      _active: active === false ? undefined : active,
+    },
+    "Failed to fetch listings",
+    true, // include false values here
+  );
 }
 
 /**
@@ -93,13 +103,18 @@ export async function fetchListingsArt(
   active = false,
   tag = "art",
 ) {
-  return fetchListingsCommon(API_AUCTION_LISTINGS, {
-    limit,
-    page,
-    _seller: seller,
-    _tag: tag,
-    _active: active === false ? undefined : active,
-  });
+  return fetchListingsCommon(
+    API_AUCTION_LISTINGS,
+    {
+      limit,
+      page,
+      _seller: seller,
+      _tag: tag,
+      _active: active === false ? undefined : active,
+    },
+    "Failed to fetch listings",
+    true, // include false values here
+  );
 }
 
 /**
@@ -112,13 +127,18 @@ export async function fetchListingsBooks(
   active = false,
   tag = "books",
 ) {
-  return fetchListingsCommon(API_AUCTION_LISTINGS, {
-    limit,
-    page,
-    _seller: seller,
-    _tag: tag,
-    _active: active === false ? undefined : active,
-  });
+  return fetchListingsCommon(
+    API_AUCTION_LISTINGS,
+    {
+      limit,
+      page,
+      _seller: seller,
+      _tag: tag,
+      _active: active === false ? undefined : active,
+    },
+    "Failed to fetch listings",
+    true, // include false values here
+  );
 }
 
 /**
@@ -131,13 +151,18 @@ export async function fetchListingsJewelry(
   active = false,
   tag = "jewelry",
 ) {
-  return fetchListingsCommon(API_AUCTION_LISTINGS, {
-    limit,
-    page,
-    _seller: seller,
-    _tag: tag,
-    _active: active === false ? undefined : active,
-  });
+  return fetchListingsCommon(
+    API_AUCTION_LISTINGS,
+    {
+      limit,
+      page,
+      _seller: seller,
+      _tag: tag,
+      _active: active === false ? undefined : active,
+    },
+    "Failed to fetch listings",
+    true, // include false values here
+  );
 }
 
 /**
@@ -151,10 +176,15 @@ export async function fetchListingsJewelry(
  */
 export async function fetchSingleListing(id, seller = true, bids = true) {
   const endpoint = `${API_AUCTION_LISTINGS}/${id}`;
-  return fetchListingsCommon(endpoint, {
-    _seller: seller,
-    _bids: bids,
-  });
+  return fetchListingsCommon(
+    endpoint,
+    {
+      _seller: seller,
+      _bids: bids,
+    },
+    "Failed to fetch single listing",
+    true, // 👈 again, includes false values in the query string
+  );
 }
 
 /**
@@ -185,8 +215,13 @@ export async function fetchListingsByProfile(
   active = false,
 ) {
   const endpoint = `${API_AUCTION_PROFILES}/${username}/listings`;
-  return fetchListingsCommon(endpoint, {
-    _seller,
-    _active: active === false ? undefined : active,
-  });
+  return fetchListingsCommon(
+    endpoint,
+    {
+      _seller,
+      _active: active === false ? undefined : active,
+    },
+    "Failed to fetch listings by profile",
+    true,
+  );
 }
