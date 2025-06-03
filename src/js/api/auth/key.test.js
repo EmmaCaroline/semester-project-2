@@ -11,7 +11,6 @@ describe("localStorage helpers", () => {
   });
 
   it("save calls localStorage.setItem with JSON stringified value", () => {
-    // Now you can spy on setItem because it's mocked
     const spy = jest.spyOn(localStorage, "setItem");
     const key = "testKey";
     const value = { a: 1 };
@@ -25,7 +24,6 @@ describe("localStorage helpers", () => {
     const key = "testKey";
     const value = { a: 1 };
 
-    // Since getItem is mocked, you must mock its return value here
     localStorage.getItem.mockReturnValueOnce(JSON.stringify(value));
 
     const result = load(key);
@@ -34,7 +32,6 @@ describe("localStorage helpers", () => {
   });
 
   it("load returns null for missing key", () => {
-    // Simulate getItem returning null
     localStorage.getItem.mockReturnValueOnce(null);
 
     expect(load("missingKey")).toBeNull();
@@ -43,7 +40,6 @@ describe("localStorage helpers", () => {
   it("load returns null for invalid JSON value", () => {
     const key = "badJSON";
 
-    // Simulate getItem returning invalid JSON string
     localStorage.getItem.mockReturnValueOnce("not-json");
 
     expect(load(key)).toBeNull();
