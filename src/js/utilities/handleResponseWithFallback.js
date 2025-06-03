@@ -12,17 +12,17 @@ export async function handleResponseWithFallback(
   defaultErrorMessage = "Request failed.",
 ) {
   if (!response.ok) {
-    let errorMessage = defaultErrorMessage;
+    let errorMessage;
 
     try {
       const errorData = await response.json();
-      errorMessage += ` ${errorData.errors?.[0]?.message || errorData.message || ""}`;
+      errorMessage = errorData.errors?.[0]?.message || errorData.message;
     } catch {
       const errorText = await response.text();
-      errorMessage += ` ${errorText}`;
+      errorMessage = errorText;
     }
 
-    throw new Error(errorMessage.trim());
+    throw new Error((errorMessage || defaultErrorMessage).trim());
   }
 
   return response.json();
