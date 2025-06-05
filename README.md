@@ -1,27 +1,41 @@
 # Semester Project 2
 
-This project is an Auction website where you can register a profile and get 1000 credits to use.
-When logged in, you can update your profile info, and create listings and bid on other users listings.
-Unregistered users can view listings.
+![Screenshot of the app](images/screenshot_treasurebid.png)
 
-This project is set up with Vite and Tailwind CSS.
+Online Auction website
 
-# Getting Started
+## Description
+
+This project is an Auction website where users can register for an account and receive 1,000 credits to bid on listings.
+Once logged in, users can update their profile information, create new listings, and place bids on other users’ auctions.
+Unregistered visitors can still browse and view all available listings.
+
+## Built With
+
+Vite – Fast frontend build tool
+
+Tailwind CSS – Utility-first CSS framework
+
+Vanilla JavaScript
+
+## Getting Started
 
 Follow these steps to set up and run the project locally:
 
-1. Install dependencies
+1. Clone the repo: git clone git@github.com:EmmaCaroline/semester-project-2.git
+
+2. Install dependencies
 
 - Ensure you have Node.js installed. Then, run:
   npm install
 
-2. Start the development server
+3. Start the development server
    npm run dev
 
-3. Open the project in your browser
+4. Open the project in your browser
 
 - Vite will start a development server and provide a local URL (e.g., http://localhost:5173). Open this link in your browser to view the project
 
-4. Build for production (optional)
+5. Build for production (optional)
 
 - npm run build
