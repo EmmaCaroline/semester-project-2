@@ -22,18 +22,32 @@ Unregistered visitors can still browse and view all available listings.
 
 Follow these steps to set up and run the project locally:
 
-1. Clone the repo: git clone git@github.com:EmmaCaroline/semester-project-2.git
+1. **Clone the repository**
 
-2. Install dependencies
+   ```bash
+   git clone git@github.com:EmmaCaroline/semester-project-2.git
+   ```
 
-Ensure you have Node.js installed. Then, run:
-npm install
+2. **Install dependencies**
 
-3. Start the development server
+   Ensure you have Node.js installed. Then run:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+
+   ```bash
    npm run dev
+   ```
 
-4. Open the project in your browser
-   Vite will start a development server and provide a local URL (e.g., http://localhost:5173). Open this link in your browser to view the project
+4. **Open the project in your browser**
 
-5. Build for production (optional)
+   Vite will start a development server and provide a local URL (e.g., http://localhost:5173). Open this link in your browser to view the project.
+
+5. **Build for production (optional)**
+
+   ```bash
    npm run build
+   ```
