@@ -12,11 +12,11 @@ Unregistered visitors can still browse and view all available listings.
 
 ## Built With
 
-Vite – Fast frontend build tool
+- Vite – Fast frontend build tool
 
-Tailwind CSS – Utility-first CSS framework
+- Tailwind CSS – Utility-first CSS framework
 
-Vanilla JavaScript
+- Vanilla JavaScript
 
 ## Getting Started
 
@@ -26,16 +26,14 @@ Follow these steps to set up and run the project locally:
 
 2. Install dependencies
 
-- Ensure you have Node.js installed. Then, run:
-  npm install
+Ensure you have Node.js installed. Then, run:
+npm install
 
 3. Start the development server
    npm run dev
 
 4. Open the project in your browser
-
-- Vite will start a development server and provide a local URL (e.g., http://localhost:5173). Open this link in your browser to view the project
+   Vite will start a development server and provide a local URL (e.g., http://localhost:5173). Open this link in your browser to view the project
 
 5. Build for production (optional)
-
-- npm run build
+   npm run build
