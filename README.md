@@ -12,10 +12,8 @@ Unregistered visitors can still browse and view all available listings.
 
 ## Built With
 
-- Vite – Fast frontend build tool
-
-- Tailwind CSS – Utility-first CSS framework
-
+- [Vite](https://vitejs.dev/) – Fast build tool and development server
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework for styling
 - Vanilla JavaScript
 
 ## Getting Started
